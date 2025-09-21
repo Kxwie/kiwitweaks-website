@@ -1,6 +1,8 @@
 // Hero 3D Background Animation with Scroll Effects
 class HeroBackground {
     constructor() {
+        console.log('[HeroBackground] Initializing...');
+        
         this.canvas = document.getElementById('hero-canvas');
         this.scrollElements = document.querySelectorAll('[data-scroll]');
         this.parallaxElements = document.querySelectorAll('[data-parallax]');
@@ -10,19 +12,50 @@ class HeroBackground {
         this.mouseX = 0;
         this.mouseY = 0;
         
-        if (!this.canvas) return;
+        if (!this.canvas) {
+            console.error('[HeroBackground] Canvas element not found');
+            return;
+        }
 
-        // Initialize components
-        this.setupCanvas();
-        this.setupLights();
-        this.createParticles();
-        this.initScrollAnimations();
-        this.initParallax();
-        this.animate();
-        this.addEventListeners();
+        try {
+            // Initialize components
+            if (!this.setupCanvas()) return;
+            
+            // Only proceed if WebGL is available
+            if (this.gl) {
+                console.log('[HeroBackground] Setting up lights...');
+                this.setupLights();
+                
+                console.log('[HeroBackground] Creating particles...');
+                this.createParticles();
+                
+                console.log('[HeroBackground] Initializing scroll animations...');
+                this.initScrollAnimations();
+                
+                console.log('[HeroBackground] Initializing parallax...');
+                this.initParallax();
+                
+                console.log('[HeroBackground] Starting animation loop...');
+                this.animate();
+                
+                console.log('[HeroBackground] Adding event listeners...');
+                this.addEventListeners();
+                
+                console.log('[HeroBackground] Initialization complete!');
+            }
+        } catch (error) {
+            console.error('[HeroBackground] Error during initialization:', error);
+        }
     }
 
     setupCanvas() {
+        console.log('[HeroBackground] Setting up canvas...');
+        
+        if (!this.canvas) {
+            console.error('[HeroBackground] Canvas element not found');
+            return false;
+        }
+        
         this.width = window.innerWidth;
         this.height = window.innerHeight;
         
@@ -30,21 +63,87 @@ class HeroBackground {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         
-        // Get WebGL context
-        this.gl = this.canvas.getContext('webgl') || 
-                 this.canvas.getContext('experimental-webgl');
-        
-        if (!this.gl) {
-            console.error('WebGL not supported in your browser');
-            return;
+        try {
+            // Try to get WebGL context with error handling
+            const contextAttributes = {
+                antialias: true,
+                alpha: true,
+                powerPreference: 'high-performance'
+            };
+            
+            this.gl = this.canvas.getContext('webgl', contextAttributes) || 
+                     this.canvas.getContext('experimental-webgl', contextAttributes);
+            
+            if (!this.gl) {
+                throw new Error('WebGL not supported or initialization failed');
+            }
+            
+            // Set clear color to dark blue
+            this.gl.clearColor(0.05, 0.1, 0.2, 1.0);
+            this.gl.enable(this.gl.DEPTH_TEST);
+            this.gl.depthFunc(this.gl.LEQUAL);
+            this.gl.enable(this.gl.BLEND);
+            this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+            
+            console.log('[HeroBackground] WebGL context created successfully');
+            return true;
+            
+        } catch (error) {
+            console.error('[HeroBackground] WebGL initialization error:', error);
+            this.showWebGLError();
+            return false;
         }
 
-        // Set clear color to dark blue
-        this.gl.clearColor(0.05, 0.1, 0.2, 1.0);
-        this.gl.enable(this.gl.DEPTH_TEST);
-        this.gl.depthFunc(this.gl.LEQUAL);
-        this.gl.enable(this.gl.BLEND);
-        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+    }
+
+    initScrollAnimations() {
+        // Initialize scroll animations for elements with data-scroll attribute
+        const animatedElements = document.querySelectorAll('[data-scroll]');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        animatedElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+
+    initParallax() {
+        // Initialize parallax effect for elements with data-parallax attribute
+        const parallaxElements = document.querySelectorAll('[data-parallax]');
+        
+        const updateParallax = () => {
+            const scrollY = window.scrollY;
+            
+            parallaxElements.forEach(element => {
+                const speed = parseFloat(element.getAttribute('data-parallax-speed') || '0.5');
+                const yPos = -(scrollY * speed);
+                element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            });
+            
+            this.requestId = requestAnimationFrame(updateParallax);
+        };
+        
+        // Start the parallax effect
+        updateParallax();
+        
+        // Clean up on component unmount
+        return () => {
+            if (this.requestId) {
+                cancelAnimationFrame(this.requestId);
+            }
+        };
     }
 
     setupLights() {
@@ -295,17 +394,68 @@ class HeroBackground {
         this.animate();
     }
 
+    onWindowResize() {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+        
+        if (this.gl) {
+            this.gl.viewport(0, 0, this.width, this.height);
+            mat4.perspective(this.projectionMatrix, 75 * Math.PI / 180, this.width / this.height, 0.1, 1000.0);
+        }
+    }
+
     addEventListeners() {
-        window.addEventListener('resize', this.onWindowResize.bind(this), false);
+        // Bind the context for event handlers
+        this.handleResize = this.onWindowResize.bind(this);
+        
+        // Add event listeners
+        window.addEventListener('resize', this.handleResize, false);
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', (e) => {
                 e.preventDefault();
+                const targetId = anchor.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
             });
-        }, { threshold: 0.5 });
+        });
 
-        statValues.forEach(stat => observer.observe(stat));
+        // Initialize stats observer if needed
+        const statValues = document.querySelectorAll('.stat-value');
+        if (statValues.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const value = parseInt(entry.target.getAttribute('data-count') || '0');
+                        this.animateValue(entry.target, 0, value, 2000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            statValues.forEach(stat => observer.observe(stat));
+        }
+    }
+    
+    // Helper method for number animation
+    animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            element.textContent = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
     }
 
     animateValue(element) {

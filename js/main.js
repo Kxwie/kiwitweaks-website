@@ -1,33 +1,81 @@
 // Main JavaScript File - KiwiTweaks
 // Enhanced with modern interactive features and animations
 
+console.log('[Main] DOM Content Loaded - Starting initialization...');
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize core components
-    initMobileMenu();
-    initCookieConsent();
-    
-    // Initialize animation system
-    if (typeof Animations !== 'undefined') {
-        Animations.initSmoothScrolling();
-        Animations.initScrollAnimations();
-        Animations.initHoverEffects();
-        Animations.initPageTransitions();
-        Animations.initParallaxEffects();
-        Animations.init3DHoverEffects();
-        Animations.initRippleEffects();
-        Animations.initScrollProgress();
-        Animations.initCustomCursors();
+    console.log('[Main] DOM fully loaded, initializing components...');
+    try {
+        // Initialize core components
+        console.log('[Main] Initializing mobile menu...');
+        initMobileMenu();
+        console.log('[Main] Initializing cookie consent...');
+        initCookieConsent();
+        
+        // Initialize animation system
+        if (typeof Animations !== 'undefined') {
+            console.log('[Main] Initializing animations...');
+            Animations.initSmoothScrolling();
+            Animations.initScrollAnimations();
+            Animations.initHoverEffects();
+            Animations.initPageTransitions();
+            Animations.initParallaxEffects();
+            Animations.init3DHoverEffects();
+            Animations.initRippleEffects();
+            Animations.initScrollProgress();
+            Animations.initCustomCursors();
+        } else {
+            console.warn('[Main] Animations module not found');
+        }
+        
+        // Initialize 3D visualizations
+        init3DHeroVisualization();
+        init3DVisualization();
+        
+        // Initialize other components
+        initTestimonials();
+        initTooltips();
+        initCounters();
+        
+        // Initialize product showcase after a short delay to ensure DOM is ready
+        console.log('[Main] Scheduling product showcase initialization...');
+        setTimeout(() => {
+            console.log('[Main] Initializing product showcase...');
+            initProductShowcase();
+            
+            // Verify initialization
+            setTimeout(() => {
+                const activeTab = document.querySelector('.product-tab.active');
+                const activePane = document.querySelector('.product-pane.active');
+                console.log('[Main] Product Showcase Status:', {
+                    tabs: document.querySelectorAll('.product-tab').length,
+                    panes: document.querySelectorAll('.product-pane').length,
+                    activeTab: activeTab ? 'Found' : 'Missing',
+                    activePane: activePane ? 'Found' : 'Missing',
+                    tabText: activeTab ? activeTab.textContent.trim() : 'N/A',
+                    paneContent: activePane ? activePane.innerHTML.substring(0, 100) + '...' : 'N/A'
+                });
+            }, 500);
+            
+        }, 100);
+        
+    } catch (error) {
+        console.error('[Main] Error during initialization:', error);
+    }
+        // Initialize 3D visualizations - only if not already initialized
+    if (typeof window.threeInitialized === 'undefined') {
+        init3DHeroVisualization();
+        init3DVisualization();
+        window.threeInitialized = true;
     }
     
-    // Initialize 3D visualizations
-    init3DHeroVisualization();
-    init3DVisualization();
-    
     // Initialize other components
-    initTestimonials();
-    initTooltips();
-    initCounters();
-    initProductShowcase();
+    if (typeof window.componentsInitialized === 'undefined') {
+        initTestimonials();
+        initTooltips();
+        initCounters();
+        window.componentsInitialized = true;
+    }
     
     // Add loaded class to body for animations
     setTimeout(() => {
@@ -69,8 +117,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Enhanced Mobile Menu with Accessibility
 function initMobileMenu() {
-    const menuBtn = document.querySelector('.mobile-menu-btn');
+    console.log('[MobileMenu] Initializing mobile menu...');
+    
+    const menuBtn = document.querySelector('.menu-btn'); // Changed from .mobile-menu-btn
     const navLinks = document.querySelector('.nav-links');
+    
+    if (!menuBtn || !navLinks) {
+        console.warn('[MobileMenu] Required elements not found. Looking for:', {
+            menuBtn: '.menu-btn',
+            navLinks: '.nav-links'
+        });
+        return;
+    }
     const body = document.body;
     
     if (menuBtn && navLinks) {
@@ -361,39 +419,91 @@ function animateCounter(element) {
 
 // Initialize product showcase with interactive features and smooth animations
 function initProductShowcase() {
+    console.log('[ProductShowcase] Initializing product showcase...');
+    
     const tabs = document.querySelectorAll('.product-tab');
     const panes = document.querySelectorAll('.product-pane');
     const tabsContainer = document.querySelector('.product-tabs');
     
-    if (tabs.length === 0 || panes.length === 0 || !tabsContainer) return;
+    console.log(`[ProductShowcase] Found ${tabs.length} tabs and ${panes.length} panes`);
     
-    // Create and style tab indicator
-    const tabIndicator = document.createElement('div');
-    tabIndicator.className = 'tab-indicator';
-    tabsContainer.appendChild(tabIndicator);
+    if (!tabs.length || !panes.length || !tabsContainer) {
+        console.warn('Product showcase elements not found');
+        return;
+    }
+    
+    // Create and style tab indicator if it doesn't exist
+    let tabIndicator = document.querySelector('.tab-indicator');
+    if (!tabIndicator) {
+        tabIndicator = document.createElement('div');
+        tabIndicator.className = 'tab-indicator';
+        tabsContainer.appendChild(tabIndicator);
+    }
     
     // Set initial active tab (first one or the one with active class)
     let activeTab = document.querySelector('.product-tab.active');
     if (!activeTab && tabs.length > 0) {
         activeTab = tabs[0];
         activeTab.classList.add('active');
+        // Ensure corresponding pane is active
+        const tabId = activeTab.getAttribute('data-tab');
+        document.querySelector(`#${tabId}`)?.classList.add('active');
     }
     
-    // Set initial active tab and position indicator
-    function setActiveTab(tab, animate = true) {
-        const tabId = tab.getAttribute('data-tab');
-        
-        // Update active tab
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        
-        // Position indicator
+    // Set initial tab indicator position
+    function updateTabIndicator(tab) {
+        if (!tab) return;
         const tabRect = tab.getBoundingClientRect();
         const containerRect = tabsContainer.getBoundingClientRect();
         const indicatorWidth = tabRect.width * 0.8;
         
         tabIndicator.style.width = `${indicatorWidth}px`;
         tabIndicator.style.left = `${tabRect.left - containerRect.left + (tabRect.width - indicatorWidth) / 2}px`;
+    }
+    
+    // Handle tab click
+    function handleTabClick(e) {
+        e.preventDefault();
+        const tab = e.currentTarget;
+        if (tab.classList.contains('active')) return;
+        
+        setActiveTab(tab, true);
+    }
+    
+    // Add click event listeners to tabs
+    tabs.forEach(tab => {
+        tab.addEventListener('click', handleTabClick);
+    });
+    
+    // Update tab indicator on window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const activeTab = document.querySelector('.product-tab.active');
+            if (activeTab) updateTabIndicator(activeTab);
+        }, 250);
+    });
+    
+    // Initialize tab indicator position
+    const currentActiveTab = document.querySelector('.product-tab.active');
+    if (currentActiveTab) {
+        updateTabIndicator(currentActiveTab);
+    }
+    
+    // Set active tab and show corresponding pane
+    function setActiveTab(tab, animate = true) {
+        if (!tab) return;
+        
+        const tabId = tab.getAttribute('data-tab');
+        if (!tabId) return;
+        
+        // Update active tab
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Update tab indicator
+        updateTabIndicator(tab);
         
         // Show corresponding pane with animation
         panes.forEach(pane => {

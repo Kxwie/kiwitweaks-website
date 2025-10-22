@@ -1,0 +1,10 @@
+# KiwiTweaks Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://kiwitweaks.com/sitemap.xml
+
+# Disallow specific paths if needed
+Disallow: /js/
+Disallow: /css/

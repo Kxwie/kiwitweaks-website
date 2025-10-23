@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/legal-pages.css">
+    <link rel="stylesheet" href="css/scroll-to-top.css">
+    <link rel="stylesheet" href="css/design-enhancements.css">
 </head>
 <body>
     <div class="page-wrapper">
@@ -18,18 +20,25 @@
         <header class="header">
             <div class="container">
                 <nav class="navbar">
-                    <a href="index.html" class="logo">Kiwi<span>Tweaks</span></a>
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-kiwi-bird"></i>
+                        <span>Kiwi<span>Tweaks</span></span>
+                    </a>
                     <div class="nav-links">
                         <a href="index.html">Home</a>
                         <a href="benchmarks.html">Benchmarks</a>
                         <a href="index.html#download">Download</a>
                         <a href="index.html#testimonials">Reviews</a>
-                        <a href="https://payhip.com/b/wq82p" class="nav-cta" target="_blank" rel="noopener noreferrer">
+                        <a href="auth.html" class="nav-link-auth">
+                            <i class="fas fa-user"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="#" class="nav-cta" data-purchase-modal>
                             <span>Purchase</span>
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
-                    <button class="mobile-menu-btn">
+                    <button class="mobile-menu-toggle" aria-label="Toggle menu">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -123,7 +132,16 @@
         </footer>
     </div>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Scripts -->
-    <script src="js/main.js"></script>
+    <script src="js/scroll-to-top.js" defer></script>
+    <script src="js/nextauth-client.js" defer></script>
+    <script src="js/purchase-modal.js" defer></script>
+    <script src="js/design-interactions.js" defer></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>

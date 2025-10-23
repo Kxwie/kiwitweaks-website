@@ -44,6 +44,8 @@
     <link rel="stylesheet" href="css/new-sections.css">
     <link rel="stylesheet" href="css/benchmarks.css">
     <link rel="stylesheet" href="css/benchmark-controls.css">
+    <link rel="stylesheet" href="css/scroll-to-top.css">
+    <link rel="stylesheet" href="css/design-enhancements.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -66,7 +68,11 @@
                         <a href="benchmarks.html" class="active">Benchmarks</a>
                         <a href="index.html#download">Download</a>
                         <a href="index.html#testimonials">Reviews</a>
-                        <a href="https://payhip.com/b/wq82p" class="nav-cta" target="_blank" rel="noopener noreferrer">
+                        <a href="auth.html" class="nav-link-auth">
+                            <i class="fas fa-user"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="#" class="nav-cta" data-purchase-modal>
                             <span>Purchase</span>
                             <i class="fas fa-shopping-cart"></i>
                         </a>
@@ -457,12 +463,21 @@
     </script>
 
     <!-- Scripts -->
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/particles-3d.js"></script>
     <script src="js/ui-components.js"></script>
     <script src="js/animations.js" defer></script>
     <script src="js/benchmarks.js" defer></script>
+    <script src="js/scroll-to-top.js" defer></script>
+    <script src="js/nextauth-client.js" defer></script>
+    <script src="js/purchase-modal.js" defer></script>
+    <script src="js/design-interactions.js" defer></script>
     <script src="js/main.js" defer></script>
     
     <script>

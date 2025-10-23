@@ -936,5 +936,58 @@ function initAnimations() {
     animateOnScroll();
 }
 
+/**
+ * Animate stat counters
+ */
+function animateStatCounters() {
+    const statValues = document.querySelectorAll('[data-count]');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                const counter = entry.target.querySelector('.counter');
+                const target = parseInt(entry.target.getAttribute('data-count'));
+                
+                animateCounter(counter, 0, target, 2000);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statValues.forEach(stat => observer.observe(stat));
+}
+
+/**
+ * Animate counter element
+ */
+function animateCounter(element, start, end, duration) {
+    if (!element) return;
+    
+    const range = end - start;
+    const minFrameTime = 30;
+    const totalFrames = Math.ceil(duration / minFrameTime);
+    let frame = 0;
+    
+    const timer = setInterval(() => {
+        frame++;
+        const progress = frame / totalFrames;
+        const current = Math.floor(start + (range * progress));
+        
+        element.textContent = current;
+        
+        if (frame === totalFrames) {
+            clearInterval(timer);
+            element.textContent = end; // Ensure exact end value
+        }
+    }, minFrameTime);
+}
+
+// Initialize stat counter animations
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', animateStatCounters);
+} else {
+    animateStatCounters();
+}
+
 // Make functions available globally
 window.initBenchmarkCharts = initBenchmarkCharts;

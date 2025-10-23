@@ -1353,7 +1353,7 @@ transition: transform 0.3s ease;
     display: block;
     color: var(--gray);
     margin-bottom: 0.75rem;
-    transition: var(--transition);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .footer-links-group a:hover {
@@ -1385,7 +1385,7 @@ transition: transform 0.3s ease;
 .footer-legal a {
     color: var(--gray);
     font-size: 0.875rem;
-    transition: var(--transition);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .footer-legal a:hover {

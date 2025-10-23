@@ -411,7 +411,7 @@ html {
 /* ===== Enhanced Footer Links ===== */
 .footer-links a {
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .footer-links a::before {
@@ -419,7 +419,7 @@ html {
     position: absolute;
     left: -20px;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .footer-links a:hover {

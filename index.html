@@ -86,11 +86,14 @@
                         <a href="#testimonials">Reviews</a>
                     </div>
                     <div class="nav-auth-actions">
-                        <a href="auth.html" class="nav-link-auth">
+                        <a href="auth.html" class="nav-link-auth" aria-label="Login">
                             <i class="fas fa-user"></i>
                             <span>Login</span>
                         </a>
-                        <a href="#" class="nav-cart" data-purchase-modal aria-label="Shopping cart">
+                        <a href="https://discord.gg/kiwitweaks" target="_blank" class="nav-discord" aria-label="Join Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="nav-cart" aria-label="Shopping cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                         <a href="#" class="nav-cta" data-purchase-modal>
@@ -137,14 +140,17 @@
                     </div>
                     <div class="hero-stats" data-scroll="fade-up" data-scroll-delay="0.6s">
                         <div class="stat-item">
+                            <div class="stat-icon">😊</div>
                             <div class="stat-value" data-count="150">0</div>
                             <div class="stat-label">Happy Customers</div>
                         </div>
                         <div class="stat-item">
+                            <div class="stat-icon">💬</div>
                             <div class="stat-value" data-count="5000">0</div>
                             <div class="stat-label">Discord Members</div>
                         </div>
                         <div class="stat-item">
+                            <div class="stat-icon">⭐</div>
                             <div class="stat-value" data-count="5">0</div>
                             <div class="stat-label">Average Rating</div>
                         </div>
@@ -681,19 +687,114 @@
         <section id="download" class="section bg-dark">
             <div class="container">
                 <div class="section-header" data-scroll="fade-up">
+                    <span class="section-subtitle text-gradient">Ready to Optimize?</span>
                     <h2 class="section-title">Get Started <span class="highlight">Today</span></h2>
+                    <p class="section-description">Choose the version that's right for you</p>
                 </div>
                 
-                <div class="download-card" data-scroll="fade-up" data-scroll-delay="0.2s">
-                    <div class="download-info">
-                        <h3>KiwiTweaks v2.0</h3>
-                        <p>Latest stable release for Windows 10/11</p>
-                        <div class="download-stats">
-                            <div class="stat">
+                <div class="download-grid">
+                    <!-- Free Version Card -->
+                    <div class="download-version-card" data-scroll="fade-up" data-scroll-delay="0.2s">
+                        <div class="version-badge free">FREE</div>
+                        <div class="version-header">
+                            <h3>KiwiTweaks Free</h3>
+                            <p class="version-subtitle">Perfect for getting started</p>
+                            <div class="version-price">
+                                <span class="price">$0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="version-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Basic FPS Optimizations</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>System Tweaks</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Community Support</span>
+                            </div>
+                            <div class="feature-item disabled">
+                                <i class="fas fa-times"></i>
+                                <span>Advanced Features</span>
+                            </div>
+                            <div class="feature-item disabled">
+                                <i class="fas fa-times"></i>
+                                <span>Game-Specific Tweaks</span>
+                            </div>
+                            <div class="feature-item disabled">
+                                <i class="fas fa-times"></i>
+                                <span>Priority Support</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-outline btn-lg btn-block" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-download"></i>
+                            Download Free
+                        </a>
+                        
+                        <div class="version-stats">
+                            <div class="stat-item">
                                 <i class="fas fa-download"></i>
                                 <span>150+ Downloads</span>
                             </div>
-                            <div class="stat">
+                            <div class="stat-item">
+                                <i class="fas fa-file-archive"></i>
+                                <span>12 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Premium Version Card -->
+                    <div class="download-version-card premium" data-scroll="fade-up" data-scroll-delay="0.4s">
+                        <div class="version-badge premium">PREMIUM</div>
+                        <div class="popular-tag">Most Popular</div>
+                        <div class="version-header">
+                            <h3>KiwiTweaks Premium</h3>
+                            <p class="version-subtitle">Maximum performance unleashed</p>
+                            <div class="version-price">
+                                <span class="price">$29.99</span>
+                                <span class="price-note">One-time payment</span>
+                            </div>
+                        </div>
+                        
+                        <div class="version-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>All Free Features</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Advanced BIOS Tweaks</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>10+ Game Profiles</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Priority Support</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Lifetime Updates</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Early Access Features</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn btn-primary btn-lg btn-block" data-purchase-modal>
+                            <i class="fas fa-shopping-cart"></i>
+                            Purchase Premium
+                        </a>
+                        
+                        <div class="version-stats">
+                            <div class="stat-item">
                                 <div class="rating-display">
                                     <span class="rating-number">5.0</span>
                                     <div class="rating-stars">
@@ -705,40 +806,39 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="stat">
+                            <div class="stat-item">
                                 <i class="fas fa-file-archive"></i>
                                 <span>15 MB</span>
                             </div>
                         </div>
                     </div>
-                    <div class="download-actions">
-                        <a href="#" class="btn btn-primary btn-lg btn-block" data-purchase-modal>
-                            <i class="fas fa-shopping-cart"></i>
-                            Purchase Premium
-                        </a>
-                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-outline btn-lg btn-block" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-download"></i>
-                            Download Free Version
-                        </a>
-                        <div class="download-stats">
-                            <div class="stat-badge">
-                                <i class="fab fa-discord"></i>
-                                <span id="discord-members">5,000+</span> Discord Members
-                            </div>
-                            <div class="stat-badge">
-                                <i class="fas fa-download"></i>
-                                <span>150+</span> Downloads
-                            </div>
-                        </div>
-                        <div class="system-requirements">
-                            <h4>System Requirements</h4>
-                            <ul>
-                                <li>Windows 10/11 (64-bit)</li>
-                                <li>2GB RAM minimum</li>
-                                <li>100MB disk space</li>
-                                <li>Administrator access</li>
-                            </ul>
-                        </div>
+                </div>
+                
+                <!-- Additional Info Section -->
+                <div class="download-info-grid" data-scroll="fade-up" data-scroll-delay="0.6s">
+                    <div class="info-card">
+                        <i class="fab fa-discord"></i>
+                        <h4>Join Our Community</h4>
+                        <p class="stat-highlight"><span id="discord-members">5,248</span> Members</p>
+                        <p>Get help, share tips, and stay updated</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <i class="fas fa-laptop"></i>
+                        <h4>System Requirements</h4>
+                        <ul class="requirements-list">
+                            <li>✓ Windows 10/11 (64-bit)</li>
+                            <li>✓ 2GB RAM minimum</li>
+                            <li>✓ 100MB disk space</li>
+                            <li>✓ Administrator access</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Money-Back Guarantee</h4>
+                        <p class="stat-highlight">30 Days</p>
+                        <p>Not satisfied? Get a full refund, no questions asked</p>
                     </div>
                 </div>
             </div>

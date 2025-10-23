@@ -33,13 +33,18 @@
                             <label class="checkbox-container">
                                 <input type="checkbox" id="acceptTermsCheckbox">
                                 <span class="checkmark"></span>
-                                I have read and agree to the following:
-                                <br><br>
-                                <a href="user-agreement.html" target="_blank">User Agreement</a>,
-                                <a href="privacy-policy.html" target="_blank">Privacy Policy</a>,
-                                <a href="refund-policy.html" target="_blank">Refund Policy</a>,
-                                and
-                                <a href="privacy-policy.html#cookies" target="_blank">Cookie Policy</a>
+                                <span class="terms-text">
+                                    I have read and agree to the following:
+                                    <span class="terms-links">
+                                        <a href="user-agreement.html" target="_blank">User Agreement</a>
+                                        <span class="separator">•</span>
+                                        <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+                                        <span class="separator">•</span>
+                                        <a href="refund-policy.html" target="_blank">Refund Policy</a>
+                                        <span class="separator">•</span>
+                                        <a href="privacy-policy.html#cookies" target="_blank">Cookie Policy</a>
+                                    </span>
+                                </span>
                             </label>
                         </div>
                     </div>

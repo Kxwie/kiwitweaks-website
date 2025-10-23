@@ -49,12 +49,21 @@ function initFAQAccordion() {
     }
     
     faqItems.forEach(item => {
+        // Check if already initialized to prevent double binding
+        if (item.hasAttribute('data-faq-initialized')) {
+            return;
+        }
+        item.setAttribute('data-faq-initialized', 'true');
+        
         const question = item.querySelector('.faq-question');
         const answer = item.querySelector('.faq-answer');
         
         if (!question || !answer) return;
         
-        question.addEventListener('click', () => {
+        question.addEventListener('click', (e) => {
+            // Prevent event bubbling
+            e.stopPropagation();
+            
             const isActive = item.classList.contains('active');
             
             // Close all other FAQ items

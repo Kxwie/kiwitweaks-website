@@ -151,82 +151,131 @@
         const session = await getSession();
         
         if (session && session.user) {
-            // User is logged in
-            const loginLink = document.querySelector('.nav-link-auth');
-            if (loginLink) {
-                loginLink.innerHTML = `
-                    <i class="fas fa-user-circle"></i>
-                    <span>${session.user.name || session.user.email}</span>
-                `;
-                loginLink.href = '#';
-                loginLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showUserMenu(session.user);
-                });
-            }
+            // User is logged in - show profile dropdown
+            document.body.classList.add('logged-in');
+            createProfileDropdown(session.user);
         } else {
-            // User is not logged in
-            const loginLink = document.querySelector('.nav-link-auth');
-            if (loginLink) {
-                loginLink.innerHTML = `
-                    <i class="fas fa-user"></i>
-                    <span>Login</span>
-                `;
-                loginLink.href = 'auth.html';
-            }
+            // User is not logged in - show login button
+            document.body.classList.remove('logged-in');
+            removeProfileDropdown();
         }
     }
 
     /**
-     * Show user menu dropdown
+     * Create profile dropdown in navbar
      */
-    function showUserMenu(user) {
-        // Create dropdown menu
-        const menu = document.createElement('div');
-        menu.className = 'user-menu-dropdown';
-        menu.innerHTML = `
-            <div class="user-menu-header">
-                <strong>${user.name || user.email}</strong>
+    function createProfileDropdown(user) {
+        // Remove existing profile dropdown if any
+        removeProfileDropdown();
+        
+        // Get navbar
+        const navbar = document.querySelector('.nav-links');
+        if (!navbar) return;
+        
+        // Create profile dropdown HTML
+        const dropdown = document.createElement('div');
+        dropdown.className = 'profile-dropdown visible';
+        
+        // Get user initials
+        const initials = getUserInitials(user.name || user.email);
+        const displayName = user.name || user.email.split('@')[0];
+        const isPremium = user.role === 'premium' || user.role === 'admin';
+        
+        dropdown.innerHTML = `
+            <div class="profile-trigger">
+                <div class="profile-avatar">${initials}</div>
+                <div class="profile-info">
+                    <div class="profile-name">
+                        ${displayName}
+                        ${isPremium ? '<span class="profile-badge"><i class="fas fa-crown"></i> Premium</span>' : ''}
+                    </div>
+                    <div class="profile-email">${user.email}</div>
+                </div>
+                <i class="fas fa-chevron-down profile-arrow"></i>
             </div>
-            <a href="#" class="user-menu-item" data-action="profile">
-                <i class="fas fa-user"></i> Profile
-            </a>
-            <a href="#" class="user-menu-item" data-action="downloads">
-                <i class="fas fa-download"></i> Downloads
-            </a>
-            <hr>
-            <a href="#" class="user-menu-item" data-action="signout">
-                <i class="fas fa-sign-out-alt"></i> Sign Out
-            </a>
+            <div class="profile-menu">
+                <div class="profile-menu-header">
+                    <strong>${user.name || 'User'}</strong>
+                    <span>${user.email}</span>
+                </div>
+                <a href="/profile.html" class="profile-menu-item" data-action="profile">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="/downloads.html" class="profile-menu-item" data-action="downloads">
+                    <i class="fas fa-download"></i>
+                    <span>My Downloads</span>
+                </a>
+                <a href="/settings.html" class="profile-menu-item" data-action="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <hr>
+                <button class="profile-menu-item" data-action="signout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </button>
+            </div>
         `;
-
-        // Position and show menu
-        document.body.appendChild(menu);
-
-        // Handle menu actions
-        menu.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const action = e.target.closest('[data-action]')?.dataset.action;
-            
-            if (action === 'signout') {
-                await signOut();
-            } else if (action === 'profile') {
-                window.location.href = '/profile.html';
-            } else if (action === 'downloads') {
-                window.location.href = '/downloads.html';
-            }
-            
-            menu.remove();
+        
+        // Insert after nav-links
+        navbar.parentNode.insertBefore(dropdown, navbar.nextSibling);
+        
+        // Add click handlers
+        const trigger = dropdown.querySelector('.profile-trigger');
+        const menu = dropdown.querySelector('.profile-menu');
+        const signoutBtn = dropdown.querySelector('[data-action="signout"]');
+        
+        // Toggle dropdown on click
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
         });
-
-        // Close menu when clicking outside
-        setTimeout(() => {
-            document.addEventListener('click', function closeMenu() {
-                menu.remove();
-                document.removeEventListener('click', closeMenu);
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+        
+        // Handle sign out
+        if (signoutBtn) {
+            signoutBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                await signOut();
             });
-        }, 100);
+        }
+        
+        console.log('✅ Profile dropdown created for:', user.email);
     }
+
+    /**
+     * Remove profile dropdown
+     */
+    function removeProfileDropdown() {
+        const existing = document.querySelector('.profile-dropdown');
+        if (existing) {
+            existing.remove();
+        }
+    }
+
+    /**
+     * Get user initials from name or email
+     */
+    function getUserInitials(nameOrEmail) {
+        if (!nameOrEmail) return 'U';
+        
+        const name = nameOrEmail.split('@')[0]; // Remove email domain if present
+        const parts = name.split(' ');
+        
+        if (parts.length >= 2) {
+            return (parts[0][0] + parts[1][0]).toUpperCase();
+        }
+        
+        return name.substring(0, 2).toUpperCase();
+    }
+
 
     /**
      * Initialize NextAuth on page load

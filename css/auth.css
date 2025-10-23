@@ -159,14 +159,16 @@ body {
     color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     padding: 0.5rem;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
 }
 
 .toggle-password:hover {
     color: #8b5cf6;
+    transform: translateY(-50%);
 }
 
 .toggle-password:active {

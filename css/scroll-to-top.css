@@ -102,20 +102,7 @@
     }
 }
 
-/* Page scroll behavior */
-html {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Body scroll behavior */
-body {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-}
+/* Smooth scrolling is handled in style.css */
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {

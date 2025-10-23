@@ -87,8 +87,8 @@ html {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100%;
     overflow-x: hidden;
+    height: 100%;
 }
 
 body {
@@ -98,11 +98,10 @@ body {
     background-color: #0f172a;
     background: radial-gradient(ellipse at top, #0f1a2e 0%, #0f172a 100%);
     overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -278,6 +277,8 @@ ul {
 /* Main content area */
 .page-wrapper {
     padding-top: var(--header-height);
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Ensure sections have proper spacing */
@@ -1316,9 +1317,8 @@ transition: transform 0.3s ease;
     color: #94a3b8;
     padding: 4rem 0 2rem;
     position: relative;
-    overflow: hidden;
+    border-top: 1px solid rgba(99, 102, 241, 0.1);
     backdrop-filter: blur(10px);
-    margin-bottom: 0 !important;
 }
 
 .footer::before {
@@ -1389,7 +1389,7 @@ transition: transform 0.3s ease;
 }
 
 .footer-links-group a {
-    display: block;
+    display: inline-block;
     color: var(--gray);
     margin-bottom: 0.75rem;
     transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);

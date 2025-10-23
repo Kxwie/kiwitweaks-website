@@ -1,31 +1,29 @@
 /* ===== Enhanced Purchase Modal ===== */
 
-/* Modal Overlay */
+/* Modal Overlay - Hidden by default */
 .purchase-modal-overlay {
     position: fixed !important;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 9999;
-    display: none !important; /* Force hidden by default */
+    display: none !important;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 2rem;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Show modal when active class is added */
 .purchase-modal-overlay.active {
-    display: flex !important; /* Show when active */
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
 }
 
 /* Modal Container */
@@ -127,6 +125,22 @@
 .purchase-modal-header p {
     color: rgba(255, 255, 255, 0.6);
     font-size: 1rem;
+}
+
+/* Pricing Comparison */
+.pricing-comparison {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.pricing-comparison .btn {
+    min-width: 200px;
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
 }
 
 /* Pricing Options */
@@ -232,6 +246,7 @@
 
 /* Payment Info */
 .payment-info {
+    text-align: center;
     background: rgba(139, 92, 246, 0.05);
     border: 1px solid rgba(139, 92, 246, 0.2);
     border-radius: 12px;
@@ -241,33 +256,32 @@
 
 .payment-info h4 {
     color: #8b5cf6;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
 .payment-methods {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
 
-.payment-method {
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    border-radius: 8px;
-    padding: 0.75rem 1.25rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.payment-methods i {
+    font-size: 2rem;
+    color: #8b5cf6;
+    opacity: 0.7;
+    transition: all 0.3s ease;
 }
 
-.payment-method i {
-    color: #8b5cf6;
+.payment-methods i:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 /* Features List */
@@ -325,32 +339,60 @@
     font-weight: 600;
 }
 
+/* Pricing Comparison */
+.pricing-comparison {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pricing-comparison h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.pricing-comparison .pricing-card {
+    flex: 1;
+}
+
 /* Money Back Guarantee */
 .guarantee-badge {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 16px;
     padding: 1.5rem;
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    border-radius: 12px;
     margin-top: 2rem;
 }
 
 .guarantee-badge i {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #10b981;
-    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+}
+
+.guarantee-badge div {
+    flex: 1;
 }
 
 .guarantee-badge h4 {
-    color: #10b981;
     font-size: 1.1rem;
-    margin-bottom: 0.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
 }
 
 .guarantee-badge p {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     margin: 0;
+    line-height: 1.5;
 }
 
 /* Responsive Design */

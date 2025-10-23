@@ -629,11 +629,7 @@
     }
 }
 
-/* Smooth scroll behavior for the entire page */
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 100px;
-}
+/* Smooth scroll behavior is handled in style.css */
 
 /* Ensure hero content is above 3D elements */
 .hero-content {

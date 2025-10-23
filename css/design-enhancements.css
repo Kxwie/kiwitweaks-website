@@ -302,15 +302,7 @@ i[class*="fa-"] {
 }
 
 /* ===== Enhanced Smooth Scrolling ===== */
-html {
-    scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    html {
-        scroll-behavior: smooth;
-    }
-}
+/* Smooth scrolling is handled in style.css */
 
 /* ===== Performance Optimizations ===== */
 

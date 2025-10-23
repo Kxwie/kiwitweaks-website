@@ -18,131 +18,67 @@
     });
 
     function createPurchaseModal() {
-        const modalHTML = `
-            <div class="purchase-modal-overlay" id="purchaseModal">
-                <div class="purchase-modal">
-                    <button class="modal-close" id="closeModal">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    
-                    <div class="purchase-modal-content">
-                        <div class="purchase-modal-header">
-                            <i class="fas fa-kiwi-bird"></i>
-                            <h2>Get KiwiTweaks Premium</h2>
-                            <p>Unlock the full potential of your PC</p>
+        // Create modal element
+        const modal = document.createElement('div');
+        modal.id = 'purchaseModal';
+        modal.className = 'purchase-modal-overlay';
+        modal.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        
+        // Build modal content using DOM methods (not innerHTML to avoid parsing issues)
+        modal.innerHTML = `
+            <div class="purchase-modal">
+                <button class="modal-close" id="closeModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="purchase-modal-content">
+                    <div class="purchase-modal-header">
+                        <i class="fas fa-kiwi-bird"></i>
+                        <h2>Get KiwiTweaks Premium</h2>
+                        <p>Unlock the full potential of your gaming PC</p>
+                    </div>
+
+                    <div class="pricing-comparison">
+                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" 
+                           class="btn btn-outline" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           style="margin-right: 1rem;">
+                            <i class="fas fa-download"></i>
+                            Get Free Version
+                        </a>
+                        <button class="btn btn-primary" onclick="handlePurchase('premium')">
+                            <i class="fas fa-shopping-cart"></i>
+                            Purchase Premium - $29.99
+                        </button>
+                    </div>
+
+                    <div class="payment-info">
+                        <h4><i class="fas fa-credit-card"></i> Secure Payment via Payhip</h4>
+                        <div class="payment-methods">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                            <i class="fab fa-bitcoin"></i>
                         </div>
+                    </div>
 
-                        <div class="pricing-options">
-                            <!-- Free Version -->
-                            <div class="pricing-card" data-plan="free">
-                                <h3>KiwiTweaks Free</h3>
-                                <div class="pricing-price">
-                                    $0
-                                </div>
-                                <ul class="pricing-features">
-                                    <li><i class="fas fa-check"></i> Basic Optimizations</li>
-                                    <li><i class="fas fa-check"></i> FPS Boost</li>
-                                    <li><i class="fas fa-check"></i> Community Support</li>
-                                    <li><i class="fas fa-times" style="color: #ef4444;"></i> Advanced Tweaks</li>
-                                    <li><i class="fas fa-times" style="color: #ef4444;"></i> Bios Optimizations</li>
-                                    <li><i class="fas fa-times" style="color: #ef4444;"></i> Game Specific Tweaks</li>
-                                </ul>
-                                <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-                                    <i class="fas fa-download"></i>
-                                    Download Free
-                                </a>
-                            </div>
-
-                            <!-- Premium Version -->
-                            <div class="pricing-card selected" data-plan="premium">
-                                <div class="pricing-badge">Most Popular</div>
-                                <h3>KiwiTweaks Premium</h3>
-                                <div class="pricing-price">
-                                    $29.99
-                                </div>
-                                <ul class="pricing-features">
-                                    <li><i class="fas fa-check"></i> All Free Features</li>
-                                    <li><i class="fas fa-check"></i> Advanced Tweaks</li>
-                                    <li><i class="fas fa-check"></i> Bios Optimizations</li>
-                                    <li><i class="fas fa-check"></i> 10+ Game Specific Tweaks</li>
-                                    <li><i class="fas fa-check"></i> Priority Support</li>
-                                    <li><i class="fas fa-check"></i> Early Access</li>
-                                    <li><i class="fas fa-check"></i> Lifetime Updates</li>
-                                </ul>
-                                <button class="btn btn-primary" onclick="handlePurchase('premium')">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    Purchase Now
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="payment-info">
-                            <h4><i class="fas fa-credit-card"></i> Payment Methods</h4>
-                            <div class="payment-methods">
-                                <div class="payment-method">
-                                    <i class="fab fa-cc-visa"></i>
-                                    Visa
-                                </div>
-                                <div class="payment-method">
-                                    <i class="fab fa-cc-mastercard"></i>
-                                    Mastercard
-                                </div>
-                                <div class="payment-method">
-                                    <i class="fab fa-cc-paypal"></i>
-                                    PayPal
-                                </div>
-                                <div class="payment-method">
-                                    <i class="fab fa-bitcoin"></i>
-                                    Crypto
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="features-included">
-                            <h4>What's Included in Premium</h4>
-                            <div class="features-grid">
-                                <div class="feature-item">
-                                    <i class="fas fa-rocket"></i>
-                                    <div>
-                                        <h5>Maximum Performance</h5>
-                                        <p>Unlock all optimization features</p>
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-gamepad"></i>
-                                    <div>
-                                        <h5>Game Optimization</h5>
-                                        <p>10+ game-specific tweaks</p>
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-headset"></i>
-                                    <div>
-                                        <h5>Priority Support</h5>
-                                        <p>Get help when you need it</p>
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-bolt"></i>
-                                    <div>
-                                        <h5>BIOS Optimization</h5>
-                                        <p>Advanced system tweaks</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="guarantee-badge">
-                            <i class="fas fa-shield-alt"></i>
+                    <div class="guarantee-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
                             <h4>30-Day Money Back Guarantee</h4>
-                            <p>Try KiwiTweaks risk-free. Not satisfied? Get a full refund as long as you're within our refund requirements!</p>
+                            <p>Try KiwiTweaks risk-free. Get a full refund as long as you're within our refund requirements!</p>
                         </div>
                     </div>
                 </div>
             </div>
         `;
-
-        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Append to body - it will be hidden by CSS
+        document.body.appendChild(modal);
+        console.log('[Purchase Modal] Modal created and hidden');
     }
 
     function initPurchaseModal() {

@@ -1,0 +1,334 @@
+/* ===== Smooth Animations Enhancement ===== */
+
+/* Global smooth transitions */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 0.3s !important;
+}
+
+/* Enhanced easing curves */
+:root {
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+    --smooth-transition: all 0.4s var(--ease-out-quart);
+    --button-transition: all 0.3s var(--ease-out-back);
+    --hover-transition: all 0.25s var(--ease-out-expo);
+}
+
+/* Smooth button animations */
+.btn,
+.nav-cta,
+.nav-link-auth,
+.nav-cart,
+button,
+[class*="btn"] {
+    transition: var(--button-transition) !important;
+    will-change: transform, box-shadow, background-color;
+}
+
+.btn:hover,
+.nav-cta:hover,
+.nav-link-auth:hover,
+.nav-cart:hover {
+    transition: var(--hover-transition) !important;
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* Smooth card animations */
+.card,
+.feature-card,
+.testimonial-card,
+.comparison-card,
+.benchmark-card {
+    transition: var(--smooth-transition) !important;
+    will-change: transform, box-shadow;
+}
+
+.card:hover,
+.feature-card:hover,
+.testimonial-card:hover,
+.comparison-card:hover,
+.benchmark-card:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    transition: all 0.4s var(--ease-out-back) !important;
+}
+
+/* Smooth navbar animations */
+.navbar a,
+.nav-links a,
+.logo {
+    transition: all 0.3s var(--ease-out-expo) !important;
+}
+
+.navbar a:hover,
+.nav-links a:hover {
+    transform: translateY(-2px);
+    transition: all 0.2s var(--ease-out-back) !important;
+}
+
+/* Smooth modal animations */
+.modal,
+.purchase-modal,
+.download-notification,
+.modal-overlay {
+    transition: all 0.4s var(--ease-out-quart) !important;
+}
+
+.modal.active,
+.purchase-modal-overlay.active,
+.download-notification-overlay.active {
+    transition: all 0.3s var(--ease-out-back) !important;
+}
+
+/* Smooth scroll animations */
+.scroll-reveal,
+[data-scroll] {
+    transition: all 0.6s var(--ease-out-expo) !important;
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+    transition: var(--smooth-transition) !important;
+}
+
+.hover-lift:hover {
+    transform: translateY(-6px) scale(1.02);
+    transition: all 0.3s var(--ease-out-back) !important;
+}
+
+/* Smooth loading animations */
+.loading,
+.spinner,
+.preloader {
+    animation-timing-function: var(--ease-in-out-quart) !important;
+    animation-duration: 1.2s !important;
+}
+
+/* Enhanced ripple effect */
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+    transition: var(--button-transition) !important;
+}
+
+.ripple-effect::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s var(--ease-out-expo), height 0.6s var(--ease-out-expo);
+}
+
+.ripple-effect:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Smooth gradient animations */
+.gradient-animation {
+    background-size: 200% 200%;
+    animation: gradientShift 3s var(--ease-in-out-quart) infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Enhanced floating animation */
+.float-animation {
+    animation: smoothFloat 4s var(--ease-in-out-quart) infinite;
+}
+
+@keyframes smoothFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(1deg); }
+    50% { transform: translateY(-5px) rotate(0deg); }
+    75% { transform: translateY(-15px) rotate(-1deg); }
+}
+
+/* Smooth pulse animation */
+.pulse-smooth {
+    animation: smoothPulse 2s var(--ease-in-out-expo) infinite;
+}
+
+@keyframes smoothPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
+    }
+}
+
+/* Smooth fade animations */
+.fade-in-smooth {
+    animation: smoothFadeIn 0.8s var(--ease-out-expo) forwards;
+}
+
+@keyframes smoothFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Smooth slide animations */
+.slide-in-smooth {
+    animation: smoothSlideIn 0.6s var(--ease-out-back) forwards;
+}
+
+@keyframes smoothSlideIn {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Enhanced scroll-to-top animation */
+.scroll-to-top {
+    transition: all 0.4s var(--ease-out-back) !important;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-4px) scale(1.1);
+    transition: all 0.2s var(--ease-out-expo) !important;
+}
+
+/* Smooth dropdown animations */
+.dropdown-menu,
+.profile-menu,
+.nav-dropdown {
+    transition: all 0.3s var(--ease-out-back) !important;
+    transform-origin: top center;
+}
+
+.dropdown-menu.active,
+.profile-menu.active {
+    animation: smoothDropdown 0.4s var(--ease-out-back) forwards;
+}
+
+@keyframes smoothDropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Smooth form animations */
+input,
+textarea,
+select {
+    transition: all 0.3s var(--ease-out-quart) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    transform: scale(1.02);
+    transition: all 0.2s var(--ease-out-back) !important;
+}
+
+/* Enhanced loading states */
+.loading-smooth {
+    animation: smoothLoading 1.5s var(--ease-in-out-expo) infinite;
+}
+
+@keyframes smoothLoading {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+/* Smooth page transitions */
+.page-transition {
+    transition: all 0.5s var(--ease-out-expo) !important;
+}
+
+/* Enhanced 3D transforms */
+.transform-3d {
+    transform-style: preserve-3d;
+    transition: all 0.4s var(--ease-out-back) !important;
+}
+
+.transform-3d:hover {
+    transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+}
+
+/* Smooth text animations */
+.text-reveal {
+    animation: smoothTextReveal 0.8s var(--ease-out-expo) forwards;
+}
+
+@keyframes smoothTextReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Performance optimizations */
+.gpu-accelerated {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Enhanced stagger animations */
+.stagger-animation > * {
+    animation: smoothStagger 0.6s var(--ease-out-back) forwards;
+}
+
+.stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes smoothStagger {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

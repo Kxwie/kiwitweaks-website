@@ -81,24 +81,18 @@ a:hover, button:hover, .btn:hover {
     transform: translateY(-2px);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 100%;
-}
-
-/* Prevent any element from causing overflow beyond content */
-* {
-    box-sizing: border-box;
-}
-
-*:not(html):not(body) {
-    max-width: 100%;
+    overflow: visible;
+    height: auto;
 }
 
 body {
@@ -108,19 +102,12 @@ body {
     background-color: #0f172a;
     background: radial-gradient(ellipse at top, #0f1a2e 0%, #0f172a 100%);
     overflow-x: hidden;
-    overflow-y: visible;
-    min-height: 100%;
-    margin: 0 !important;
-    padding: 0 !important;
+    overflow-y: auto;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-body::after {
-    content: '';
-    display: block;
-    height: 0;
-    clear: both;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -173,7 +160,6 @@ ul {
     padding: 0 1.5rem;
     position: relative;
     z-index: 1;
-    overflow-x: hidden;
 }
 
 .section {
@@ -297,12 +283,7 @@ ul {
 /* Main content area */
 .page-wrapper {
     padding-top: var(--header-height);
-    padding-bottom: 0;
     width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-    position: relative;
-    margin-bottom: 0;
 }
 
 /* Ensure sections have proper spacing */
@@ -310,13 +291,6 @@ ul {
     padding: 6rem 0;
     position: relative;
     background: transparent;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.section:last-of-type {
-    margin-bottom: 0 !important;
-    padding-bottom: 6rem;
 }
 
 /* First section should have extra top padding */
@@ -349,14 +323,11 @@ ul {
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    overflow-x: hidden;
-    overflow-y: visible;
 }
 
 .header .container {
     padding: 0 2rem;
     max-width: 100%;
-    overflow-x: hidden;
 }
 
 .header.scrolled {
@@ -373,9 +344,7 @@ ul {
     z-index: 1001;
     padding: 0.25rem 0;
     width: 100%;
-    max-width: 100%;
     gap: 3rem;
-    overflow-x: hidden;
 }
 
 .logo {
@@ -443,9 +412,6 @@ ul {
     align-items: center;
     justify-self: center;
     grid-column: 2;
-    height: 100%;
-    overflow-x: hidden;
-    flex-wrap: nowrap;
 }
 
 /* Auth Actions - Far Right */
@@ -455,12 +421,6 @@ ul {
     align-items: center;
     justify-self: end;
     grid-column: 3;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: auto;
-    overflow-x: hidden;
-    flex-wrap: nowrap;
-    flex-shrink: 0;
 }
 
 .nav-links a {
@@ -1359,7 +1319,6 @@ transition: transform 0.3s ease;
     position: relative;
     border-top: 1px solid rgba(99, 102, 241, 0.1);
     backdrop-filter: blur(10px);
-    margin-bottom: 0 !important;
 }
 
 .footer::before {
@@ -1443,29 +1402,17 @@ transition: transform 0.3s ease;
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 2rem;
-    padding-bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 0 !important;
 }
 
 .footer-bottom p {
     margin: 0;
     color: var(--gray);
     font-size: 0.875rem;
-}
-
-/* Ensure nothing extends beyond footer */
-.footer * {
-    margin-bottom: 0;
-}
-
-.footer *:last-child {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
 }
 
 .footer-legal {

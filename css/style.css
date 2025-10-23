@@ -59,7 +59,6 @@
     --border-radius: 16px;
     --border-radius-lg: 24px;
     --border-radius-xl: 32px;
-    --header-height: 80px;
     
     /* 3D Perspective */
     --perspective: 1000px;
@@ -1787,5 +1786,22 @@ transition: transform 0.3s ease;
     
     .cookie-buttons .btn {
         width: 100%;
+    }
+}
+
+/* ===== Accessibility: Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Disable parallax effects */
+    [data-parallax] {
+        transform: none !important;
     }
 }

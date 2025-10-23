@@ -317,7 +317,7 @@
                                     <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-outline btn-block" target="_blank" rel="noopener noreferrer">Download Free</a>
                                 </div>
                                 <div class="feature-version">
-                                    <a href="https://payhip.com/b/wq82p" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Get Premium</a>
+                                    <a href="#" class="btn btn-primary btn-block" data-purchase-modal>Get Premium</a>
                                 </div>
                             </div>
                         </div>
@@ -696,7 +696,7 @@
                             <i class="fas fa-download"></i>
                             Download Free Version
                         </a>
-                        <a href="https://payhip.com/b/wq82p" class="btn btn-outline btn-lg btn-block" target="_blank" rel="noopener noreferrer">
+                        <a href="#" class="btn btn-outline btn-lg btn-block" data-purchase-modal>
                             <i class="fas fa-shopping-cart"></i>
                             Purchase Premium
                         </a>
@@ -768,7 +768,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>The Free version includes basic optimizations, while Premium and Ultimate unlock advanced features, unlimited profiles, and priority support. Check our comparison table above for details.</p>
+                            <p>The Free version includes basic optimizations, while Premium unlocks advanced features, game-specific tweaks, BIOS optimizations, and priority support. Check our comparison table above for details.</p>
                         </div>
                     </div>
                     
@@ -800,9 +800,9 @@
             <div class="container">
                 <div class="cta-content">
                     <h2>Ready to Boost Your System?</h2>
-                    <p>Join thousands of users who have already optimized their systems with KiwiTweaks.</p>
+                    <p>Join 150+ satisfied users who have already optimized their systems with KiwiTweaks.</p>
                     <div class="cta-buttons">
-                        <a href="https://payhip.com/b/wq82p" class="btn btn-primary">Get Premium Now</a>
+                        <a href="#" class="btn btn-primary" data-purchase-modal>Get Premium Now</a>
                         <a href="https://discord.gg/RT6SCASxUJ" class="btn btn-outline">Join Our Community</a>
                     </div>
                 </div>
@@ -818,8 +818,6 @@
                         <p>Optimizing your digital experience, one tweak at a time.</p>
                         <div class="social-links">
                             <a href="https://discord.gg/RT6SCASxUJ" aria-label="Discord" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
-                            <a href="https://twitter.com/kiwitweaks" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-                            <a href="https://github.com/kiwitweaks" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="footer-links">
@@ -835,7 +833,7 @@
                             <a href="#faq">FAQ</a>
                             <a href="benchmarks.html">Benchmarks</a>
                             <a href="https://discord.gg/RT6SCASxUJ" target="_blank" rel="noopener noreferrer">Discord</a>
-                            <a href="https://payhip.com/b/wq82p" target="_blank" rel="noopener noreferrer">Purchase</a>
+                            <a href="#" data-purchase-modal>Purchase</a>
                         </div>
                         <div class="footer-links-group">
                             <h4>Legal</h4>
@@ -846,7 +844,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>&copy; 2025 KiwiTweaks. All rights reserved.</p>
+                    <p>&copy; <span id="current-year">2025</span> KiwiTweaks. All rights reserved.</p>
                     <div class="footer-legal">
                         <a href="user-agreement.html">Terms of Service</a>
                         <a href="privacy-policy.html#cookies">Cookie Policy</a>
@@ -906,6 +904,12 @@
             // Initialize animations if available
             if (typeof Animations !== 'undefined') {
                 Animations.animatePageLoad();
+            }
+            
+            // Update copyright year dynamically
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
             }
         });
     </script>

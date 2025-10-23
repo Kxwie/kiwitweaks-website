@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KiwiTweaks - Advanced System Optimization for Gaming & Performance</title>
-    <meta name="description" content="Boost your gaming performance with KiwiTweaks. Get better FPS, lower latency, and optimized Windows performance. Trusted by 10,000+ users worldwide.">
+    <meta name="description" content="Boost your gaming performance with KiwiTweaks. Get better FPS, lower latency, and optimized Windows performance. Trusted by 150+ users worldwide.">
     <meta name="keywords" content="windows optimization, gaming performance, fps boost, system tweaks, pc optimization, lower latency, kiwitweaks">
     <meta name="author" content="KiwiTweaks">
     <meta name="theme-color" content="#8b5cf6">
@@ -47,11 +47,13 @@
     
     <!-- Non-critical CSS (lazy loaded) -->
     <link rel="preload" href="css/clean-tabs.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="css/scroll-to-top.css">
+    <link rel="stylesheet" href="css/download-section.css">
     <noscript><link rel="stylesheet" href="css/clean-tabs.css"></noscript>
     <link rel="preload" href="css/comparison.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="css/comparison.css"></noscript>
-    <link rel="preload" href="css/testimonial-carousel-new.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/testimonial-carousel-new.css"></noscript>
+    <link rel="stylesheet" href="css/testimonials-carousel.css">
+    <link rel="stylesheet" href="css/purchase-modal.css">
 </head>
 <body class="preload">
     <div class="page-wrapper">
@@ -69,13 +71,17 @@
                         <span>Kiwi<span>Tweaks</span></span>
                     </a>
                     <div class="nav-links">
-                        <a href="#showcase">Products</a>
+                        <a href="index.html" class="active">Home</a>
                         <a href="benchmarks.html">Benchmarks</a>
-                        <a href="#features">Features</a>
+                        <a href="#download">Download</a>
                         <a href="#testimonials">Reviews</a>
-                        <a href="#contact" class="nav-cta">
-                            <span>Get Support</span>
-                            <i class="fas fa-arrow-right"></i>
+                        <a href="auth.html" class="nav-link-auth">
+                            <i class="fas fa-user"></i>
+                            <span>Login</span>
+                        </a>
+                        <a href="#" class="nav-cta" data-purchase-modal>
+                            <span>Purchase</span>
+                            <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
                     <button class="mobile-menu-toggle" aria-label="Toggle menu">
@@ -107,18 +113,18 @@
                         Get more FPS, faster load times, and smoother gameplay.
                     </p>
                     <div class="hero-cta" data-scroll="fade-up" data-scroll-delay="0.5s">
-                        <a href="#download" class="btn btn-primary">
+                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
                             <span>Download Free</span>
-                            <i class="fas fa-arrow-down"></i>
+                            <i class="fas fa-download"></i>
                         </a>
-                        <a href="#showcase" class="btn btn-outline">
-                            <span>View Features</span>
-                            <i class="fas fa-star"></i>
+                        <a href="#" class="btn btn-outline" data-purchase-modal>
+                            <span>Get Premium</span>
+                            <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
                     <div class="hero-stats" data-scroll="fade-up" data-scroll-delay="0.6s">
                         <div class="stat-item">
-                            <div class="stat-value" data-count="10000">0</div>
+                            <div class="stat-value" data-count="150">0</div>
                             <div class="stat-label">Happy Customers</div>
                         </div>
                         <div class="stat-item">
@@ -138,9 +144,7 @@
         <section id="showcase" class="section bg-dark">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-subtitle text-gradient">Our Products</span>
                     <h2 class="section-title">Select Your <span class="highlight">Version</span></h2>
-                    <p class="section-description">Choose the perfect KiwiTweaks plan for your optimization needs</p>
                 </div>
                 
                 <div class="tab-system">
@@ -187,7 +191,7 @@
                                     </div>
                                 </div>
                                 
-                                <a href="#download" class="btn btn-primary">Download Free</a>
+                                <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download Free</a>
                             </div>
                         </div>
                     </div>
@@ -229,9 +233,7 @@
                 
                 <div class="feature-comparison">
                     <div class="section-header">
-                        <span class="section-subtitle text-gradient">Compare</span>
                         <h2 class="section-title">Feature <span class="highlight">Comparison</span></h2>
-                        <p class="section-description">See how our versions stack up against each other</p>
                     </div>
                     
                     <div class="comparison-container">
@@ -264,7 +266,7 @@
                                     <div class="feature-version"><i class="fas fa-check-circle"></i></div>
                                 </div>
                                 <div class="comparison-row">
-                                    <div class="feature-name">Performance Boost Mode</div>
+                                    <div class="feature-name">Bios Optimizations</div>
                                     <div class="feature-version"><i class="fas fa-times-circle"></i></div>
                                     <div class="feature-version"><i class="fas fa-check-circle"></i></div>
                                 </div>
@@ -273,7 +275,7 @@
                             <div class="comparison-section">
                                 <div class="section-title">Support & Updates</div>
                                 <div class="comparison-row">
-                                    <div class="feature-name">Email Support</div>
+                                    <div class="feature-name">Early Access</div>
                                     <div class="feature-version"><i class="fas fa-times-circle"></i></div>
                                     <div class="feature-version"><i class="fas fa-check-circle"></i></div>
                                 </div>
@@ -292,9 +294,9 @@
                             <div class="comparison-section">
                                 <div class="section-title">Advanced Features</div>
                                 <div class="comparison-row">
-                                    <div class="feature-name">Game Profiles</div>
-                                    <div class="feature-version">3</div>
-                                    <div class="feature-version">Unlimited</div>
+                                    <div class="feature-name">Game Specific Tweaks</div>
+                                    <div class="feature-version">0</div>
+                                    <div class="feature-version">10+</div>
                                 </div>
                                 <div class="comparison-row">
                                     <div class="feature-name">Scheduled Optimizations</div>
@@ -311,10 +313,10 @@
                             <div class="comparison-footer">
                                 <div class="feature-name"></div>
                                 <div class="feature-version">
-                                    <a href="#download" class="btn btn-outline btn-block">Download Free</a>
+                                    <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-outline btn-block" target="_blank" rel="noopener noreferrer">Download Free</a>
                                 </div>
                                 <div class="feature-version">
-                                    <a href="#download" class="btn btn-primary btn-block">Get Premium</a>
+                                    <a href="https://payhip.com/b/wq82p" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Get Premium</a>
                                 </div>
                             </div>
                         </div>
@@ -350,211 +352,151 @@
         <section id="testimonials" class="section bg-dark testimonials-section">
             <div class="container">
                 <div class="section-header" data-aos="fade-up">
-                    <span class="section-subtitle text-gradient">Testimonials</span>
                     <h2 class="section-title" style="color: #ffffff;">Trusted by <span class="highlight">Gamers Worldwide</span></h2>
-                    <p class="section-description">Join thousands of satisfied users who boosted their gaming experience</p>
                 </div>
                 
-                <div class="testimonials-container">
-                    <!-- Navigation Buttons -->
-                    <button class="carousel-btn prev" aria-label="Previous testimonial">
+                <div class="testimonials-carousel-wrapper">
+                    <button class="carousel-arrow prev" aria-label="Previous testimonial">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                     
-                    <!-- Testimonials Track -->
-                    <div class="testimonials-track">
-                        <!-- Testimonial 1 -->
-                        <div class="testimonial-card">
-                            <div class="testimonial-quote">
-                                <i class="fas fa-quote-left"></i>
-                                <p>"The utility itself is really good and also nice looking. The tweaks I made helped my gameplay performance, I got a boost of FPS with lower input delay! I really recommend it."</p>
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">
-                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jaga" loading="lazy">
-                                    <div class="verified-badge"><i class="fas fa-check"></i></div>
-                                </div>
-                                <div class="author-info">
-                                    <h4>Jaga</h4>
-                                    <span class="author-role">Gaming Enthusiast</span>
-                                    <div class="testimonial-meta">
-                                        <div class="rating" data-rating="5">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span class="testimonial-date">25 Feb 2025</span>
+                    <div class="testimonials-carousel">
+                        <div class="testimonials-track">
+                            <!-- Slide 1 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"The utility itself is really good and also nice looking. The tweaks I made helped my gameplay performance, I got a boost of FPS with lower input delay! I really recommend it."</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
                                     </div>
+                                    <h4 class="testimonial-author-name">Jaga</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
                                 </div>
                             </div>
-                            <div class="testimonial-footer">
-                                <div class="platform">
-                                    <i class="fab fa-windows"></i> Windows 11 Pro
-                                </div>
-                                <div class="social-proof">
-                                    <span><i class="fas fa-thumbs-up"></i> 4</span>
-                                </div>
-                            </div>
-                        </div>
                         
-                        <!-- Testimonial 2 -->
-                        <div class="testimonial-card">
-                            <div class="testimonial-quote">
-                                <i class="fas fa-quote-left"></i>
-                                <p>"The V1 got me super low delay and FPS got way more stable in BR because there aren't any more random FPS drops when fighting with people - 10/10, can't wait for the V2."</p>
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">
-                                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Rizler" loading="lazy">
-                                    <div class="verified-badge"><i class="fas fa-check"></i></div>
-                                </div>
-                                <div class="author-info">
-                                    <h4>Rizler</h4>
-                                    <span class="author-role">Competitive Gamer</span>
-                                    <div class="testimonial-meta">
-                                        <div class="rating" data-rating="5">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span class="testimonial-date">2 Mar 2025</span>
+                            <!-- Slide 2 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"The V1 got me super low delay and FPS got way more stable in BR because there aren't any more random FPS drops when fighting with people - 10/10, can't wait for the V2."</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
                                     </div>
+                                    <h4 class="testimonial-author-name">Rizler</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
                                 </div>
                             </div>
-                            <div class="testimonial-footer">
-                                <div class="platform">
-                                    <i class="fab fa-windows"></i> Windows 10
-                                </div>
-                                <div class="social-proof">
-                                    <span><i class="fas fa-thumbs-up"></i> 2</span>
-                                </div>
-                            </div>
-                        </div>
                         
-                        <!-- Testimonial 3 -->
-                        <div class="testimonial-card">
-                            <div class="testimonial-quote">
-                                <i class="fas fa-quote-left"></i>
-                                <p>"It literally got my FPS from 200-250 to 290-350 and my processes went down!"</p>
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">
-                                    <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Riftz" loading="lazy">
-                                    <div class="verified-badge"><i class="fas fa-check"></i></div>
-                                </div>
-                                <div class="author-info">
-                                    <h4>Riftz</h4>
-                                    <span class="author-role">PC Enthusiast</span>
-                                    <div class="testimonial-meta">
-                                        <div class="rating" data-rating="5">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span class="testimonial-date">10 Mar 2025</span>
+                            <!-- Slide 3 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"It literally got my FPS from 200-250 to 290-350 and my processes went down!"</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="testimonial-footer">
-                                <div class="platform">
-                                    <i class="fab fa-windows"></i> Windows 11 Pro
-                                </div>
-                                <div class="social-proof">
-                                    <span><i class="fas fa-thumbs-up"></i> 6</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Testimonial 4 -->
-                        <div class="testimonial-card">
-                            <div class="testimonial-quote">
-                                <i class="fas fa-quote-left"></i>
-                                <p>"I went from 254 processes in my Windows to 63-67 processes... it's the best I've tried, and the RAM was a huge change, from 8.7 GB of RAM used to 1.0 GB of RAM. I love Kiwi Tweaks!"</p>
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">
-                                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Gaspiel" loading="lazy">
-                                    <div class="verified-badge"><i class="fas fa-check"></i></div>
-                                </div>
-                                <div class="author-info">
-                                    <h4>Gaspiel</h4>
-                                    <span class="author-role">Power User</span>
-                                    <div class="testimonial-meta">
-                                        <div class="rating" data-rating="5">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span class="testimonial-date">6 Jun 2025</span>
+                                    <h4 class="testimonial-author-name">Riftz</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
                                     </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
                                 </div>
                             </div>
-                            <div class="testimonial-footer">
-                                <div class="platform">
-                                    <i class="fab fa-windows"></i> Windows 10
-                                </div>
-                                <div class="social-proof">
-                                    <span><i class="fas fa-thumbs-up"></i> 2</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Testimonial 5 -->
-                        <div class="testimonial-card">
-                            <div class="testimonial-quote">
-                                <i class="fas fa-quote-left"></i>
-                                <p>"Crazy! From AVG Frame Rate 120 in Games it hit the sky rocket with at least AVG 209 Frames. I really recommend it for you especially if your PC is old or getting older to the new components of 2024-2026."</p>
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">
-                                    <img src="https://randomuser.me/api/portraits/men/38.jpg" alt="6ba5" loading="lazy">
-                                    <div class="verified-badge"><i class="fas fa-check"></i></div>
-                                </div>
-                                <div class="author-info">
-                                    <h4>6ba5</h4>
-                                    <span class="author-role">Gaming Enthusiast</span>
-                                    <div class="testimonial-meta">
-                                        <div class="rating" data-rating="5">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span class="testimonial-date">22 Apr 2025</span>
+
+                            <!-- Slide 4 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"I went from 254 processes in my Windows to 63-67 processes... it's the best I've tried, and the RAM was a huge change, from 8.7 GB of RAM used to 1.0 GB of RAM. I love Kiwi Tweaks!"</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
                                     </div>
+                                    <h4 class="testimonial-author-name">Gaspiel</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
                                 </div>
                             </div>
-                            <div class="testimonial-footer">
-                                <div class="platform">
-                                    <i class="fab fa-windows"></i> Windows 11
+
+                            <!-- Slide 5 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"Crazy! From AVG Frame Rate 120 in Games it hit the sky rocket with at least AVG 209 Frames. I really recommend it for you especially if your PC is old or getting older to the new components of 2024-2026."</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
+                                    </div>
+                                    <h4 class="testimonial-author-name">6ba5</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
                                 </div>
-                                <div class="social-proof">
-                                    <span><i class="fas fa-thumbs-up"></i> 4</span>
+                            </div>
+
+                            <!-- Slide 6 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"Best optimization tool I've ever used. My system feels brand new and gaming is smoother than ever. Highly recommend to anyone looking to boost their PC performance!"</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
+                                    </div>
+                                    <h4 class="testimonial-author-name">TechGamer</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Dots Indicator -->
-                    <div class="carousel-dots"></div>
-                    
-                    <button class="carousel-btn next" aria-label="Next testimonial">
+                    <button class="carousel-arrow next" aria-label="Next testimonial">
                         <i class="fas fa-chevron-right"></i>
                     </button>
+                </div>
+                
+                <div class="carousel-dots-container">
+                    <!-- Dots will be generated by JavaScript -->
                 </div>
             </div>
         </section>
@@ -563,9 +505,7 @@
         <section id="benchmarks" class="section bg-dark">
             <div class="container">
                 <div class="section-header" data-scroll="fade-up">
-                    <span class="section-subtitle text-gradient">Performance</span>
                     <h2 class="section-title">Real-World <span class="highlight">Benchmarks</span></h2>
-                    <p class="section-description">See the proven performance improvements from actual users</p>
                 </div>
                 
                 <div class="benchmarks-grid">
@@ -680,9 +620,7 @@
         <section id="download" class="section bg-dark">
             <div class="container">
                 <div class="section-header" data-scroll="fade-up">
-                    <span class="section-subtitle text-gradient">Download</span>
                     <h2 class="section-title">Get Started <span class="highlight">Today</span></h2>
-                    <p class="section-description">Download KiwiTweaks and boost your PC performance</p>
                 </div>
                 
                 <div class="download-card" data-scroll="fade-up" data-scroll-delay="0.2s">
@@ -692,7 +630,7 @@
                         <div class="download-stats">
                             <div class="stat">
                                 <i class="fas fa-download"></i>
-                                <span>10,000+ Downloads</span>
+                                <span>150+ Downloads</span>
                             </div>
                             <div class="stat">
                                 <i class="fas fa-star"></i>
@@ -705,10 +643,24 @@
                         </div>
                     </div>
                     <div class="download-actions">
-                        <a href="https://payhip.com/b/wq82p" class="btn btn-primary btn-lg">
+                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-primary btn-lg btn-block" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-download"></i>
                             Download Free Version
                         </a>
+                        <a href="https://payhip.com/b/wq82p" class="btn btn-outline btn-lg btn-block" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-shopping-cart"></i>
+                            Purchase Premium
+                        </a>
+                        <div class="download-stats">
+                            <div class="stat-badge">
+                                <i class="fab fa-discord"></i>
+                                <span id="discord-members">5,000+</span> Discord Members
+                            </div>
+                            <div class="stat-badge">
+                                <i class="fas fa-download"></i>
+                                <span>150+</span> Downloads
+                            </div>
+                        </div>
                         <div class="system-requirements">
                             <h4>System Requirements</h4>
                             <ul>
@@ -727,9 +679,7 @@
         <section id="faq" class="section">
             <div class="container">
                 <div class="section-header" data-scroll="fade-up">
-                    <span class="section-subtitle text-gradient">FAQ</span>
                     <h2 class="section-title">Frequently Asked <span class="highlight">Questions</span></h2>
-                    <p class="section-description">Everything you need to know about KiwiTweaks</p>
                 </div>
                 
                 <div class="faq-grid">
@@ -857,6 +807,11 @@
         </footer>
     </div>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Cookie Consent -->
     <div class="cookie-consent">
         <div class="cookie-content">
@@ -868,18 +823,6 @@
         </div>
     </div>
 
-    <!-- Scroll to Top on Load -->
-    <script>
-        // Force scroll to top on page load/refresh
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.addEventListener('beforeunload', function() {
-            window.scrollTo(0, 0);
-        });
-        window.scrollTo(0, 0);
-    </script>
-    
     <!-- Scripts (optimized loading order) -->
     <!-- Critical: Load Three.js first for particles -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -899,7 +842,10 @@
     <!-- Page-specific scripts (deferred) -->
     <script src="js/clean-tabs.js" defer></script>
     <script src="js/comparison.js" defer></script>
-    <script src="js/testimonial-carousel-new.js" defer></script>
+    <script src="js/testimonials-carousel.js" defer></script>
+    <script src="js/scroll-to-top.js" defer></script>
+    <script src="js/discord-stats.js" defer></script>
+    <script src="js/purchase-modal.js" defer></script>
     <script src="js/main.js" defer></script>
     
     <!-- Page load handler (consolidated) -->

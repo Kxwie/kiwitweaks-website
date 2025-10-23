@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="css/hero.css">
     <link rel="stylesheet" href="css/new-sections.css">
     <link rel="stylesheet" href="css/benchmarks.css">
+    <link rel="stylesheet" href="css/benchmark-controls.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -61,13 +62,13 @@
                         <span>Kiwi<span>Tweaks</span></span>
                     </a>
                     <div class="nav-links">
-                        <a href="index.html#features">Features</a>
+                        <a href="index.html">Home</a>
                         <a href="benchmarks.html" class="active">Benchmarks</a>
-                        <a href="index.html#pricing">Pricing</a>
+                        <a href="index.html#download">Download</a>
                         <a href="index.html#testimonials">Reviews</a>
-                        <a href="index.html#contact" class="nav-cta">
-                            <span>Get Support</span>
-                            <i class="fas fa-arrow-right"></i>
+                        <a href="https://payhip.com/b/wq82p" class="nav-cta" target="_blank" rel="noopener noreferrer">
+                            <span>Purchase</span>
+                            <i class="fas fa-shopping-cart"></i>
                         </a>
                     </div>
                     <button class="mobile-menu-toggle" aria-label="Toggle menu">
@@ -165,10 +166,32 @@
                 <div class="benchmark-category">
                     <div class="benchmark-header">
                         <h3>System Performance</h3>
-                        <div class="benchmark-tabs">
-                            <button class="benchmark-tab active" data-tab="cpu">CPU Usage</button>
-                            <button class="benchmark-tab" data-tab="ram">RAM Usage</button>
-                            <button class="benchmark-tab" data-tab="io">I/O Performance</button>
+                        <div class="benchmark-controls">
+                            <div class="benchmark-tabs">
+                                <button class="benchmark-tab active" data-tab="cpu">CPU Usage</button>
+                                <button class="benchmark-tab" data-tab="ram">RAM Usage</button>
+                                <button class="benchmark-tab" data-tab="io">I/O Performance</button>
+                            </div>
+                            <div class="benchmark-mode-selector">
+                                <label for="performanceMode">Mode:</label>
+                                <select id="performanceMode">
+                                    <optgroup label="System Scenarios">
+                                        <option value="idle">Idle</option>
+                                        <option value="gaming" selected>Gaming</option>
+                                        <option value="streaming">Streaming</option>
+                                        <option value="multitasking">Multitasking</option>
+                                        <option value="heavy">Heavy Load</option>
+                                    </optgroup>
+                                    <optgroup label="Specific Games">
+                                        <option value="warzone">Call of Duty: Warzone</option>
+                                        <option value="fortnite">Fortnite</option>
+                                        <option value="valorant">Valorant</option>
+                                        <option value="cs2">Counter-Strike 2</option>
+                                        <option value="apex">Apex Legends</option>
+                                        <option value="cyberpunk">Cyberpunk 2077</option>
+                                    </optgroup>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     
@@ -214,6 +237,11 @@
                                 <option value="valorant">Valorant</option>
                                 <option value="cs2">Counter-Strike 2</option>
                                 <option value="apex">Apex Legends</option>
+                                <option value="cyberpunk">Cyberpunk 2077</option>
+                                <option value="rdr2">Red Dead Redemption 2</option>
+                                <option value="gta5">GTA V</option>
+                                <option value="overwatch">Overwatch 2</option>
+                                <option value="minecraft">Minecraft (Modded)</option>
                             </select>
                         </div>
                     </div>
@@ -225,9 +253,9 @@
                                 <div>
                                     <h4 id="gameTitle">Call of Duty: Warzone</h4>
                                     <div class="game-specs">
-                                        <span><i class="fas fa-microchip"></i> <span id="gameCpu">i5-9600K</span></span>
-                                        <span><i class="fas fa-memory"></i> <span id="gameGpu">RTX 2060</span></span>
-                                        <span><i class="fas fa-memory"></i> <span id="gameRam">16GB DDR4</span></span>
+                                        <span><i class="fas fa-microchip"></i> <span id="gameCpu">AMD Ryzen 7 7800X3D</span></span>
+                                        <span><i class="fas fa-memory"></i> <span id="gameGpu">RTX 4070 Super</span></span>
+                                        <span><i class="fas fa-memory"></i> <span id="gameRam">32GB DDR5</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -297,23 +325,25 @@
                     <h3>Test Setup</h3>
                     <div class="setup-grid">
                         <div class="setup-card">
-                            <h4>Test System 1 (Mid-Range)</h4>
+                            <h4>Primary Test System</h4>
                             <ul>
-                                <li><strong>CPU:</strong> Intel Core i5-9600K</li>
-                                <li><strong>GPU:</strong> NVIDIA RTX 2060 6GB</li>
-                                <li><strong>RAM:</strong> 16GB DDR4-3200</li>
-                                <li><strong>Storage:</strong> 1TB NVMe SSD</li>
-                                <li><strong>OS:</strong> Windows 10 22H2</li>
+                                <li><strong>CPU:</strong> AMD Ryzen 7 7800X3D</li>
+                                <li><strong>GPU:</strong> NVIDIA RTX 4070 Super 12GB</li>
+                                <li><strong>RAM:</strong> 32GB DDR5-6000 CL30</li>
+                                <li><strong>Storage:</strong> 2TB Gen4 NVMe SSD</li>
+                                <li><strong>OS:</strong> Windows 11 23H2</li>
+                                <li><strong>Monitor:</strong> 1440p 165Hz</li>
                             </ul>
                         </div>
                         <div class="setup-card">
-                            <h4>Test System 2 (High-End)</h4>
+                            <h4>Secondary Test System</h4>
                             <ul>
-                                <li><strong>CPU:</strong> AMD Ryzen 7 5800X3D</li>
-                                <li><strong>GPU:</strong> NVIDIA RTX 3080 10GB</li>
-                                <li><strong>RAM:</strong> 32GB DDR4-3600</li>
-                                <li><strong>Storage:</strong> 2TB NVMe SSD</li>
-                                <li><strong>OS:</strong> Windows 11 22H2</li>
+                                <li><strong>CPU:</strong> Intel Core i7-13700K</li>
+                                <li><strong>GPU:</strong> NVIDIA RTX 4060 Ti 8GB</li>
+                                <li><strong>RAM:</strong> 32GB DDR5-5600</li>
+                                <li><strong>Storage:</strong> 1TB Gen4 NVMe SSD</li>
+                                <li><strong>OS:</strong> Windows 11 23H2</li>
+                                <li><strong>Monitor:</strong> 1080p 240Hz</li>
                             </ul>
                         </div>
                         <div class="setup-card">
@@ -336,11 +366,11 @@
                         <p>Join thousands of gamers who have already improved their gaming experience with KiwiTweaks.</p>
                     </div>
                     <div class="cta-buttons">
-                        <a href="index.html#showcase" class="btn btn-primary">
+                        <a href="index.html#download" class="btn btn-primary">
                             <i class="fas fa-download"></i> Download Now
                         </a>
-                        <a href="#" class="btn btn-outline">
-                            <i class="fas fa-question-circle"></i> Have Questions?
+                        <a href="https://discord.gg/acWc7tnVeS" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-discord"></i> Have Questions?
                         </a>
                     </div>
                 </div>

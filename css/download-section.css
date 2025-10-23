@@ -1,0 +1,59 @@
+/* Download Section Enhancements */
+.download-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.download-actions .btn-block {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 300px;
+    max-width: 400px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.download-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(139, 92, 246, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.stat-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+}
+
+.stat-badge i {
+    color: #8b5cf6;
+    font-size: 1.2rem;
+}
+
+.stat-badge span {
+    font-weight: 600;
+    color: #8b5cf6;
+}
+
+@media (max-width: 768px) {
+    .download-stats {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .download-actions .btn-block {
+        min-width: 100%;
+    }
+}

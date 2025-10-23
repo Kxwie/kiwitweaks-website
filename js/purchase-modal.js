@@ -9,6 +9,10 @@
 
     // Initialize when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
+        // Only load purchase modal on index page, not on auth page
+        if (window.location.pathname.includes('auth.html')) {
+            return; // Don't load modal on auth page
+        }
         createPurchaseModal();
         initPurchaseModal();
     });

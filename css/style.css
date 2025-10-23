@@ -304,6 +304,7 @@ ul {
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     width: 100%;
     z-index: 1000;
     padding: 1rem 0;
@@ -312,6 +313,11 @@ ul {
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header .container {
+    padding: 0 2rem;
+    max-width: 100%;
 }
 
 .header.scrolled {
@@ -327,6 +333,8 @@ ul {
     position: relative;
     z-index: 1001;
     padding: 0.25rem 0;
+    width: 100%;
+    gap: 3rem;
 }
 
 .logo {
@@ -341,7 +349,9 @@ ul {
     -moz-background-clip: text;
     -o-background-clip: text;
     position: relative;
-    padding-right: 0.5rem;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
     z-index: 1;
     transition: var(--transition);
     justify-self: start;
@@ -398,6 +408,9 @@ ul {
     align-items: center;
     justify-self: end;
     grid-column: 3;
+    padding-right: 0;
+    padding-left: 0;
+    margin-left: auto;
 }
 
 .nav-links a {

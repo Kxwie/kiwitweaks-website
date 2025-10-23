@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - KiwiTweaks</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar-profile.css">
+    <link rel="stylesheet" href="css/button-enhancements.css">
+    <link rel="stylesheet" href="css/profile-page.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-kiwi-bird"></i>
+                    <span>Kiwi<span>Tweaks</span></span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="benchmarks.html">Benchmarks</a>
+                    <a href="index.html#download">Download</a>
+                    <a href="index.html#testimonials">Reviews</a>
+                </div>
+                <div class="nav-auth-actions">
+                    <a href="profile.html" class="nav-link-auth active" aria-label="Profile">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="https://discord.gg/kiwitweaks" target="_blank" class="nav-discord" aria-label="Join Discord">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="nav-cart" aria-label="Shopping cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="#" class="nav-cta" data-purchase-modal>
+                        <span>Purchase</span>
+                    </a>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-layout">
+                <!-- Sidebar -->
+                <aside class="profile-sidebar">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&size=200&background=8b5cf6&color=fff&bold=true" alt="Profile Avatar" id="avatarImg">
+                            <button class="avatar-upload" aria-label="Change avatar">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+                        <h2 class="profile-name" id="userName">John Doe</h2>
+                        <p class="profile-email" id="userEmail">john.doe@example.com</p>
+                        <div class="profile-badge">
+                            <i class="fas fa-crown"></i>
+                            <span id="userPlan">Premium Member</span>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-value">127</div>
+                                <div class="stat-label">Days Active</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">3</div>
+                                <div class="stat-label">Orders</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <nav class="profile-nav">
+                        <button class="profile-nav-item active" data-tab="overview">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Overview</span>
+                        </button>
+                        <button class="profile-nav-item" data-tab="orders">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Orders</span>
+                        </button>
+                        <button class="profile-nav-item" data-tab="downloads">
+                            <i class="fas fa-download"></i>
+                            <span>Downloads</span>
+                        </button>
+                        <button class="profile-nav-item" data-tab="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </button>
+                        <button class="profile-nav-item" data-tab="support">
+                            <i class="fas fa-headset"></i>
+                            <span>Support</span>
+                        </button>
+                        <button class="profile-nav-item logout" onclick="handleLogout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="profile-content">
+                    <!-- Overview Tab -->
+                    <div class="profile-tab active" id="overview">
+                        <div class="profile-header">
+                            <h1>Welcome back, <span id="welcomeName">John</span>! 👋</h1>
+                            <p>Here's what's happening with your account</p>
+                        </div>
+
+                        <div class="quick-stats">
+                            <div class="quick-stat-card">
+                                <div class="quick-stat-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div class="quick-stat-content">
+                                    <h3>Active Subscription</h3>
+                                    <p class="quick-stat-value">KiwiTweaks Premium</p>
+                                    <span class="quick-stat-meta">Renews Jan 15, 2026</span>
+                                </div>
+                            </div>
+                            <div class="quick-stat-card">
+                                <div class="quick-stat-icon">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <div class="quick-stat-content">
+                                    <h3>Latest Version</h3>
+                                    <p class="quick-stat-value">v2.4.1</p>
+                                    <a href="#" class="quick-stat-meta">Download Now</a>
+                                </div>
+                            </div>
+                            <div class="quick-stat-card">
+                                <div class="quick-stat-icon">
+                                    <i class="fas fa-ticket-alt"></i>
+                                </div>
+                                <div class="quick-stat-content">
+                                    <h3>Support Tickets</h3>
+                                    <p class="quick-stat-value">0 Open</p>
+                                    <a href="#" class="quick-stat-meta">View All</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recent-activity">
+                            <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon success">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h4>Downloaded KiwiTweaks v2.4.1</h4>
+                                        <p>2 days ago</p>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon info">
+                                        <i class="fas fa-crown"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h4>Upgraded to Premium</h4>
+                                        <p>15 days ago</p>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <h4>Account Created</h4>
+                                        <p>127 days ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div class="profile-tab" id="orders">
+                        <div class="profile-header">
+                            <h1><i class="fas fa-shopping-bag"></i> Order History</h1>
+                            <p>View and manage your purchases</p>
+                        </div>
+
+                        <div class="orders-list">
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <div>
+                                        <h3>Order #KWT-2024-001</h3>
+                                        <p class="order-date">January 1, 2024</p>
+                                    </div>
+                                    <span class="order-status success">Completed</span>
+                                </div>
+                                <div class="order-items">
+                                    <div class="order-item">
+                                        <i class="fas fa-crown"></i>
+                                        <div>
+                                            <h4>KiwiTweaks Premium</h4>
+                                            <p>Lifetime License</p>
+                                        </div>
+                                        <span class="order-price">$29.99</span>
+                                    </div>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="fas fa-file-invoice"></i>
+                                        View Invoice
+                                    </button>
+                                    <button class="btn btn-primary btn-sm">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <div>
+                                        <h3>Order #KWT-2023-042</h3>
+                                        <p class="order-date">December 15, 2023</p>
+                                    </div>
+                                    <span class="order-status">Refunded</span>
+                                </div>
+                                <div class="order-items">
+                                    <div class="order-item">
+                                        <i class="fas fa-box"></i>
+                                        <div>
+                                            <h4>KiwiTweaks Premium</h4>
+                                            <p>Trial Purchase</p>
+                                        </div>
+                                        <span class="order-price">$29.99</span>
+                                    </div>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn btn-outline btn-sm" disabled>
+                                        <i class="fas fa-undo"></i>
+                                        Refunded
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Downloads Tab -->
+                    <div class="profile-tab" id="downloads">
+                        <div class="profile-header">
+                            <h1><i class="fas fa-download"></i> Downloads</h1>
+                            <p>Access your KiwiTweaks downloads</p>
+                        </div>
+
+                        <div class="downloads-grid">
+                            <div class="download-card premium">
+                                <div class="download-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <h3>KiwiTweaks Premium</h3>
+                                <p class="download-version">Version 2.4.1 (Latest)</p>
+                                <p class="download-date">Released: October 20, 2024</p>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-download"></i>
+                                    Download Now
+                                </button>
+                                <a href="#" class="download-link">View Changelog</a>
+                            </div>
+
+                            <div class="download-card">
+                                <div class="download-icon">
+                                    <i class="fas fa-file-archive"></i>
+                                </div>
+                                <h3>Previous Versions</h3>
+                                <p class="download-version">Version 2.3.8</p>
+                                <p class="download-date">Released: October 1, 2024</p>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                                <a href="#" class="download-link">View All Versions</a>
+                            </div>
+
+                            <div class="download-card">
+                                <div class="download-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <h3>User Guide</h3>
+                                <p class="download-version">PDF Documentation</p>
+                                <p class="download-date">Updated: October 2024</p>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-download"></i>
+                                    Download PDF
+                                </button>
+                                <a href="#" class="download-link">View Online</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div class="profile-tab" id="settings">
+                        <div class="profile-header">
+                            <h1><i class="fas fa-cog"></i> Account Settings</h1>
+                            <p>Manage your account preferences</p>
+                        </div>
+
+                        <div class="settings-sections">
+                            <div class="settings-section">
+                                <h3><i class="fas fa-user"></i> Personal Information</h3>
+                                <form class="settings-form">
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" id="fullName" value="John Doe" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" value="john.doe@example.com" class="form-input">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i>
+                                        Save Changes
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3><i class="fas fa-lock"></i> Security</h3>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-key"></i>
+                                    Change Password
+                                </button>
+                                <button class="btn btn-outline" style="margin-left: 1rem;">
+                                    <i class="fas fa-shield-alt"></i>
+                                    Two-Factor Authentication
+                                </button>
+                            </div>
+
+                            <div class="settings-section">
+                                <h3><i class="fas fa-bell"></i> Notifications</h3>
+                                <div class="settings-toggles">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Email notifications for updates</span>
+                                    </label>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Newsletter and promotions</span>
+                                    </label>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Discord notifications</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="settings-section danger">
+                                <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
+                                <p>Irreversible actions that affect your account</p>
+                                <button class="btn btn-outline danger">
+                                    <i class="fas fa-trash"></i>
+                                    Delete Account
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Support Tab -->
+                    <div class="profile-tab" id="support">
+                        <div class="profile-header">
+                            <h1><i class="fas fa-headset"></i> Support</h1>
+                            <p>Get help with KiwiTweaks</p>
+                        </div>
+
+                        <div class="support-options">
+                            <div class="support-card">
+                                <i class="fab fa-discord"></i>
+                                <h3>Discord Community</h3>
+                                <p>Join our Discord server for instant help from the community</p>
+                                <a href="https://discord.gg/kiwitweaks" class="btn btn-primary" target="_blank">
+                                    <i class="fab fa-discord"></i>
+                                    Join Discord
+                                </a>
+                            </div>
+                            <div class="support-card">
+                                <i class="fas fa-envelope"></i>
+                                <h3>Email Support</h3>
+                                <p>Premium members get priority email support</p>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-envelope"></i>
+                                    Contact Support
+                                </button>
+                            </div>
+                            <div class="support-card">
+                                <i class="fas fa-book"></i>
+                                <h3>Documentation</h3>
+                                <p>Browse our comprehensive guides and tutorials</p>
+                                <button class="btn btn-outline">
+                                    <i class="fas fa-book"></i>
+                                    View Docs
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="faq-section">
+                            <h2>Frequently Asked Questions</h2>
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>How do I download KiwiTweaks?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Go to the Downloads tab above and click the download button for the latest version.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>Can I get a refund?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>Yes! We offer a 30-day money-back guarantee as long as you're within our refund requirements.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/profile-page.js"></script>
+</body>
+</html>

@@ -17,6 +17,27 @@
     padding: 1rem 2rem;
     font-size: 1rem;
     font-weight: 600;
+    border-radius: 50px !important; /* Ensure rounded corners like Download Free button */
+    outline: none !important; /* Remove default outline */
+}
+
+/* Remove any square borders/outlines on focus */
+.download-actions .btn-block:focus,
+.download-actions .btn-block:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3) !important; /* Rounded glow instead */
+    border-radius: 50px !important;
+}
+
+/* Ensure btn-primary in download section is rounded */
+.download-actions .btn-primary {
+    border-radius: 50px !important;
+    border: none !important;
+}
+
+/* Ensure btn-outline in download section is rounded */
+.download-actions .btn-outline {
+    border-radius: 50px !important;
 }
 
 .download-stats {

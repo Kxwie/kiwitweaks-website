@@ -1,50 +1,64 @@
 /* ===== Navbar Reorganization & Profile Dropdown ===== */
 
-/* Navbar Layout - Logo far left, nav links center, auth far right */
+/* Navbar Layout - Logo left, nav centered, auth right */
 .navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 1001;
-    padding: 0.25rem 1rem; /* Add horizontal padding */
-    gap: 2rem;
+    padding: 0.25rem 2rem;
+    gap: 3rem;
 }
 
-/* Logo on far left with margin */
+/* Logo on far left */
 .logo {
     order: 1;
-    margin-right: auto;
-    margin-left: 0;
     flex-shrink: 0;
+    margin-right: 0;
 }
 
-/* Navigation links in center */
+/* Navigation links centered with flex auto margins */
 .nav-links {
     order: 2;
     display: flex;
     gap: 2rem;
     align-items: center;
     justify-content: center;
-    flex-shrink: 1;
+    flex: 1;
+    margin: 0 auto;
 }
 
-/* Login button on far right with margin */
-.nav-link-auth {
+/* Remove normal links from nav-links for right-side positioning */
+.nav-links > .nav-link-auth,
+.nav-links > .nav-cta,
+.nav-links > .nav-cart {
+    display: none;
+}
+
+/* Auth actions container (right side) */
+.nav-auth-actions {
     order: 3;
-    margin-left: auto !important;
-    margin-right: 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     flex-shrink: 0;
-    display: inline-flex;
+    margin-left: auto;
+}
+
+/* Login button - first on right */
+.nav-link-auth {
+    display: inline-flex !important;
     align-items: center;
     gap: 0.5rem;
     color: rgba(255, 255, 255, 0.9) !important;
-    padding: 0.6rem 1.5rem !important;
+    padding: 0.5rem 1.25rem !important;
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: 50px;
     background: rgba(139, 92, 246, 0.1);
     transition: all 0.3s ease !important;
     font-weight: 500 !important;
+    font-size: 0.95rem;
+    margin: 0 !important;
 }
 
 .nav-link-auth:hover {
@@ -58,12 +72,57 @@
     border-color: transparent;
 }
 
-/* Purchase button (next to login) */
+/* Shopping cart icon button - second on right */
+.nav-cart {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin: 0 !important;
+}
+
+.nav-cart:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Purchase button - third on right, no icon */
 .nav-cta {
-    order: 4;
-    margin-left: 0.75rem !important;
-    margin-right: 0 !important;
-    flex-shrink: 0;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient) !important;
+    color: white !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    margin: 0 !important;
+}
+
+.nav-cta:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4) !important;
+}
+
+/* Hide icon inside purchase button */
+.nav-cta i {
+    display: none !important;
+}
+
+.nav-cta span {
+    position: static !important;
 }
 
 /* Profile Dropdown (shown when logged in) - replaces login button */
@@ -273,11 +332,25 @@
         margin-top: 1rem;
     }
     
-    .profile-dropdown {
-        order: 3;
+    .nav-auth-actions {
+        order: 4;
         width: 100%;
-        margin-left: 0;
+        flex-direction: column;
+        gap: 0.75rem;
         margin-top: 1rem;
+        margin-left: 0 !important;
+    }
+    
+    .nav-link-auth,
+    .nav-cart,
+    .nav-cta {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .profile-dropdown {
+        width: 100%;
+        margin-left: 0 !important;
     }
     
     .profile-trigger {

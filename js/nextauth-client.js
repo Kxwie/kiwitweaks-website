@@ -168,9 +168,9 @@
         // Remove existing profile dropdown if any
         removeProfileDropdown();
         
-        // Get navbar
-        const navbar = document.querySelector('.nav-links');
-        if (!navbar) return;
+        // Get navbar auth actions container
+        const authActions = document.querySelector('.nav-auth-actions');
+        if (!authActions) return;
         
         // Create profile dropdown HTML
         const dropdown = document.createElement('div');
@@ -218,8 +218,8 @@
             </div>
         `;
         
-        // Insert after nav-links
-        navbar.parentNode.insertBefore(dropdown, navbar.nextSibling);
+        // Insert at the beginning of auth actions (replacing login button position)
+        authActions.insertBefore(dropdown, authActions.firstChild);
         
         // Add click handlers
         const trigger = dropdown.querySelector('.profile-trigger');

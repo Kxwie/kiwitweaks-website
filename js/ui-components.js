@@ -55,37 +55,45 @@ function initFAQAccordion() {
     }
     faqContainer.setAttribute('data-faq-initialized', 'true');
     
-    // Use event delegation on the container instead of individual items
-    faqContainer.addEventListener('click', (e) => {
-        // Find the closest .faq-question element
-        const question = e.target.closest('.faq-question');
+    // Get all FAQ items
+    const allFaqItems = faqContainer.querySelectorAll('.faq-item');
+    
+    // Add click handler to each FAQ question directly
+    allFaqItems.forEach(faqItem => {
+        const question = faqItem.querySelector('.faq-question');
         
         if (!question) return;
         
-        // Find the parent .faq-item
-        const item = question.closest('.faq-item');
+        // Mark as initialized to prevent double binding
+        if (question.hasAttribute('data-question-initialized')) {
+            return;
+        }
+        question.setAttribute('data-question-initialized', 'true');
         
-        if (!item) return;
-        
-        // Prevent event bubbling
-        e.stopPropagation();
-        
-        const isActive = item.classList.contains('active');
-        
-        // Close all other FAQ items
-        const allFaqItems = faqContainer.querySelectorAll('.faq-item');
-        allFaqItems.forEach(otherItem => {
-            if (otherItem !== item) {
-                otherItem.classList.remove('active');
+        question.addEventListener('click', function(e) {
+            // Prevent any default behavior and stop propagation
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            // Check if this item is currently active
+            const isCurrentlyActive = faqItem.classList.contains('active');
+            
+            // Close ALL FAQ items first
+            allFaqItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // If this item wasn't active, open it
+            if (!isCurrentlyActive) {
+                faqItem.classList.add('active');
             }
-        });
-        
-        // Toggle current item
-        item.classList.toggle('active');
+            
+            console.log(`[FAQ] Toggled: ${question.querySelector('h3').textContent}`);
+        }, { capture: true }); // Use capture phase to handle event early
     });
     
-    const faqCount = faqContainer.querySelectorAll('.faq-item').length;
-    console.log(`[FAQ] Initialized ${faqCount} FAQ items using event delegation`);
+    console.log(`[FAQ] Initialized ${allFaqItems.length} FAQ items with direct handlers`);
 }
 
 // Smooth Scroll with offset for fixed header

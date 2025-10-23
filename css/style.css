@@ -87,6 +87,8 @@ html {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -98,6 +100,9 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1311,8 +1316,9 @@ transition: transform 0.3s ease;
     color: #94a3b8;
     padding: 4rem 0 2rem;
     position: relative;
-    border-top: 1px solid rgba(99, 102, 241, 0.1);
+    overflow: hidden;
     backdrop-filter: blur(10px);
+    margin-bottom: 0 !important;
 }
 
 .footer::before {
@@ -1383,7 +1389,7 @@ transition: transform 0.3s ease;
 }
 
 .footer-links-group a {
-    display: inline-block;
+    display: block;
     color: var(--gray);
     margin-bottom: 0.75rem;
     transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);

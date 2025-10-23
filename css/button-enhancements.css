@@ -130,37 +130,53 @@ button:focus-visible,
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    background: var(--gradient) !important;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%) !important;
     color: white !important;
-    padding: 0.5rem 1.5rem !important;
+    padding: 0.625rem 1.75rem !important;
     border-radius: 50px !important;
     font-weight: 600 !important;
     font-size: 0.95rem !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     border: none !important;
     margin: 0 !important;
     position: relative !important;
-    overflow: visible !important; /* Allow clicks */
-    transform: translateZ(0) !important; /* GPU acceleration without blocking clicks */
+    overflow: hidden !important;
     cursor: pointer !important;
     pointer-events: auto !important;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.nav-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50px !important;
 }
 
 .nav-cta:hover {
-    transform: translateY(-1px) translateZ(0) !important;
-    box-shadow: 0 6px 15px rgba(139, 92, 246, 0.3) !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4) !important;
+    border-radius: 50px !important;
+}
+
+.nav-cta:hover::before {
+    opacity: 1;
 }
 
 .nav-cta:active {
-    transform: translateY(0) translateZ(0) !important;
-    transition: all 0.05s ease !important;
+    transform: translateY(0) scale(0.98) !important;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3) !important;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-radius: 50px !important;
 }
 
-/* Prevent exponential growth bug */
 .nav-cta:focus {
-    transform: translateZ(0) !important;
     outline: 2px solid rgba(139, 92, 246, 0.5) !important;
     outline-offset: 2px !important;
+    border-radius: 50px !important;
 }
 
 /* Hide icon inside purchase button */
@@ -177,6 +193,19 @@ button:focus-visible,
     transform: translateY(-2px) scale(1.05) !important;
     background: rgba(255, 255, 255, 0.2) !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.nav-link-auth:active,
+.nav-cart:active {
+    transform: translateY(0) scale(1.02) !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.nav-link-auth:focus,
+.nav-cart:focus {
+    outline: 2px solid rgba(139, 92, 246, 0.4) !important;
+    outline-offset: 2px !important;
 }
 
 /* Download section button improvements */

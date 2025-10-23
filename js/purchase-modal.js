@@ -19,7 +19,7 @@
 
     function createPurchaseModal() {
         const modalHTML = `
-            <div class="purchase-modal-overlay" id="purchaseModal" style="display: none !important;">
+            <div class="purchase-modal-overlay" id="purchaseModal">
                 <div class="purchase-modal">
                     <button class="modal-close" id="closeModal">
                         <i class="fas fa-times"></i>
@@ -194,7 +194,7 @@
     function openModal() {
         const modal = document.getElementById('purchaseModal');
         if (modal) {
-            modal.style.display = 'flex';
+            // Simply add active class - CSS handles all display properties with !important
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -203,8 +203,8 @@
     function closeModal() {
         const modal = document.getElementById('purchaseModal');
         if (modal) {
+            // Simply remove active class - CSS handles all display properties with !important
             modal.classList.remove('active');
-            modal.style.display = 'none';
             document.body.style.overflow = '';
         }
     }

@@ -27,6 +27,7 @@ button,
 [class*="btn"] {
     transition: var(--button-transition) !important;
     will-change: transform, box-shadow, background-color;
+    border-radius: 50px !important;
 }
 
 .btn:hover,
@@ -34,7 +35,20 @@ button,
 .nav-link-auth:hover,
 .nav-cart:hover {
     transition: var(--hover-transition) !important;
-    transform: translateY(-3px) scale(1.02);
+    transform: translateY(-2px) scale(1.01);
+}
+
+/* Tone down excessive animations */
+.nav-cta:hover {
+    transform: translateY(-1px) scale(1.005) !important;
+}
+
+/* Fix square buttons */
+.benchmark-btn,
+.view-results-btn,
+[class*="results"],
+[class*="benchmark"] {
+    border-radius: 50px !important;
 }
 
 /* Smooth card animations */

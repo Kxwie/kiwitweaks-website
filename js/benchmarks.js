@@ -324,11 +324,11 @@ function updateSystemPerformanceCharts(mode) {
             label: 'Heavy Workload'
         },
         // Specific Games
-        warzone: {
-            cpu: { stock: 75, kiwi: 58 },
-            ram: { stock: 72, kiwi: 52 },
-            io: { stock: 68, kiwi: 90 },
-            label: 'Call of Duty: Warzone'
+        valorant: {
+            cpu: { stock: 62, kiwi: 45 },
+            ram: { stock: 58, kiwi: 42 },
+            io: { stock: 65, kiwi: 85 },
+            label: 'Valorant'
         },
         fortnite: {
             cpu: { stock: 68, kiwi: 52 },
@@ -336,11 +336,11 @@ function updateSystemPerformanceCharts(mode) {
             io: { stock: 70, kiwi: 88 },
             label: 'Fortnite'
         },
-        valorant: {
-            cpu: { stock: 62, kiwi: 45 },
-            ram: { stock: 58, kiwi: 42 },
-            io: { stock: 65, kiwi: 85 },
-            label: 'Valorant'
+        apex: {
+            cpu: { stock: 78, kiwi: 60 },
+            ram: { stock: 75, kiwi: 55 },
+            io: { stock: 70, kiwi: 90 },
+            label: 'Apex Legends'
         },
         cs2: {
             cpu: { stock: 70, kiwi: 54 },
@@ -348,17 +348,29 @@ function updateSystemPerformanceCharts(mode) {
             io: { stock: 72, kiwi: 92 },
             label: 'Counter-Strike 2'
         },
-        apex: {
-            cpu: { stock: 78, kiwi: 60 },
-            ram: { stock: 75, kiwi: 55 },
-            io: { stock: 70, kiwi: 90 },
-            label: 'Apex Legends'
+        overwatch: {
+            cpu: { stock: 66, kiwi: 49 },
+            ram: { stock: 62, kiwi: 46 },
+            io: { stock: 68, kiwi: 87 },
+            label: 'Overwatch 2'
         },
-        cyberpunk: {
-            cpu: { stock: 88, kiwi: 70 },
-            ram: { stock: 85, kiwi: 65 },
-            io: { stock: 75, kiwi: 95 },
-            label: 'Cyberpunk 2077'
+        minecraft: {
+            cpu: { stock: 58, kiwi: 42 },
+            ram: { stock: 72, kiwi: 48 },
+            io: { stock: 62, kiwi: 82 },
+            label: 'Minecraft'
+        },
+        rust: {
+            cpu: { stock: 80, kiwi: 62 },
+            ram: { stock: 78, kiwi: 58 },
+            io: { stock: 72, kiwi: 91 },
+            label: 'Rust'
+        },
+        roblox: {
+            cpu: { stock: 55, kiwi: 38 },
+            ram: { stock: 52, kiwi: 36 },
+            io: { stock: 58, kiwi: 78 },
+            label: 'Roblox'
         }
     };
     
@@ -572,7 +584,7 @@ function initGameSelector() {
             gpuTempImprovement: -6
         },
         minecraft: {
-            title: 'Minecraft (Modded)',
+            title: 'Minecraft',
             cpu: 'AMD Ryzen 7 7800X3D',
             gpu: 'RTX 4070 Super',
             ram: '32GB DDR5',
@@ -585,13 +597,60 @@ function initGameSelector() {
             gpuTemp: 58,
             fpsImprovement: 35,
             cpuTempImprovement: -12,
-            gpuTempImprovement: -8
+            gpuTempImprovement: -8,
+            logo: 'assets/images/minecraft.jpg'
+        },
+        rust: {
+            title: 'Rust',
+            cpu: 'AMD Ryzen 7 7800X3D',
+            gpu: 'RTX 4070 Super',
+            ram: '32GB DDR5',
+            settings: {
+                '1080p': { low: 245, medium: 205, high: 172, ultra: 145 },
+                '1440p': { low: 195, medium: 165, high: 138, ultra: 115 },
+                '4k': { low: 125, medium: 105, high: 88, ultra: 72 }
+            },
+            cpuTemp: 65,
+            gpuTemp: 72,
+            fpsImprovement: 33,
+            cpuTempImprovement: -11,
+            gpuTempImprovement: -9,
+            logo: 'assets/images/rust.png'
+        },
+        roblox: {
+            title: 'Roblox',
+            cpu: 'AMD Ryzen 7 7800X3D',
+            gpu: 'RTX 4070 Super',
+            ram: '32GB DDR5',
+            settings: {
+                '1080p': { low: 425, medium: 365, high: 315, ultra: 275 },
+                '1440p': { low: 345, medium: 295, high: 255, ultra: 225 },
+                '4k': { low: 235, medium: 205, high: 175, ultra: 155 }
+            },
+            cpuTemp: 52,
+            gpuTemp: 56,
+            fpsImprovement: 38,
+            cpuTempImprovement: -10,
+            gpuTempImprovement: -7,
+            logo: 'assets/images/roblox.png'
         }
+    };
+    
+    // Game logo mapping
+    const gameLogos = {
+        valorant: 'assets/images/valorant.jpg',
+        fortnite: 'assets/images/fortnite.png',
+        apex: 'assets/images/apex_legends.jpg',
+        cs2: 'assets/images/counter_strike.png',
+        overwatch: 'assets/images/overwatch.jpg',
+        minecraft: 'assets/images/minecraft.jpg',
+        rust: 'assets/images/rust.png',
+        roblox: 'assets/images/roblox.png'
     };
     
     // Store current settings
     let currentSettings = {
-        game: 'warzone',
+        game: 'valorant',
         resolution: '1440p',
         quality: 'medium'
     };
@@ -609,6 +668,13 @@ function initGameSelector() {
         document.getElementById('gameCpu').textContent = game.cpu;
         document.getElementById('gameGpu').textContent = game.gpu;
         document.getElementById('gameRam').textContent = game.ram;
+        
+        // Update game logo
+        const gameLogo = document.getElementById('gameLogo');
+        if (gameLogo && gameLogos[currentSettings.game]) {
+            gameLogo.src = gameLogos[currentSettings.game];
+            gameLogo.alt = game.title + ' Logo';
+        }
         
         // Update stats with animation
         animateValue('avgFps', 0, fps, 1000);

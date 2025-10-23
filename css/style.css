@@ -202,14 +202,19 @@ ul {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius);
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 50px !important; /* Force rounded buttons */
     font-weight: 600;
-    text-align: center;
+    font-size: 1rem;
+    text-decoration: none;
     cursor: pointer;
     transition: var(--transition);
-    border: 2px solid transparent;
-    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-size: 0.875rem;
 }
 
 .btn i {
@@ -225,6 +230,7 @@ ul {
     background-color: var(--primary);
     color: white;
     box-shadow: var(--shadow);
+    border-radius: 50px !important;
 }
 
 .btn-primary:hover {
@@ -235,8 +241,9 @@ ul {
 
 .btn-outline {
     background-color: transparent;
-    border-color: var(--primary);
+    border: 2px solid var(--primary);
     color: var(--primary);
+    border-radius: 50px !important;
 }
 
 .btn-outline:hover {

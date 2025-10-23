@@ -1,0 +1,111 @@
+/* ===== Button Border Radius Fixes ===== */
+
+/* Force all buttons to be rounded */
+.btn,
+.btn-primary,
+.btn-outline,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info,
+.btn-light,
+.btn-dark,
+.btn-block,
+.btn-sm,
+.btn-lg,
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    border-radius: 50px !important;
+}
+
+/* Specific button classes */
+.cta-button,
+.download-btn,
+.purchase-btn,
+.auth-btn,
+.modal-btn,
+.nav-cta,
+.nav-link-auth,
+.nav-cart {
+    border-radius: 50px !important;
+}
+
+/* Download section buttons */
+.download-actions .btn,
+.download-actions .btn-primary,
+.download-actions .btn-outline,
+.download-actions .btn-block {
+    border-radius: 50px !important;
+}
+
+/* Hero section buttons */
+.hero-cta .btn,
+.hero-buttons .btn,
+.cta-buttons .btn {
+    border-radius: 50px !important;
+}
+
+/* Modal buttons */
+.modal-footer .btn,
+.purchase-modal .btn,
+.notification-modal .btn {
+    border-radius: 50px !important;
+}
+
+/* Auth form buttons */
+.auth-form .btn,
+.login-form .btn,
+.register-form .btn {
+    border-radius: 50px !important;
+}
+
+/* Comparison section buttons */
+.comparison-card .btn,
+.feature-card .btn {
+    border-radius: 50px !important;
+}
+
+/* Testimonials buttons */
+.testimonial-cta .btn {
+    border-radius: 50px !important;
+}
+
+/* Footer buttons */
+.footer .btn {
+    border-radius: 50px !important;
+}
+
+/* Any other button-like elements */
+[class*="btn"],
+[class*="button"],
+.button,
+.cta {
+    border-radius: 50px !important;
+}
+
+/* Focus and hover states should maintain rounded corners */
+.btn:focus,
+.btn:hover,
+.btn:active,
+.btn-primary:focus,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-outline:focus,
+.btn-outline:hover,
+.btn-outline:active {
+    border-radius: 50px !important;
+}
+
+/* Ensure no conflicting border-radius */
+* {
+    --btn-border-radius: 50px;
+}
+
+/* Override any framework defaults */
+.btn {
+    --bs-btn-border-radius: 50px !important;
+    --bootstrap-btn-border-radius: 50px !important;
+}

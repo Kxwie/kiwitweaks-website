@@ -4,19 +4,28 @@
     {
       "src": "api/**/*.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/*.js",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
-  ],
-  "env": {
-    "MONGODB_URI": "mongodb+srv://uprisekxwie_db_user:qmevMgf3T9NZJRkR@kiwitweaksdb.4jh9nv1.mongodb.net",
-    "JWT_SECRET": "your-secret-jwt-key-change-this-in-production",
-    "STRIPE_PUBLISHABLE_KEY": "pk_live_51SL85DPAav93iDQPS9DGfN3QTFjSdqPlAWUy567Z4jUXuxLO0OybGBS4LkckPb2lqk3O73vLODM1Xk08vulNkoTJ00YKMGzP3x",
-    "PAYPAL_CLIENT_ID": "AfHir0qS1C-PrKUV2D1VcqAZ-JDTIA4KRpd40cdJkTojucgv40k-sfpnrpxJfoKKE9b5uszwJOk5qVfR",
-    "PAYPAL_CLIENT_SECRET": "your-paypal-secret"
-  }
+  ]
 }

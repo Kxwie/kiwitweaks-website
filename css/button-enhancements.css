@@ -1,0 +1,279 @@
+/* ===== Button Design & Animation Enhancements ===== */
+
+/* Fix square outline issue - CRITICAL FIX */
+.btn,
+.btn-primary,
+.btn-outline,
+.btn-secondary,
+button,
+[class*="btn"],
+.nav-cta,
+.nav-link-auth,
+.nav-cart,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    /* Force rounded corners everywhere */
+    border-radius: 50px !important;
+    
+    /* Fix square focus outline */
+    outline: none !important;
+    
+    /* Custom focus styles */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Enhanced focus styles for accessibility */
+.btn:focus,
+.btn:focus-visible,
+button:focus,
+button:focus-visible,
+[class*="btn"]:focus,
+[class*="btn"]:focus-visible {
+    outline: none !important;
+    border-radius: 50px !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4) !important;
+    transform: translateY(-1px);
+}
+
+/* Primary button enhancements */
+.btn-primary {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+}
+
+/* Outline button enhancements */
+.btn-outline {
+    background: transparent;
+    border: 2px solid rgba(139, 92, 246, 0.8);
+    color: #8b5cf6;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.btn-outline:hover {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border-color: transparent;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+}
+
+.btn-outline:active {
+    transform: translateY(0);
+}
+
+/* Navbar button improvements */
+.nav-cta {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%) !important;
+    border: none !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.nav-cta:hover {
+    transform: translateY(-1px) scale(1.02) !important;
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4) !important;
+}
+
+.nav-link-auth:hover {
+    transform: translateY(-1px) !important;
+    background: rgba(139, 92, 246, 0.15) !important;
+}
+
+.nav-cart:hover {
+    transform: translateY(-1px) scale(1.05) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Download section button improvements */
+.download-actions .btn {
+    min-height: 56px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.download-actions .btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Modal button improvements */
+.purchase-modal .btn,
+.download-notification-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+}
+
+.purchase-modal .btn:hover,
+.download-notification-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Scroll to top button enhancement */
+.scroll-to-top {
+    border-radius: 50% !important;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border: none;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+}
+
+/* Carousel controls enhancement */
+.carousel-dot {
+    border-radius: 50% !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-dot:hover,
+.carousel-dot.active {
+    transform: scale(1.2);
+}
+
+/* Form button improvements */
+.auth-form .btn,
+input[type="submit"] {
+    min-height: 48px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile menu toggle enhancement */
+.mobile-menu-toggle {
+    border-radius: 8px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(139, 92, 246, 0.1);
+    transform: scale(1.05);
+}
+
+/* Button loading state */
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Ripple effect for buttons */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Button group spacing */
+.btn + .btn {
+    margin-left: 1rem;
+}
+
+/* Responsive button adjustments */
+@media (max-width: 768px) {
+    .btn {
+        min-height: 48px;
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    .btn-lg {
+        min-height: 52px;
+        font-size: 1.1rem;
+    }
+    
+    .btn + .btn {
+        margin-left: 0;
+        margin-top: 0.75rem;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn-outline {
+        border-width: 3px;
+    }
+    
+    .btn:focus,
+    .btn:focus-visible {
+        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.6) !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn::before,
+    .btn:hover,
+    .btn:focus {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    .btn {
+        background: transparent !important;
+        color: #000 !important;
+        border: 2px solid #000 !important;
+        box-shadow: none !important;
+    }
+}

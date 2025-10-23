@@ -1,48 +1,37 @@
 /**
- * Force all pages to load from top
- * Ensures consistent user experience across all page loads
+ * Ensure pages always load from top to bottom
  */
 
 (function() {
     'use strict';
 
-    // Force scroll to top immediately when page starts loading
+    // Force scroll to top on page load/refresh
+    function scrollToTop() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    }
+
+    // Disable scroll restoration
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
 
-    // Scroll to top before page unloads
-    window.addEventListener('beforeunload', function() {
-        window.scrollTo(0, 0);
-    });
+    // Force scroll to top immediately
+    scrollToTop();
 
     // Force scroll to top on page load
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            window.scrollTo(0, 0);
-        }, 0);
-    });
+    window.addEventListener('load', scrollToTop);
 
-    // Force scroll to top on DOM ready
-    document.addEventListener('DOMContentLoaded', function() {
-        window.scrollTo(0, 0);
-    });
+    // Force scroll to top before page unload
+    window.addEventListener('beforeunload', scrollToTop);
 
-    // Immediate scroll to top
-    window.scrollTo(0, 0);
+    // Force scroll to top on DOM content loaded
+    document.addEventListener('DOMContentLoaded', scrollToTop);
 
-    // Handle browser back/forward navigation
-    window.addEventListener('popstate', function() {
-        setTimeout(function() {
-            window.scrollTo(0, 0);
-        }, 0);
-    });
+    // Additional safety - force scroll after a short delay
+    setTimeout(scrollToTop, 100);
 
-    // Handle page refresh
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            window.scrollTo(0, 0);
-        }
-    });
+    console.log('✅ Scroll-to-top on load initialized');
 
 })();

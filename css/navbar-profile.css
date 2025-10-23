@@ -6,26 +6,26 @@
     align-items: center;
     position: relative;
     z-index: 1001;
-    padding: 0.25rem 2rem;
-    gap: 3rem;
+    padding: 0.25rem 2.5rem;
+    gap: 4rem; /* Increased gap between sections */
 }
 
 /* Logo on far left */
 .logo {
     order: 1;
     flex-shrink: 0;
-    margin-right: 0;
+    margin-right: 2rem; /* Add space after logo */
 }
 
 /* Navigation links centered with flex auto margins */
 .nav-links {
     order: 2;
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem; /* Increased gap between nav items */
     align-items: center;
     justify-content: center;
     flex: 1;
-    margin: 0 auto;
+    margin: 0 4rem; /* Add large margins on both sides */
 }
 
 /* Remove normal links from nav-links for right-side positioning */
@@ -40,9 +40,9 @@
     order: 3;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem; /* Increased gap between auth items */
     flex-shrink: 0;
-    margin-left: auto;
+    margin-left: 2rem; /* Add space before auth actions */
 }
 
 /* Login button - first on right */
@@ -311,11 +311,22 @@
     .navbar {
         flex-wrap: wrap;
         padding: 0.5rem 0.75rem; /* Smaller padding on mobile */
+        gap: 1rem; /* Smaller gap on mobile */
     }
     
     .logo {
         order: 1;
         margin-left: 0;
+        margin-right: 0; /* Remove extra margin on mobile */
+    }
+    
+    .nav-links {
+        margin: 0; /* Remove large margins on mobile */
+        gap: 1.5rem; /* Smaller gap between nav items on mobile */
+    }
+    
+    .nav-auth-actions {
+        margin-left: 0; /* Remove margin on mobile */
     }
     
     .mobile-menu-toggle {

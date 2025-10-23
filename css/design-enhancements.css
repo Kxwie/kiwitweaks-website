@@ -1,0 +1,528 @@
+/* ========================================
+   🎨 DESIGN ENHANCEMENTS & FINE-TUNING
+   Enhanced buttons, cards, animations, and performance
+   ======================================== */
+
+/* ===== Enhanced Button Styles ===== */
+.btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    text-decoration: none;
+    /* Add ripple effect container */
+}
+
+/* Button Ripple Effect */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Enhanced Primary Button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    position: relative;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::after {
+    opacity: 1;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Enhanced Outline Button */
+.btn-outline {
+    border: 2px solid;
+    border-image: linear-gradient(135deg, var(--primary), var(--secondary)) 1;
+    background: rgba(139, 92, 246, 0.05);
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.btn-outline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.btn-outline:hover::before {
+    opacity: 1;
+}
+
+.btn-outline:hover {
+    color: white;
+    border-image: none;
+    border-color: transparent;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+}
+
+/* Button Loading State */
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+    position: relative;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== Enhanced Card Styles ===== */
+.card,
+.feature-card,
+.pricing-card,
+.benchmark-card,
+.testimonial-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+/* Card Hover Glow Effect */
+.card::before,
+.feature-card::before,
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    filter: blur(20px);
+}
+
+.card:hover::before,
+.feature-card:hover::before,
+.pricing-card:hover::before {
+    opacity: 0.6;
+}
+
+.card:hover,
+.feature-card:hover,
+.pricing-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+}
+
+/* Card Shine Effect */
+.card::after,
+.feature-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    transition: transform 0.6s ease;
+}
+
+.card:hover::after,
+.feature-card:hover::after {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+}
+
+/* ===== Enhanced Text Animations ===== */
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Text Reveal Animation */
+[data-scroll="fade-up"] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+[data-scroll="fade-up"].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger Animation Delays */
+[data-scroll-delay="0.1s"].visible { transition-delay: 0.1s; }
+[data-scroll-delay="0.2s"].visible { transition-delay: 0.2s; }
+[data-scroll-delay="0.3s"].visible { transition-delay: 0.3s; }
+[data-scroll-delay="0.4s"].visible { transition-delay: 0.4s; }
+[data-scroll-delay="0.5s"].visible { transition-delay: 0.5s; }
+[data-scroll-delay="0.6s"].visible { transition-delay: 0.6s; }
+[data-scroll-delay="0.7s"].visible { transition-delay: 0.7s; }
+
+/* ===== Enhanced Link Hover Effects ===== */
+/* Exclude navbar links, buttons, and logo */
+a:not(.btn):not(.logo):not(.nav-links a):not(.nav-cta):not(.nav-link-auth) {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+a:not(.btn):not(.logo):not(.nav-links a):not(.nav-cta):not(.nav-link-auth)::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.3s ease;
+}
+
+a:not(.btn):not(.logo):not(.nav-links a):not(.nav-cta):not(.nav-link-auth):hover::after {
+    width: 100%;
+}
+
+/* ===== Enhanced Input Fields ===== */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+input:focus,
+textarea:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+    border-color: var(--primary);
+}
+
+/* Input Glow Effect */
+.form-group {
+    position: relative;
+}
+
+.form-group::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(10px);
+}
+
+.form-group:focus-within::before {
+    opacity: 0.5;
+}
+
+/* ===== Enhanced Icon Animations ===== */
+.fas,
+.fab,
+i[class*="fa-"] {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn:hover i {
+    transform: translateX(4px);
+}
+
+.feature-icon i,
+.benchmark-icon i {
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.feature-card:hover .feature-icon i,
+.benchmark-card:hover .benchmark-icon i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* ===== Enhanced Smooth Scrolling ===== */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* ===== Performance Optimizations ===== */
+
+/* GPU Acceleration for Animations */
+.btn,
+.card,
+.feature-card,
+.pricing-card,
+[data-scroll] {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Reduce paint operations */
+.btn,
+.card {
+    contain: layout style paint;
+}
+
+/* ===== Micro-interactions ===== */
+
+/* Button Press Effect */
+.btn:active {
+    transform: translateY(0) scale(0.95);
+    transition-duration: 0.1s;
+}
+
+/* Card Tilt Effect on Hover */
+@media (hover: hover) and (pointer: fine) {
+    .pricing-card,
+    .feature-card {
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Pulse Animation for CTA Buttons */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(139, 92, 246, 0.7);
+    }
+}
+
+.btn-primary.pulse {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ===== Enhanced Testimonial Cards ===== */
+.testimonial-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: 0 25px 50px rgba(139, 92, 246, 0.25);
+}
+
+/* ===== Enhanced Stat Counters ===== */
+.stat-value {
+    font-variant-numeric: tabular-nums;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-value {
+    transform: scale(1.1);
+    color: var(--primary);
+}
+
+/* ===== Enhanced Section Headers ===== */
+.section-title {
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.4s ease, width 0.4s ease;
+}
+
+.section-header[data-scroll].visible .section-title::after {
+    opacity: 1;
+    width: 100px;
+}
+
+/* ===== Enhanced Footer Links ===== */
+.footer-links a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.footer-links a::before {
+    content: '→';
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    padding-left: 20px;
+    color: var(--primary);
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
+    left: 0;
+}
+
+/* ===== Enhanced Social Links ===== */
+.social-links a {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.social-links a:hover {
+    transform: translateY(-5px) scale(1.15) rotate(5deg);
+    color: var(--primary);
+}
+
+/* ===== Loading Skeleton Animation ===== */
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+/* ===== Enhanced Scroll Indicator ===== */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: 10000;
+    transition: width 0.1s linear;
+}
+
+/* ===== Focus Visible Enhancement ===== */
+*:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* ===== Enhanced Badge/Tag Styles ===== */
+.badge,
+.tag {
+    transition: all 0.3s ease;
+}
+
+.badge:hover,
+.tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+/* ===== Print Optimization ===== */
+@media print {
+    .btn,
+    .header,
+    .footer,
+    .scroll-to-top {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
+
+/* ===== High Contrast Mode Support ===== */
+@media (prefers-contrast: high) {
+    .btn-primary {
+        border: 2px solid white;
+    }
+    
+    .btn-outline {
+        border-width: 3px;
+    }
+}
+
+/* ===== Dark Mode Enhancements (Future-proof) ===== */
+@media (prefers-color-scheme: dark) {
+    /* Already dark, but ensure consistency */
+    body {
+        color-scheme: dark;
+    }
+}

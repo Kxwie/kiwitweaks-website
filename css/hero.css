@@ -342,6 +342,11 @@
     filter: drop-shadow(0 4px 8px rgba(139, 92, 246, 0.3));
 }
 
+.stat-icon i {
+    color: #8b5cf6;
+    font-size: 3rem;
+}
+
 @keyframes float {
     0%, 100% {
         transform: translateY(0px);

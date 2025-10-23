@@ -1383,15 +1383,14 @@ transition: transform 0.3s ease;
 }
 
 .footer-links-group a {
-    display: block;
+    display: inline-block;
     color: var(--gray);
     margin-bottom: 0.75rem;
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-links-group a:hover {
     color: white;
-    padding-left: 0.5rem;
 }
 
 .footer-bottom {
@@ -1416,13 +1415,30 @@ transition: transform 0.3s ease;
 }
 
 .footer-legal a {
+    position: relative;
+    display: inline-block;
     color: var(--gray);
     font-size: 0.875rem;
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-legal a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-legal a:hover {
     color: white;
+}
+
+.footer-legal a:hover::after {
+    width: 100%;
 }
 
 /* ===== Centered Feature Section ===== */

@@ -411,25 +411,28 @@ html {
 /* ===== Enhanced Footer Links ===== */
 .footer-links a {
     position: relative;
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-block;
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.footer-links a::before {
-    content: '→';
+/* Underline animation that only affects text width */
+.footer-links a::after {
+    content: '';
     position: absolute;
-    left: -20px;
-    opacity: 0;
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-links a:hover {
-    padding-left: 20px;
     color: var(--primary);
 }
 
-.footer-links a:hover::before {
-    opacity: 1;
-    left: 0;
+.footer-links a:hover::after {
+    width: 100%;
 }
 
 /* ===== Enhanced Social Links ===== */

@@ -35,19 +35,17 @@ function initBenchmarkCharts() {
     new Chart(fpsCtx, {
         type: 'bar',
         data: {
-            labels: ['Stock Windows', 'With KiwiTweaks', 'Improvement'],
+            labels: ['Stock Windows', 'With KiwiTweaks'],
             datasets: [{
                 label: 'Average FPS',
-                data: [100, 130, 30],
+                data: [100, 135],
                 backgroundColor: [
                     'rgba(99, 102, 241, 0.7)',
-                    'rgba(124, 58, 237, 0.9)',
-                    'rgba(16, 185, 129, 0.9)'
+                    'rgba(124, 58, 237, 0.9)'
                 ],
                 borderColor: [
                     'rgba(99, 102, 241, 1)',
-                    'rgba(124, 58, 237, 1)',
-                    'rgba(16, 185, 129, 1)'
+                    'rgba(124, 58, 237, 1)'
                 ],
                 borderWidth: 1,
                 borderRadius: 4
@@ -63,7 +61,9 @@ function initBenchmarkCharts() {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return `${context.dataset.label}: ${context.raw} FPS`;
+                            const value = context.raw;
+                            const improvement = context.dataIndex === 1 ? ' (+35% vs Stock)' : '';
+                            return `${context.dataset.label}: ${value} FPS${improvement}`;
                         }
                     }
                 }

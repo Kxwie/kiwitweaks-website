@@ -19,7 +19,7 @@
 
     function createPurchaseModal() {
         const modalHTML = `
-            <div class="purchase-modal-overlay" id="purchaseModal">
+            <div class="purchase-modal-overlay" id="purchaseModal" style="display: none !important;">
                 <div class="purchase-modal">
                     <button class="modal-close" id="closeModal">
                         <i class="fas fa-times"></i>
@@ -135,7 +135,7 @@
                         <div class="guarantee-badge">
                             <i class="fas fa-shield-alt"></i>
                             <h4>30-Day Money Back Guarantee</h4>
-                            <p>Try KiwiTweaks risk-free. Not satisfied? Get a full refund within 30 days.</p>
+                            <p>Try KiwiTweaks risk-free. Not satisfied? Get a full refund as long as you're within our refund requirements!</p>
                         </div>
                     </div>
                 </div>
@@ -194,6 +194,7 @@
     function openModal() {
         const modal = document.getElementById('purchaseModal');
         if (modal) {
+            modal.style.display = 'flex';
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -203,6 +204,7 @@
         const modal = document.getElementById('purchaseModal');
         if (modal) {
             modal.classList.remove('active');
+            modal.style.display = 'none';
             document.body.style.overflow = '';
         }
     }

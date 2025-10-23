@@ -41,48 +41,51 @@ function initMobileMenuToggle() {
 
 // FAQ Accordion
 function initFAQAccordion() {
-    const faqItems = document.querySelectorAll('.faq-item');
+    const faqContainer = document.querySelector('.faq-grid');
     
-    if (!faqItems.length) {
-        console.warn('[FAQ] No FAQ items found');
+    if (!faqContainer) {
+        console.warn('[FAQ] FAQ container not found');
         return;
     }
     
-    faqItems.forEach(item => {
-        // Check if already initialized to prevent double binding
-        if (item.hasAttribute('data-faq-initialized')) {
-            return;
-        }
-        item.setAttribute('data-faq-initialized', 'true');
+    // Check if already initialized to prevent double binding
+    if (faqContainer.hasAttribute('data-faq-initialized')) {
+        console.log('[FAQ] Already initialized, skipping');
+        return;
+    }
+    faqContainer.setAttribute('data-faq-initialized', 'true');
+    
+    // Use event delegation on the container instead of individual items
+    faqContainer.addEventListener('click', (e) => {
+        // Find the closest .faq-question element
+        const question = e.target.closest('.faq-question');
         
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
+        if (!question) return;
         
-        if (!question || !answer) return;
+        // Find the parent .faq-item
+        const item = question.closest('.faq-item');
         
-        question.addEventListener('click', (e) => {
-            // Prevent event bubbling
-            e.stopPropagation();
-            
-            const isActive = item.classList.contains('active');
-            
-            // Close all other FAQ items
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                }
-            });
-            
-            // Toggle current item
-            if (isActive) {
-                item.classList.remove('active');
-            } else {
-                item.classList.add('active');
+        if (!item) return;
+        
+        // Prevent event bubbling
+        e.stopPropagation();
+        
+        const isActive = item.classList.contains('active');
+        
+        // Close all other FAQ items
+        const allFaqItems = faqContainer.querySelectorAll('.faq-item');
+        allFaqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
             }
         });
+        
+        // Toggle current item
+        item.classList.toggle('active');
     });
     
-    console.log(`[FAQ] Initialized ${faqItems.length} FAQ items`);
+    const faqCount = faqContainer.querySelectorAll('.faq-item').length;
+    console.log(`[FAQ] Initialized ${faqCount} FAQ items using event delegation`);
 }
 
 // Smooth Scroll with offset for fixed header

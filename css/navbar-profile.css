@@ -1,31 +1,35 @@
 /* ===== Navbar Reorganization & Profile Dropdown ===== */
 
-/* Navbar Layout - Logo left, nav centered, auth right */
+/* Navbar Layout - Logo far left, nav perfectly centered, auth right */
 .navbar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     position: relative;
     z-index: 1001;
-    padding: 0.25rem 2.5rem;
-    gap: 4rem; /* Increased gap between sections */
+    padding: 0.25rem 1rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 /* Logo on far left */
 .logo {
     order: 1;
+    justify-self: start;
     flex-shrink: 0;
-    margin-right: 2rem; /* Add space after logo */
+    margin-left: 1rem; /* Move more to the left */
 }
 
-/* Navigation links centered with flex auto margins */
+/* Navigation links perfectly centered */
 .nav-links {
     order: 2;
     display: flex;
-    gap: 2.5rem; /* Increased gap between nav items */
+    gap: 2.5rem;
     align-items: center;
     justify-content: center;
-    flex: 1;
-    margin: 0 4rem; /* Add large margins on both sides */
+    justify-self: center;
+    white-space: nowrap;
 }
 
 /* Active page indicator */
@@ -77,9 +81,10 @@
     order: 3;
     display: flex;
     align-items: center;
-    gap: 1.25rem; /* Increased gap between auth items */
+    gap: 1rem;
     flex-shrink: 0;
-    margin-left: 2rem; /* Add space before auth actions */
+    justify-self: end;
+    margin-right: 1rem;
 }
 
 /* Login button - first on right */

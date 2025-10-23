@@ -64,39 +64,15 @@
 
     // Enhanced button feedback
     function enhanceButton(button) {
-        // Add ripple effect
-        button.addEventListener('click', createRipple);
+        // Skip if already enhanced
+        if (button.hasAttribute('data-enhanced')) return;
+        button.setAttribute('data-enhanced', 'true');
         
-        // Add loading state for certain buttons
-        if (button.matches('[data-purchase-modal], .btn-primary[href*="discord"]')) {
-            button.addEventListener('click', (e) => {
-                if (!e.defaultPrevented) {
-                    addLoadingState(button, 1500);
-                }
-            });
-        }
+        // Add ripple effect (don't prevent default)
+        button.addEventListener('click', createRipple, { passive: true });
         
-        // Enhanced focus handling
-        button.addEventListener('focus', () => {
-            button.style.transform = 'translateY(-1px)';
-        });
-        
-        button.addEventListener('blur', () => {
-            button.style.transform = '';
-        });
-        
-        // Keyboard interaction
-        button.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                button.style.transform = 'translateY(0)';
-            }
-        });
-        
-        button.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                button.style.transform = 'translateY(-1px)';
-            }
-        });
+        // Don't interfere with button functionality
+        // Just add visual enhancements
     }
 
     // Initialize enhanced buttons

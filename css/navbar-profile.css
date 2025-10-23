@@ -1,35 +1,40 @@
 /* ===== Navbar Reorganization & Profile Dropdown ===== */
 
-/* Navbar Layout - Logo left, content centered, auth right */
+/* Navbar Layout - Logo far left, nav links center, auth far right */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 1001;
-    padding: 0.25rem 0;
+    padding: 0.25rem 1rem; /* Add horizontal padding */
+    gap: 2rem;
 }
 
-/* Logo stays on the left */
+/* Logo on far left with margin */
 .logo {
     order: 1;
     margin-right: auto;
+    margin-left: 0;
+    flex-shrink: 0;
 }
 
-/* Navigation links centered */
+/* Navigation links in center */
 .nav-links {
     order: 2;
     display: flex;
     gap: 2rem;
     align-items: center;
-    flex: 1;
     justify-content: center;
+    flex-shrink: 1;
 }
 
-/* Hide Login button initially, only show when not logged in */
+/* Login button on far right with margin */
 .nav-link-auth {
     order: 3;
     margin-left: auto !important;
+    margin-right: 0 !important;
+    flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -53,17 +58,21 @@
     border-color: transparent;
 }
 
-/* Purchase button */
+/* Purchase button (next to login) */
 .nav-cta {
-    order: 3;
-    margin-left: 1rem !important;
+    order: 4;
+    margin-left: 0.75rem !important;
+    margin-right: 0 !important;
+    flex-shrink: 0;
 }
 
-/* Profile Dropdown (shown when logged in) */
+/* Profile Dropdown (shown when logged in) - replaces login button */
 .profile-dropdown {
     position: relative;
     order: 3;
-    margin-left: auto;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    flex-shrink: 0;
 }
 
 .profile-trigger {
@@ -242,15 +251,18 @@
 @media (max-width: 768px) {
     .navbar {
         flex-wrap: wrap;
+        padding: 0.5rem 0.75rem; /* Smaller padding on mobile */
     }
     
     .logo {
         order: 1;
+        margin-left: 0;
     }
     
     .mobile-menu-toggle {
         order: 2;
         margin-left: auto;
+        margin-right: 0;
     }
     
     .nav-links {

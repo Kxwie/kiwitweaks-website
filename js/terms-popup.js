@@ -27,35 +27,19 @@
                     </div>
                     
                     <div class="terms-popup-content">
-                        <p>Welcome to KiwiTweaks! Before you continue, please review and accept our terms:</p>
-                        
-                        <div class="terms-list">
-                            <div class="term-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>You must be 13 years or older to use KiwiTweaks</span>
-                            </div>
-                            <div class="term-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Use of optimization software is at your own risk</span>
-                            </div>
-                            <div class="term-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>We recommend creating a system restore point before using</span>
-                            </div>
-                            <div class="term-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Your data will be handled according to our Privacy Policy</span>
-                            </div>
-                        </div>
+                        <p>Welcome to KiwiTweaks! Before you continue, please review and accept our legal agreements:</p>
                         
                         <div class="terms-checkbox">
                             <label class="checkbox-container">
                                 <input type="checkbox" id="acceptTermsCheckbox">
                                 <span class="checkmark"></span>
-                                I have read and agree to the 
-                                <a href="user-agreement.html" target="_blank">Terms of Service</a> 
-                                and 
-                                <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
+                                I have read and agree to the following:
+                                <br><br>
+                                <a href="user-agreement.html" target="_blank">User Agreement</a>,
+                                <a href="privacy-policy.html" target="_blank">Privacy Policy</a>,
+                                <a href="refund-policy.html" target="_blank">Refund Policy</a>,
+                                and
+                                <a href="privacy-policy.html#cookies" target="_blank">Cookie Policy</a>
                             </label>
                         </div>
                     </div>

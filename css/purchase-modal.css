@@ -1,0 +1,436 @@
+/* ===== Enhanced Purchase Modal ===== */
+
+/* Modal Overlay - Hidden by default */
+.purchase-modal-overlay {
+    position: fixed !important;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 9999;
+    display: none !important;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Show modal when active class is added */
+.purchase-modal-overlay.active {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+/* Modal Container */
+.purchase-modal {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: 28px;
+    max-width: 950px;
+    width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 1px rgba(139, 92, 246, 0.5);
+    position: relative;
+    transform: scale(0.85) translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.purchase-modal-overlay.active .purchase-modal {
+    transform: scale(1) translateY(0);
+}
+
+/* Animated gradient border */
+.purchase-modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #8b5cf6 0%, #6366f1 50%, #8b5cf6 100%);
+    background-size: 200% 100%;
+    animation: gradient-flow 3s linear infinite;
+    border-radius: 28px 28px 0 0;
+}
+
+@keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: #8b5cf6;
+    transform: rotate(90deg);
+}
+
+.modal-close i {
+    font-size: 1.25rem;
+}
+
+/* Modal Content */
+.purchase-modal-content {
+    padding: 3rem;
+}
+
+/* Modal Header */
+.purchase-modal-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.purchase-modal-header i {
+    font-size: 3rem;
+    color: #8b5cf6;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.purchase-modal-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.purchase-modal-header p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+}
+
+/* Pricing Comparison */
+.pricing-comparison {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.pricing-comparison .btn {
+    min-width: 200px;
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+}
+
+/* Pricing Options */
+.pricing-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.pricing-card {
+    background: rgba(139, 92, 246, 0.05);
+    border: 2px solid rgba(139, 92, 246, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.pricing-card:hover::before {
+    left: 100%;
+}
+
+.pricing-card:hover {
+    border-color: #8b5cf6;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+}
+
+.pricing-card.selected {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: #8b5cf6;
+}
+
+.pricing-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.pricing-card h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.pricing-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #8b5cf6;
+    margin-bottom: 1rem;
+}
+
+.pricing-price span {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.pricing-features li {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.pricing-features li i {
+    color: #10b981;
+    font-size: 0.875rem;
+}
+
+.pricing-card .btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Payment Info */
+.payment-info {
+    text-align: center;
+    background: rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-info h4 {
+    color: #8b5cf6;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.payment-methods i {
+    font-size: 2rem;
+    color: #8b5cf6;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.payment-methods i:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Features List */
+.features-included {
+    margin-bottom: 2rem;
+}
+
+.features-included h4 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.feature-item i {
+    color: #8b5cf6;
+    font-size: 1.1rem;
+    margin-top: 0.25rem;
+}
+
+.feature-item div h5 {
+    color: #ffffff;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.feature-item div p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Purchase Actions */
+.purchase-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.purchase-actions .btn {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Pricing Comparison */
+.pricing-comparison {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pricing-comparison h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.pricing-comparison .pricing-card {
+    flex: 1;
+}
+
+/* Money Back Guarantee */
+.guarantee-badge {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.guarantee-badge i {
+    font-size: 2.5rem;
+    color: #10b981;
+    flex-shrink: 0;
+}
+
+.guarantee-badge div {
+    flex: 1;
+}
+
+.guarantee-badge h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+}
+
+.guarantee-badge p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .purchase-modal-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .pricing-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .purchase-actions {
+        flex-direction: column;
+    }
+    
+    .purchase-modal-header h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .purchase-modal-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .payment-methods {
+        flex-direction: column;
+    }
+    
+    .modal-close {
+        top: 1rem;
+        right: 1rem;
+        width: 36px;
+        height: 36px;
+    }
+}

@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiwiTweaks - Advanced System Optimization for Gaming & Performance</title>
+    <meta name="description" content="Boost your gaming performance with KiwiTweaks. Get better FPS, lower latency, and optimized Windows performance. Trusted by 150+ users worldwide.">
+    <meta name="keywords" content="windows optimization, gaming performance, fps boost, system tweaks, pc optimization, lower latency, kiwitweaks">
+    <meta name="author" content="KiwiTweaks">
+    <meta name="theme-color" content="#8b5cf6">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="KiwiTweaks - Advanced System Optimization">
+    <meta property="og:description" content="Boost your gaming performance with KiwiTweaks. Get better FPS and lower latency with our Windows optimization tools.">
+    <meta property="og:url" content="https://kiwitweaks.com">
+    <meta property="og:site_name" content="KiwiTweaks">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KiwiTweaks - Advanced System Optimization">
+    <meta name="twitter:description" content="Boost your gaming performance with KiwiTweaks. Get better FPS and lower latency.">
+    <meta name="twitter:site" content="@kiwitweaks">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kiwitweaks.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/icons.svg">
+    <link rel="apple-touch-icon" href="assets/images/icons.svg">
+    <!-- Preconnect to external domains (performance optimization) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Fonts and Icons (defer non-critical) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Critical CSS (loaded immediately) -->
+    <link rel="stylesheet" href="css/optimized-global.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/new-sections.css">
+    
+    <!-- Non-critical CSS (lazy loaded) -->
+    <link rel="preload" href="css/clean-tabs.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="css/scroll-to-top.css">
+    <link rel="stylesheet" href="css/download-section.css">
+    <noscript><link rel="stylesheet" href="css/clean-tabs.css"></noscript>
+    <link rel="preload" href="css/comparison.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/comparison.css"></noscript>
+    <link rel="stylesheet" href="css/testimonials-carousel.css">
+    <link rel="stylesheet" href="css/purchase-modal.css">
+    <link rel="stylesheet" href="css/terms-popup.css">
+    <link rel="stylesheet" href="css/design-enhancements.css">
+    <link rel="stylesheet" href="css/navbar-profile.css">
+    <link rel="stylesheet" href="css/download-notification.css">
+    <link rel="stylesheet" href="css/button-fixes.css">
+    <link rel="stylesheet" href="css/smooth-animations.css">
+    <link rel="stylesheet" href="css/rating-display.css">
+    <link rel="stylesheet" href="css/button-enhancements.css">
+    <link rel="stylesheet" href="css/shopping-cart.css">
+</head>
+<body class="preload">
+    <div class="page-wrapper">
+        <!-- 3D Background Elements -->
+        <div class="hero-3d-element" data-parallax data-parallax-speed="0.5"></div>
+        <div class="hero-3d-element" data-parallax data-parallax-speed="0.3"></div>
+        <div class="hero-3d-element" data-parallax data-parallax-speed="0.7"></div>
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo" data-scroll="fade-right">
+                        <i class="fas fa-kiwi-bird"></i>
+                        <span>Kiwi<span>Tweaks</span></span>
+                    </a>
+                    <div class="nav-links">
+                        <a href="index.html" class="active">Home</a>
+                        <a href="benchmarks.html">Benchmarks</a>
+                        <a href="#download">Download</a>
+                        <a href="#testimonials">Reviews</a>
+                    </div>
+                    <div class="nav-auth-actions">
+                        <a href="profile.html" class="nav-link-auth" aria-label="Profile" title="My Profile">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <a href="https://discord.gg/kiwitweaks" target="_blank" class="nav-discord" aria-label="Join Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="nav-cart" aria-label="Shopping cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <a href="#" class="nav-cta" data-purchase-modal>
+                            <span>Purchase</span>
+                        </a>
+                    </div>
+                    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <canvas class="hero-canvas" id="hero-canvas"></canvas>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge" data-scroll="fade-up" data-scroll-delay="0.2s">
+                        <svg class="badge-icon" width="16" height="16" viewBox="0 0 100 100">
+                            <use xlink:href="assets/images/icons.svg#kiwi-logo"></use>
+                        </svg>
+                        <span>Version 2.0 Released</span>
+                    </div>
+                    <h1 class="hero-title" data-scroll="fade-up" data-scroll-delay="0.3s">
+                        Unleash Your <span class="gradient-text">PC's Potential</span>
+                    </h1>
+                    <p class="hero-description" data-scroll="fade-up" data-scroll-delay="0.4s">
+                        Experience the ultimate performance boost with our AI-powered optimization tools.
+                        Get more FPS, faster load times, and smoother gameplay.
+                    </p>
+                    <div class="hero-cta" data-scroll="fade-up" data-scroll-delay="0.5s">
+                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            <span>Download Free</span>
+                            <i class="fas fa-download"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline" data-purchase-modal>
+                            <span>Get Premium</span>
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </div>
+                    <div class="hero-stats" data-scroll="fade-up" data-scroll-delay="0.6s">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-value" data-count="150">0</div>
+                            <div class="stat-label">Happy Customers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fab fa-discord"></i></div>
+                            <div class="stat-value" data-count="5000">0</div>
+                            <div class="stat-label">Discord Members</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-star"></i></div>
+                            <div class="stat-value" data-count="5">0</div>
+                            <div class="stat-label">Average Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase Section -->
+        <section id="showcase" class="section bg-dark">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Select Your <span class="highlight">Version</span></h2>
+                </div>
+                
+                <div class="tab-system">
+                    <div class="tab-header">
+                        <button class="tab-button" data-tab="free">
+                            <svg class="tab-icon" width="20" height="20" viewBox="0 0 100 100">
+                                <use xlink:href="assets/images/icons.svg#kiwi-logo"></use>
+                            </svg>
+                            <span>KiwiTweaks Free</span>
+                        </button>
+                        <button class="tab-button active" data-tab="pro">
+                            <svg class="tab-icon" width="20" height="20" viewBox="0 0 100 100">
+                                <use xlink:href="assets/images/icons.svg#kiwi-logo"></use>
+                            </svg>
+                            <span>KiwiTweaks Premium</span>
+                        </button>
+                    </div>
+
+                    <!-- Free Version -->
+                    <div id="free" class="tab-content">
+                        <div class="pane-content">
+                            <div class="pane-details">
+                                <h2>Free Version</h2>
+                                <p>Experience basic system optimization with our free version.</p>
+                                
+                                <div class="feature-cards-grid">
+                                    <div class="feature-card-item">
+                                        <div class="feature-card-icon">
+                                            <i class="fas fa-mouse-pointer"></i>
+                                        </div>
+                                        <h3>One-click optimization</h3>
+                                    </div>
+                                    <div class="feature-card-item">
+                                        <div class="feature-card-icon">
+                                            <i class="fas fa-sliders-h"></i>
+                                        </div>
+                                        <h3>Advanced settings</h3>
+                                    </div>
+                                    <div class="feature-card-item">
+                                        <div class="feature-card-icon">
+                                            <i class="fas fa-user-cog"></i>
+                                        </div>
+                                        <h3>Profile management</h3>
+                                    </div>
+                                </div>
+                                
+                                <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download Free</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pro Version -->
+                    <div id="pro" class="tab-content active">
+                        <div class="pane-content">
+                            <div class="pane-details">
+                                <h2>KiwiTweaks Premium</h2>
+                                <p>Unlock advanced optimization features and priority support.</p>
+                                
+                                <div class="feature-cards-grid">
+                                    <div class="feature-card-item">
+                                        <div class="feature-card-icon">
+                                            <i class="fas fa-mouse-pointer"></i>
+                                        </div>
+                                        <h3>One-click optimization</h3>
+                                    </div>
+                                    <div class="feature-card-item">
+                                        <div class="feature-card-icon">
+                                            <i class="fas fa-sliders-h"></i>
+                                        </div>
+                                        <h3>Advanced settings</h3>
+                                    </div>
+                                    <div class="feature-card-item">
+                                        <div class="feature-card-icon">
+                                            <i class="fas fa-user-cog"></i>
+                                        </div>
+                                        <h3>Profile management</h3>
+                                    </div>
+                                </div>
+                                
+                                <a href="#download" class="btn btn-primary">Download Premium</a>
+                                <p class="text-sm mt-3">30-day refund within requirements</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-comparison">
+                    <div class="section-header">
+                        <h2 class="section-title">Feature <span class="highlight">Comparison</span></h2>
+                    </div>
+                    
+                    <div class="comparison-container">
+                        <div class="comparison-table">
+                            <div class="comparison-header">
+                                <div class="feature-name">Features</div>
+                                <div class="feature-version">
+                                    <div class="version-label">Free</div>
+                                    <div class="version-price">$0</div>
+                                    <a href="#download" class="btn btn-sm btn-outline">Download</a>
+                                </div>
+                                <div class="feature-version popular">
+                                    <div class="popular-tag">Most Popular</div>
+                                    <div class="version-label">Premium</div>
+                                    <div class="version-price">$29.99</div>
+                                    <a href="#download" class="btn btn-sm btn-primary">Get Premium</a>
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-section">
+                                <div class="section-title">Performance</div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Basic Optimizations</div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Advanced Tweaks</div>
+                                    <div class="feature-version"><i class="fas fa-times-circle"></i></div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Bios Optimizations</div>
+                                    <div class="feature-version"><i class="fas fa-times-circle"></i></div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-section">
+                                <div class="section-title">Support & Updates</div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Early Access</div>
+                                    <div class="feature-version"><i class="fas fa-times-circle"></i></div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Priority Support</div>
+                                    <div class="feature-version"><i class="fas fa-times-circle"></i></div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Lifetime Updates</div>
+                                    <div class="feature-version"><i class="fas fa-times-circle"></i></div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-section">
+                                <div class="section-title">Advanced Features</div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Tweaks</div>
+                                    <div class="feature-version">300+</div>
+                                    <div class="feature-version">1200+</div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Scheduled Optimizations</div>
+                                    <div class="feature-version"><i class="fas fa-times-circle"></i></div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                </div>
+                                <div class="comparison-row">
+                                    <div class="feature-name">Advanced Analytics</div>
+                                    <div class="feature-version"><i class="fas fa-times-circle"></i></div>
+                                    <div class="feature-version"><i class="fas fa-check-circle"></i></div>
+                                </div>
+                            </div>
+                            
+                            <div class="comparison-footer">
+                                <div class="feature-name"></div>
+                                <div class="feature-version">
+                                    <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-outline btn-block" target="_blank" rel="noopener noreferrer">Download Free</a>
+                                </div>
+                                <div class="feature-version">
+                                    <a href="#" class="btn btn-primary btn-block" data-purchase-modal>Get Premium</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-legend">
+                            <div class="legend-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Included</span>
+                            </div>
+                            <div class="legend-item">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Not Included</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Centered Feature Section -->
+        <section class="centered-feature" data-scroll="fade-up">
+            <p>Tailor the optimization to your specific needs with our intuitive interface and detailed customization options.</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-check"></i> One-click optimization</li>
+                <li><i class="fas fa-check"></i> Advanced settings</li>
+                <li><i class="fas fa-check"></i> Profile management</li>
+            </ul>
+            <p class="cta-text">Ready to experience the difference? Try KiwiTweaks today and feel the performance boost!</p>
+            <a href="#download" class="btn">Download Now</a>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section bg-dark testimonials-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title" style="color: #ffffff;">Trusted by <span class="highlight">Gamers Worldwide</span></h2>
+                </div>
+                
+                <div class="testimonials-carousel-wrapper">
+                    <button class="carousel-arrow prev" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="testimonials-carousel">
+                        <div class="testimonials-track">
+                            <!-- Slide 1 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"The utility itself is really good and also nice looking. The tweaks I made helped my gameplay performance, I got a boost of FPS with lower input delay! I really recommend it."</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
+                                    </div>
+                                    <h4 class="testimonial-author-name">Jaga</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
+                                </div>
+                            </div>
+                        
+                            <!-- Slide 2 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"The V1 got me super low delay and FPS got way more stable in BR because there aren't any more random FPS drops when fighting with people - 10/10, can't wait for the V2."</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
+                                    </div>
+                                    <h4 class="testimonial-author-name">Rizler</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
+                                </div>
+                            </div>
+                        
+                            <!-- Slide 3 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"It literally got my FPS from 200-250 to 290-350 and my processes went down!"</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
+                                    </div>
+                                    <h4 class="testimonial-author-name">Riftz</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
+                                </div>
+                            </div>
+
+                            <!-- Slide 4 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"I went from 254 processes in my Windows to 63-67 processes... it's the best I've tried, and the RAM was a huge change, from 8.7 GB of RAM used to 1.0 GB of RAM. I love Kiwi Tweaks!"</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
+                                    </div>
+                                    <h4 class="testimonial-author-name">Gaspiel</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
+                                </div>
+                            </div>
+
+                            <!-- Slide 5 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"Crazy! From AVG Frame Rate 120 in Games it hit the sky rocket with at least AVG 209 Frames. I really recommend it for you especially if your PC is old or getting older to the new components of 2024-2026."</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
+                                    </div>
+                                    <h4 class="testimonial-author-name">6ba5</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
+                                </div>
+                            </div>
+
+                            <!-- Slide 6 -->
+                            <div class="testimonial-slide">
+                                <i class="fas fa-quote-left quote-icon-top"></i>
+                                <p class="testimonial-quote-text">"Best optimization tool I've ever used. My system feels brand new and gaming is smoother than ever. Highly recommend to anyone looking to boost their PC performance!"</p>
+                                <div class="testimonial-author-section">
+                                    <div class="testimonial-avatar">
+                                        <i class="fas fa-kiwi-bird"></i>
+                                    </div>
+                                    <h4 class="testimonial-author-name">TechGamer</h4>
+                                    <p class="testimonial-author-role">Discord Member</p>
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="testimonial-verified"><i class="fas fa-check-circle"></i> Verified User</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-arrow next" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="carousel-dots-container">
+                    <!-- Dots will be generated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Benchmarks Section -->
+        <section id="benchmarks" class="section bg-dark">
+            <div class="container">
+                <div class="section-header" data-scroll="fade-up">
+                    <h2 class="section-title">Real-World <span class="highlight">Benchmarks</span></h2>
+                </div>
+                
+                <div class="benchmarks-grid">
+                    <div class="benchmark-card" data-scroll="fade-up" data-scroll-delay="0.1s">
+                        <div class="benchmark-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>FPS Increase</h3>
+                        <div class="benchmark-value">
+                            <span class="value">+35%</span>
+                            <span class="label">Average Boost</span>
+                        </div>
+                        <div class="benchmark-comparison">
+                            <div class="comparison-bar">
+                                <div class="bar-before">
+                                    <span>Before</span>
+                                    <span class="fps">120 FPS</span>
+                                </div>
+                                <div class="bar-after" style="width: 65%;">
+                                    <span>After</span>
+                                    <span class="fps">162 FPS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="benchmark-desc">Average FPS improvement in competitive games like Valorant, CS2, and Fortnite</p>
+                    </div>
+                    
+                    <div class="benchmark-card" data-scroll="fade-up" data-scroll-delay="0.2s">
+                        <div class="benchmark-icon">
+                            <i class="fas fa-stopwatch"></i>
+                        </div>
+                        <h3>Input Lag Reduction</h3>
+                        <div class="benchmark-value">
+                            <span class="value">-42%</span>
+                            <span class="label">Latency Drop</span>
+                        </div>
+                        <div class="benchmark-comparison">
+                            <div class="comparison-bar">
+                                <div class="bar-before">
+                                    <span>Before</span>
+                                    <span class="fps">28ms</span>
+                                </div>
+                                <div class="bar-after" style="width: 58%;">
+                                    <span>After</span>
+                                    <span class="fps">16ms</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="benchmark-desc">Reduced click-to-screen latency for faster, more responsive gameplay</p>
+                    </div>
+                    
+                    <div class="benchmark-card" data-scroll="fade-up" data-scroll-delay="0.3s">
+                        <div class="benchmark-icon">
+                            <i class="fas fa-memory"></i>
+                        </div>
+                        <h3>RAM Usage</h3>
+                        <div class="benchmark-value">
+                            <span class="value">-55%</span>
+                            <span class="label">Memory Saved</span>
+                        </div>
+                        <div class="benchmark-comparison">
+                            <div class="comparison-bar">
+                                <div class="bar-before">
+                                    <span>Before</span>
+                                    <span class="fps">8.7 GB</span>
+                                </div>
+                                <div class="bar-after" style="width: 45%;">
+                                    <span>After</span>
+                                    <span class="fps">3.9 GB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="benchmark-desc">Reduced background RAM usage, freeing up memory for games and apps</p>
+                    </div>
+                    
+                    <div class="benchmark-card" data-scroll="fade-up" data-scroll-delay="0.4s">
+                        <div class="benchmark-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>Background Processes</h3>
+                        <div class="benchmark-value">
+                            <span class="value">-70%</span>
+                            <span class="label">Fewer Processes</span>
+                        </div>
+                        <div class="benchmark-comparison">
+                            <div class="comparison-bar">
+                                <div class="bar-before">
+                                    <span>Before</span>
+                                    <span class="fps">254</span>
+                                </div>
+                                <div class="bar-after" style="width: 30%;">
+                                    <span>After</span>
+                                    <span class="fps">76</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="benchmark-desc">Disabled unnecessary services and startup programs for cleaner system</p>
+                    </div>
+                    
+                    <div class="benchmark-card" data-scroll="fade-up" data-scroll-delay="0.5s">
+                        <div class="benchmark-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3>CPU Usage</h3>
+                        <div class="benchmark-value">
+                            <span class="value">-38%</span>
+                            <span class="label">Lower Usage</span>
+                        </div>
+                        <div class="benchmark-comparison">
+                            <div class="comparison-bar">
+                                <div class="bar-before">
+                                    <span>Before</span>
+                                    <span class="fps">45%</span>
+                                </div>
+                                <div class="bar-after" style="width: 62%;">
+                                    <span>After</span>
+                                    <span class="fps">28%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="benchmark-desc">Reduced CPU overhead from background tasks, more power for your games</p>
+                    </div>
+                    
+                    <div class="benchmark-card" data-scroll="fade-up" data-scroll-delay="0.6s">
+                        <div class="benchmark-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Boot Time</h3>
+                        <div class="benchmark-value">
+                            <span class="value">-60%</span>
+                            <span class="label">Faster Boot</span>
+                        </div>
+                        <div class="benchmark-comparison">
+                            <div class="comparison-bar">
+                                <div class="bar-before">
+                                    <span>Before</span>
+                                    <span class="fps">45s</span>
+                                </div>
+                                <div class="bar-after" style="width: 40%;">
+                                    <span>After</span>
+                                    <span class="fps">18s</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="benchmark-desc">Optimized startup sequence for lightning-fast boot times</p>
+                    </div>
+                </div>
+                
+                <div class="benchmarks-cta" data-scroll="fade-up" data-scroll-delay="0.7s">
+                    <p>Want to see detailed benchmarks and testing methodology?</p>
+                    <a href="benchmarks.html" class="btn btn-primary">
+                        <i class="fas fa-chart-bar"></i>
+                        View Full Benchmarks
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="section bg-dark">
+            <div class="container">
+                <div class="section-header" data-scroll="fade-up">
+                    <span class="section-subtitle text-gradient">Ready to Optimize?</span>
+                    <h2 class="section-title">Get Started <span class="highlight">Today</span></h2>
+                    <p class="section-description">Choose the version that's right for you</p>
+                </div>
+                
+                <div class="download-grid">
+                    <!-- Free Version Card -->
+                    <div class="download-version-card" data-scroll="fade-up" data-scroll-delay="0.2s">
+                        <div class="version-badge free">FREE</div>
+                        <div class="version-header">
+                            <h3>KiwiTweaks Free</h3>
+                            <p class="version-subtitle">Perfect for getting started</p>
+                            <div class="version-price">
+                                <span class="price">$0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="version-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Basic FPS Optimizations</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>System Tweaks</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Community Support</span>
+                            </div>
+                            <div class="feature-item disabled">
+                                <i class="fas fa-times"></i>
+                                <span>Advanced Features</span>
+                            </div>
+                            <div class="feature-item disabled">
+                                <i class="fas fa-times"></i>
+                                <span>Game-Specific Tweaks</span>
+                            </div>
+                            <div class="feature-item disabled">
+                                <i class="fas fa-times"></i>
+                                <span>Priority Support</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" class="btn btn-outline btn-lg btn-block" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-download"></i>
+                            Download Free
+                        </a>
+                        
+                        <div class="version-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-download"></i>
+                                <span>5,000+ Downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-file-archive"></i>
+                                <span>12 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Premium Version Card -->
+                    <div class="download-version-card premium" data-scroll="fade-up" data-scroll-delay="0.4s">
+                        <div class="version-badge premium">PREMIUM</div>
+                        <div class="popular-tag">Most Popular</div>
+                        <div class="version-header">
+                            <h3>KiwiTweaks Premium</h3>
+                            <p class="version-subtitle">Maximum performance unleashed</p>
+                            <div class="version-price">
+                                <span class="price">$29.99</span>
+                                <span class="price-note">One-time payment</span>
+                            </div>
+                        </div>
+                        
+                        <div class="version-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>All Free Features</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Advanced BIOS Tweaks</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>1200+ Tweaks</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Priority Support</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Lifetime Updates</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Early Access Features</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn btn-primary btn-lg btn-block" data-purchase-modal>
+                            <i class="fas fa-shopping-cart"></i>
+                            Purchase Premium
+                        </a>
+                        
+                        <div class="version-stats">
+                            <div class="stat-item">
+                                <div class="rating-display">
+                                    <span class="rating-number">5.0</span>
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-file-archive"></i>
+                                <span>15 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Info Section -->
+                <div class="download-info-grid" data-scroll="fade-up" data-scroll-delay="0.6s">
+                    <div class="info-card">
+                        <i class="fab fa-discord"></i>
+                        <h4>Join Our Community</h4>
+                        <p class="stat-highlight"><span id="discord-members">5,248</span> Members</p>
+                        <p>Get help, share tips, and stay updated</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <i class="fas fa-laptop"></i>
+                        <h4>System Requirements</h4>
+                        <ul class="requirements-list">
+                            <li>✓ Windows 10/11 (64-bit)</li>
+                            <li>✓ 2GB RAM minimum</li>
+                            <li>✓ 100MB disk space</li>
+                            <li>✓ Administrator access</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Money-Back Guarantee</h4>
+                        <p class="stat-highlight">30 Days</p>
+                        <p>Not satisfied? Get a full refund as long as you're within our refund requirements!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section">
+            <div class="container">
+                <div class="section-header" data-scroll="fade-up">
+                    <h2 class="section-title">Frequently Asked <span class="highlight">Questions</span></h2>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item" data-scroll="fade-up" data-scroll-delay="0.1s">
+                        <div class="faq-question">
+                            <h3>Is KiwiTweaks safe to use?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! All tweaks are thoroughly tested and completely reversible. We prioritize your system safety and provide restore points before applying any changes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-scroll="fade-up" data-scroll-delay="0.2s">
+                        <div class="faq-question">
+                            <h3>Will it work with my games?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>KiwiTweaks works with all games and applications. Our optimization techniques improve overall system performance, benefiting any software you run.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-scroll="fade-up" data-scroll-delay="0.3s">
+                        <div class="faq-question">
+                            <h3>Can I revert the changes?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! Every optimization can be reverted with a single click. We also create automatic system restore points for extra safety.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-scroll="fade-up" data-scroll-delay="0.4s">
+                        <div class="faq-question">
+                            <h3>What's the difference between versions?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The Free version includes basic optimizations, while Premium unlocks advanced features, game-specific tweaks, BIOS optimizations, and priority support. Check our comparison table above for details.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-scroll="fade-up" data-scroll-delay="0.5s">
+                        <div class="faq-question">
+                            <h3>Do I need to be tech-savvy?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Not at all! KiwiTweaks is designed for everyone. Our one-click optimization makes it easy for anyone to boost their PC performance.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-scroll="fade-up" data-scroll-delay="0.6s">
+                        <div class="faq-question">
+                            <h3>How do I get support?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Join our Discord server with over 5,000 members for community support. Premium users get priority email support with response times under 24 hours.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Boost Your System?</h2>
+                    <p>Join 150+ satisfied users who have already optimized their systems with KiwiTweaks.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary" data-purchase-modal>Get Premium Now</a>
+                        <a href="https://discord.gg/RT6SCASxUJ" class="btn btn-outline">Join Our Community</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">Kiwi<span>Tweaks</span></a>
+                        <p>Optimizing your digital experience, one tweak at a time.</p>
+                        <div class="social-links">
+                            <a href="https://discord.gg/RT6SCASxUJ" aria-label="Discord" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-links-group">
+                            <h4>Product</h4>
+                            <a href="#showcase">Products</a>
+                            <a href="#pricing">Pricing</a>
+                            <a href="#testimonials">Testimonials</a>
+                            <a href="#download">Download</a>
+                        </div>
+                        <div class="footer-links-group">
+                            <h4>Resources</h4>
+                            <a href="#faq">FAQ</a>
+                            <a href="benchmarks.html">Benchmarks</a>
+                            <a href="https://discord.gg/RT6SCASxUJ" target="_blank" rel="noopener noreferrer">Discord</a>
+                            <a href="#" data-purchase-modal>Purchase</a>
+                        </div>
+                        <div class="footer-links-group">
+                            <h4>Legal</h4>
+                            <a href="privacy-policy.html">Privacy Policy</a>
+                            <a href="user-agreement.html">User Agreement</a>
+                            <a href="refund-policy.html">Refund Policy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; <span id="current-year">2025</span> KiwiTweaks. All rights reserved.</p>
+                    <div class="footer-legal">
+                        <a href="user-agreement.html">Terms of Service</a>
+                        <a href="privacy-policy.html#cookies">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts (optimized loading order) -->
+    <!-- Critical: Load Three.js first for particles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Critical: Early initialization -->
+    <script>
+        // Set JS enabled flag immediately
+        document.documentElement.classList.add('js-enabled');
+    </script>
+    
+    <!-- Core scripts (loaded in order) -->
+    <script src="js/particles-3d.js"></script>
+    <script src="js/ui-components.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/hero-animation.js"></script>
+    
+    <!-- Page-specific scripts (deferred) -->
+    <script src="js/clean-tabs.js" defer></script>
+    <script src="js/comparison.js" defer></script>
+    <script src="js/testimonials-carousel.js" defer></script>
+    <script src="js/scroll-to-top.js" defer></script>
+    <script src="js/scroll-clamp.js" defer></script>
+    <script src="js/discord-stats.js" defer></script>
+    <script src="js/purchase-modal.js" defer></script>
+    <script src="js/download-notification.js" defer></script>
+    <script src="js/terms-popup.js" defer></script>
+    <script src="js/design-interactions.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/button-interactions.js" defer></script>
+    <script src="js/shopping-cart.js" defer></script>
+    <script src="js/scroll-to-top-load.js"></script>
+    
+    <!-- Page load handler (consolidated) -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+            
+            // Initialize animations if available
+            if (typeof Animations !== 'undefined') {
+                Animations.animatePageLoad();
+            }
+            
+            // Update copyright year dynamically
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+</body>
+</html>

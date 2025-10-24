@@ -1,0 +1,24 @@
+{
+  "name": "kiwitweaks-website",
+  "version": "2.0.0",
+  "description": "KiwiTweaks - Advanced System Optimization",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build required'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "mongodb": "^5.9.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "stripe": "^14.10.0",
+    "@paypal/checkout-server-sdk": "^1.0.3",
+    "next-auth": "^4.24.0",
+    "@next-auth/mongodb-adapter": "^1.1.3",
+    "nodemailer": "^6.9.0"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.1"
+  }
+}

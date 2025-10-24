@@ -1,0 +1,325 @@
+/* Legal Pages Styling - Modern Dark Theme */
+
+/* Body & Page Wrapper */
+body {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    min-height: 100vh;
+}
+
+.legal-page {
+    padding: 6rem 0 4rem;
+    min-height: calc(100vh - 200px);
+}
+
+/* Legal Content Container */
+.legal-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(30, 30, 45, 0.95) 0%, rgba(20, 20, 35, 0.98) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.legal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8b5cf6 0%, #6366f1 100%);
+}
+
+/* Headings */
+.legal-content h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.last-updated {
+    text-align: center;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 3rem;
+    font-size: 0.9rem;
+}
+
+.legal-content h2 {
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    color: #8b5cf6;
+    font-size: 1.75rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.legal-content h2::before {
+    content: '';
+    width: 4px;
+    height: 1.5rem;
+    background: linear-gradient(180deg, #8b5cf6 0%, #6366f1 100%);
+    border-radius: 2px;
+}
+
+.legal-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Paragraphs & Text */
+.legal-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+.legal-content strong {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+}
+
+/* Lists */
+.legal-content ul {
+    margin-bottom: 2rem;
+    padding-left: 0;
+    list-style: none;
+}
+
+.legal-content li {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.legal-content li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #8b5cf6;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.legal-content ol {
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+    counter-reset: item;
+    list-style: none;
+}
+
+.legal-content ol li {
+    counter-increment: item;
+    padding-left: 2rem;
+}
+
+.legal-content ol li::before {
+    content: counter(item) ".";
+    position: absolute;
+    left: 0;
+    color: #8b5cf6;
+    font-weight: 600;
+}
+
+/* Links */
+.legal-content a {
+    color: #8b5cf6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.legal-content a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #8b5cf6 0%, #6366f1 100%);
+    transition: width 0.3s ease;
+}
+
+.legal-content a:hover {
+    color: #6366f1;
+}
+
+.legal-content a:hover::after {
+    width: 100%;
+}
+
+/* Note Box */
+.note-box {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-left: 4px solid #8b5cf6;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.note-box p {
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.note-box strong {
+    color: #8b5cf6;
+}
+
+/* Warning Box */
+.warning-box {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+    border-left: 4px solid #ef4444;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.warning-box p {
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Info Box */
+.info-box {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+    border-left: 4px solid #3b82f6;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.info-box p {
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Table of Contents */
+.toc {
+    background: rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #8b5cf6;
+}
+
+.toc ul {
+    margin-bottom: 0;
+}
+
+.toc li {
+    margin-bottom: 0.5rem;
+}
+
+.toc a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.toc a:hover {
+    color: #8b5cf6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .legal-page {
+        padding: 4rem 0 2rem;
+    }
+    
+    .legal-content {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .legal-content h1 {
+        font-size: 2rem;
+    }
+    
+    .legal-content h2 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .legal-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .legal-content p {
+        font-size: 0.95rem;
+    }
+    
+    .legal-content li {
+        padding-left: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .legal-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .legal-content h1 {
+        font-size: 1.75rem;
+    }
+    
+    .legal-content h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Back to Top Button for Legal Pages */
+.legal-content .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.legal-content .back-to-top:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.legal-content .back-to-top::after {
+    display: none;
+}
+
+/* Section Divider */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.5) 50%, transparent 100%);
+    margin: 3rem 0;
+}

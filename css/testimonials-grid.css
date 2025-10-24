@@ -1,0 +1,217 @@
+/* Modern Testimonials Grid Layout */
+.testimonials-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.testimonial-item {
+    background: linear-gradient(135deg, rgba(30, 30, 45, 0.8) 0%, rgba(20, 20, 35, 0.9) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #8b5cf6 0%, #6366f1 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.testimonial-item:hover {
+    transform: translateY(-8px);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.2);
+}
+
+.testimonial-item:hover::before {
+    transform: scaleX(1);
+}
+
+/* Testimonial Header */
+.testimonial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-author {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.testimonial-item:hover .author-avatar {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.author-details h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+}
+
+.rating {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.rating i {
+    color: #fbbf24;
+    font-size: 0.9rem;
+}
+
+.quote-icon {
+    font-size: 2rem;
+    color: rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.testimonial-item:hover .quote-icon {
+    color: rgba(139, 92, 246, 0.6);
+    transform: scale(1.1);
+}
+
+/* Testimonial Text */
+.testimonial-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+/* Testimonial Meta */
+.testimonial-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.testimonial-meta .verified {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.testimonial-meta .verified i {
+    color: #10b981;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .testimonial-item {
+        padding: 1.5rem;
+    }
+    
+    .author-avatar {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .quote-icon {
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-text {
+        font-size: 0.95rem;
+    }
+}
+
+/* Animation on scroll */
+.testimonial-item[data-scroll="fade-up"] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.testimonial-item[data-scroll="fade-up"].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation delays */
+.testimonial-item[data-scroll-delay="0.1s"] {
+    transition-delay: 0.1s;
+}
+
+.testimonial-item[data-scroll-delay="0.2s"] {
+    transition-delay: 0.2s;
+}
+
+.testimonial-item[data-scroll-delay="0.3s"] {
+    transition-delay: 0.3s;
+}
+
+.testimonial-item[data-scroll-delay="0.4s"] {
+    transition-delay: 0.4s;
+}
+
+.testimonial-item[data-scroll-delay="0.5s"] {
+    transition-delay: 0.5s;
+}
+
+/* Remove old carousel styles */
+.testimonials-container {
+    position: relative;
+}
+
+.carousel-btn,
+.carousel-dots {
+    display: none !important;
+}
+
+.testimonials-track {
+    display: contents;
+}

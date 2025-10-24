@@ -1,0 +1,91 @@
+/* Force visibility of all product panes for debugging */
+.product-pane {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    transform: none !important;
+    height: auto !important;
+    min-height: 200px;
+    background: rgba(30, 41, 59, 0.9) !important;
+    border: 1px solid rgba(99, 102, 241, 0.3) !important;
+    border-radius: 12px !important;
+    padding: 2rem !important;
+    margin: 1rem 0 !important;
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Ensure content is visible */
+.pane-content {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: #e2e8f0 !important;
+}
+
+/* Make sure text is visible */
+.pane-content h2,
+.pane-content h3,
+.pane-content p,
+.pane-content li {
+    color: #e2e8f0 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Style the 3D viewer container */
+.model-viewer-container {
+    position: relative;
+    width: 100% !important;
+    height: 400px !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Add debug outline to all elements */
+[class*="product-"],
+[class*="pane-"],
+[class*="tab-"] {
+    outline: 1px dashed rgba(255, 0, 0, 0.3) !important;
+}
+
+/* Make sure buttons are visible */
+.btn {
+    display: inline-block !important;
+    padding: 0.75rem 1.5rem !important;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px -5px rgba(99, 102, 241, 0.4) !important;
+}
+
+.product-showcase .btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px -5px rgba(99, 102, 241, 0.6) !important;
+}
+
+/* Ensure feature lists are visible */
+.feature-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 1rem 0 !important;
+}
+
+.feature-list li {
+    padding: 0.5rem 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+.feature-list li:before {
+    content: '✓' !important;
+    color: #10b981 !important;
+    font-weight: bold !important;
+}

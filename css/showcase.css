@@ -1126,7 +1126,7 @@
     z-index: 1;
 }
 
-.btn::before {
+.showcase-section .btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -1139,11 +1139,11 @@
     pointer-events: none;
 }
 
-.btn:hover::before {
+.showcase-section .btn:hover::before {
     transform: translateX(100%) skewX(-15deg);
 }
 
-.btn i {
+.showcase-section .btn i {
     font-size: 1.3em;
     transition: all 0.4s var(--ease-out-quint);
     position: relative;
@@ -1155,12 +1155,12 @@
     height: 1.2em;
 }
 
-.btn:hover i {
+.showcase-section .btn:hover i {
     transform: translateX(5px) scale(1.1);
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-.btn:active i {
+.showcase-section .btn:active i {
     transform: translateX(2px) scale(0.95);
 }
 

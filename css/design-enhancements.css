@@ -4,16 +4,20 @@
    ======================================== */
 
 /* ===== Enhanced Button Styles ===== */
-.btn {
+/* Scoped to avoid conflicts with specific button animations */
+.pricing-section .btn,
+.testimonials-section .btn,
+.comparison-section .btn {
     position: relative;
     overflow: hidden;
     isolation: isolate;
     text-decoration: none;
-    /* Add ripple effect container */
 }
 
-/* Button Ripple Effect */
-.btn::before {
+/* Button Ripple Effect - scoped to avoid conflicts */
+.pricing-section .btn::before,
+.testimonials-section .btn::before,
+.comparison-section .btn::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -24,9 +28,12 @@
     background: rgba(255, 255, 255, 0.3);
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
+    z-index: 0;
 }
 
-.btn:active::before {
+.pricing-section .btn:active::before,
+.testimonials-section .btn:active::before,
+.comparison-section .btn:active::before {
     width: 300px;
     height: 300px;
 }

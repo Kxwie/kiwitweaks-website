@@ -76,8 +76,8 @@ a, button, .btn, .card, .feature-card, .pricing-card, .benchmark-card, .testimon
     transition: var(--transition);
 }
 
-/* Smoother hover effects */
-a:hover, button:hover, .btn:hover {
+/* Smoother hover effects for links only */
+a:not(.btn):hover {
     transform: translateY(-2px);
 }
 
@@ -728,15 +728,21 @@ transform: translateZ(0);
 will-change: transform, box-shadow;
 }
 
-.btn i {
-transition: transform 0.3s ease;
+.btn:not(.centered-feature .btn) i {
+    transition: transform 0.3s ease;
 }
 
-.btn:hover i {
+.btn:not(.centered-feature .btn):hover i {
     transform: translateX(3px);
 }
 
-.btn:active {
+/* Centered-feature button has no icon animations */
+.centered-feature .btn i {
+    transition: none !important;
+    transform: none !important;
+}
+
+.btn:not(.centered-feature .btn):active {
     transform: translateY(1px) scale(0.99);
 }
 
@@ -1382,21 +1388,30 @@ transition: transform 0.3s ease;
     gap: 2rem;
 }
 
+.footer-links-group {
+    display: flex;
+    flex-direction: column;
+}
+
 .footer-links-group h4 {
     color: white;
     margin-bottom: 1.5rem;
     font-size: 1.125rem;
+    font-weight: 600;
 }
 
 .footer-links-group a {
-    display: inline-block;
+    display: block;
     color: var(--gray);
     margin-bottom: 0.75rem;
-    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    width: fit-content;
 }
 
 .footer-links-group a:hover {
     color: white;
+    transform: translateX(4px);
 }
 
 .footer-bottom {
@@ -1552,47 +1567,128 @@ transition: transform 0.3s ease;
 }
 
 .centered-feature .btn {
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 1rem 3rem;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.4s var(--ease-out-quint);
-    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
-    border: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    padding: 1rem 3rem !important;
+    border-radius: 50px !important;
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+    color: white !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4),
+                0 0 40px rgba(139, 92, 246, 0.3) !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+    will-change: transform, box-shadow !important;
+    animation: btnFloat 3s ease-in-out infinite, btnGlowPulse 2s ease-in-out infinite !important;
+}
+
+/* Floating animation keyframes */
+@keyframes btnFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-8px) scale(1);
+    }
+}
+
+/* Glow pulse animation keyframes */
+@keyframes btnGlowPulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4),
+                    0 0 40px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.6),
+                    0 0 60px rgba(139, 92, 246, 0.5),
+                    0 0 100px rgba(139, 92, 246, 0.2);
+    }
+}
+
+/* Shine animation keyframes */
+@keyframes btnShine {
+    0% {
+        left: -150%;
+    }
+    50%, 100% {
+        left: 150%;
+    }
+}
+
+/* Hover glow pulse - faster and more intense */
+@keyframes btnGlowPulseHover {
+    0%, 100% {
+        box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6),
+                    0 0 60px rgba(139, 92, 246, 0.4),
+                    0 0 100px rgba(139, 92, 246, 0.2);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(139, 92, 246, 0.7),
+                    0 0 80px rgba(139, 92, 246, 0.5),
+                    0 0 120px rgba(139, 92, 246, 0.3);
+    }
 }
 
 .centered-feature .btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.4s var(--ease-out-quint);
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+    z-index: -1 !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50px !important;
+}
+
+/* Shine effect */
+.centered-feature .btn::after {
+    content: '' !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -150% !important;
+    width: 50% !important;
+    height: 200% !important;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    ) !important;
+    transform: rotate(25deg) !important;
+    animation: btnShine 4s ease-in-out infinite !important;
+    animation-delay: 0.5s !important;
+    pointer-events: none !important;
 }
 
 .centered-feature .btn:hover::before {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 .centered-feature .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+    transform: translateY(-8px) scale(1.05) !important;
+    animation: btnGlowPulseHover 1.5s ease-in-out infinite !important;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.centered-feature .btn:active {
+    transform: translateY(-3px) scale(1.02) !important;
+    transition: transform 0.1s ease, box-shadow 0.1s ease !important;
 }
 
 /* ===== Cookie Consent ===== */

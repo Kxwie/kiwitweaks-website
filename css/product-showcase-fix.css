@@ -65,7 +65,7 @@
     box-shadow: 0 4px 15px -5px rgba(99, 102, 241, 0.4) !important;
 }
 
-.btn:hover {
+.product-showcase .btn:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px -5px rgba(99, 102, 241, 0.6) !important;
 }

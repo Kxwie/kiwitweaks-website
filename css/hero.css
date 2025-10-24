@@ -250,12 +250,12 @@
     }
 }
 
-.btn:hover {
+.hero .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 7px 20px -5px rgba(0, 0, 0, 0.3);
 }
 
-.btn:active {
+.hero .btn:active {
     transform: translateY(1px);
     box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.2);
 }

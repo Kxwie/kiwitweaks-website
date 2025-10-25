@@ -165,7 +165,6 @@
                 showNotification(data.error || 'Login failed', 'error');
             }
         } catch (error) {
-            console.error('Login error:', error);
             showNotification('Connection error. Please try again.', 'error');
         }
     }
@@ -255,7 +254,6 @@
                 showNotification(data.error || 'Registration failed', 'error');
             }
         } catch (error) {
-            console.error('Register error:', error);
             showNotification('Connection error. Please try again.', 'error');
         }
     }

@@ -130,12 +130,19 @@
                 
                 showNotification('Login successful!', 'success');
                 
-                // Check if user should be redirected back to purchase flow
+                // Check redirect intent
                 const redirectAfterAuth = sessionStorage.getItem('redirectAfterAuth');
                 const redirectAction = sessionStorage.getItem('redirectAction');
+                const intendedDestination = sessionStorage.getItem('intendedDestination');
                 
                 setTimeout(() => {
-                    if (redirectAction === 'purchase' && redirectAfterAuth) {
+                    if (intendedDestination === 'profile') {
+                        // User wanted to access profile
+                        sessionStorage.removeItem('redirectAfterAuth');
+                        sessionStorage.removeItem('intendedDestination');
+                        sessionStorage.removeItem('redirectAction');
+                        window.location.href = 'profile.html';
+                    } else if (redirectAction === 'purchase' && redirectAfterAuth) {
                         // Clear redirect data
                         sessionStorage.removeItem('redirectAfterAuth');
                         sessionStorage.removeItem('redirectAction');
@@ -211,12 +218,19 @@
                 
                 showNotification('Account created successfully!', 'success');
                 
-                // Check if user should be redirected back to purchase flow
+                // Check redirect intent
                 const redirectAfterAuth = sessionStorage.getItem('redirectAfterAuth');
                 const redirectAction = sessionStorage.getItem('redirectAction');
+                const intendedDestination = sessionStorage.getItem('intendedDestination');
                 
                 setTimeout(() => {
-                    if (redirectAction === 'purchase' && redirectAfterAuth) {
+                    if (intendedDestination === 'profile') {
+                        // User wanted to access profile
+                        sessionStorage.removeItem('redirectAfterAuth');
+                        sessionStorage.removeItem('intendedDestination');
+                        sessionStorage.removeItem('redirectAction');
+                        window.location.href = 'profile.html';
+                    } else if (redirectAction === 'purchase' && redirectAfterAuth) {
                         // Clear redirect data
                         sessionStorage.removeItem('redirectAfterAuth');
                         sessionStorage.removeItem('redirectAction');

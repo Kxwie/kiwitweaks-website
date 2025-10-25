@@ -1,0 +1,241 @@
+/* ===== Purchase Modal Auth & Payment Entry Styles ===== */
+
+/* Auth Tabs */
+.auth-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.25rem;
+    border-radius: 12px;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab:hover {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.auth-tab.active {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Auth Form Containers */
+.auth-form-container {
+    display: none;
+}
+
+.auth-form-container.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.auth-form-container label {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.auth-form-container label a {
+    color: #8b5cf6;
+    text-decoration: none;
+}
+
+.auth-form-container label a:hover {
+    text-decoration: underline;
+}
+
+/* Payment Summary */
+.payment-summary {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0;
+    margin-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Stripe Card Element */
+.stripe-element {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    min-height: 45px;
+    transition: border-color 0.3s ease;
+}
+
+.stripe-element:focus-within {
+    border-color: #8b5cf6;
+}
+
+/* Stripe error styling is handled by field-error class */
+
+/* Payment Security Note */
+.payment-security-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+}
+
+.payment-security-note i {
+    color: #10b981;
+}
+
+/* PayPal Button Wrapper */
+.paypal-button-wrapper {
+    min-height: 150px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* PayPal buttons styling is handled by PayPal SDK */
+
+/* Auth Form Enhancements */
+#step-auth h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+#step-auth p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+}
+
+/* Payment Entry Headers */
+#step-stripe-entry h3,
+#step-paypal-entry h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+#step-stripe-entry p,
+#step-paypal-entry p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+}
+
+/* Form Group Improvements for Auth */
+.auth-form-container .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.auth-form-container .checkbox-group {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.auth-form-container .checkbox-group label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.auth-form-container .checkbox-group input[type="checkbox"] {
+    margin-top: 0.2rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .auth-tabs {
+        gap: 0.25rem;
+    }
+    
+    .auth-tab {
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .payment-summary {
+        padding: 1rem;
+    }
+    
+    .summary-item,
+    .summary-total {
+        font-size: 0.875rem;
+    }
+    
+    .summary-total {
+        font-size: 1rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Focus States for Accessibility */
+.auth-tab:focus-visible {
+    outline: 2px solid #8b5cf6;
+    outline-offset: 2px;
+}
+
+.stripe-element:focus-within {
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+/* Loading State for Payment Buttons */
+#btn-stripe-pay.loading,
+#btn-paypal-pay.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}

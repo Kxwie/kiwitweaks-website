@@ -103,35 +103,130 @@
                         </div>
                     </div>
 
-                    <!-- Email Collection Step -->
-                    <div id="step-email" class="modal-step">
-                        <h3>Enter Your Email</h3>
-                        <p>We'll send your license key to this address</p>
+                    <!-- Authentication Step (Login/Signup) -->
+                    <div id="step-auth" class="modal-step">
+                        <h3>Sign In or Create Account</h3>
+                        <p>You need an account to purchase KiwiTweaks Premium</p>
                         
-                        <form id="email-form" onsubmit="submitEmail(event)">
-                            <div class="form-group">
-                                <input 
-                                    type="email" 
-                                    id="purchase-email"
-                                    placeholder="your@email.com"
-                                    autocomplete="email"
-                                    required
-                                    aria-label="Email address"
-                                    aria-describedby="email-error"
-                                >
-                                <span class="field-error" id="email-error" role="alert"></span>
-                            </div>
-                            
-                            <div class="form-actions">
-                                <button type="button" class="btn btn-outline" onclick="goBackToStart()">
-                                    <i class="fas fa-arrow-left"></i> Back
-                                </button>
-                                <button type="submit" class="btn btn-primary" id="btn-email-submit">
-                                    <span>Continue</span>
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </form>
+                        <!-- Auth Tabs -->
+                        <div class="auth-tabs">
+                            <button class="auth-tab active" onclick="switchAuthTab('login')" data-tab="login">
+                                Sign In
+                            </button>
+                            <button class="auth-tab" onclick="switchAuthTab('signup')" data-tab="signup">
+                                Create Account
+                            </button>
+                        </div>
+                        
+                        <!-- Login Form -->
+                        <div id="auth-login" class="auth-form-container active">
+                            <form id="login-form" onsubmit="handleModalLogin(event)">
+                                <div class="form-group">
+                                    <label for="login-email">Email</label>
+                                    <input 
+                                        type="email" 
+                                        id="login-email"
+                                        placeholder="your@email.com"
+                                        autocomplete="email"
+                                        required
+                                    >
+                                    <span class="field-error" id="login-email-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="login-password">Password</label>
+                                    <input 
+                                        type="password" 
+                                        id="login-password"
+                                        placeholder="Enter your password"
+                                        autocomplete="current-password"
+                                        required
+                                    >
+                                    <span class="field-error" id="login-password-error"></span>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-outline" onclick="goBackToStart()">
+                                        <i class="fas fa-arrow-left"></i> Back
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" id="btn-login-submit">
+                                        <span>Sign In</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Signup Form -->
+                        <div id="auth-signup" class="auth-form-container">
+                            <form id="signup-form" onsubmit="handleModalSignup(event)">
+                                <div class="form-group">
+                                    <label for="signup-username">Username</label>
+                                    <input 
+                                        type="text" 
+                                        id="signup-username"
+                                        placeholder="Choose a username"
+                                        autocomplete="username"
+                                        required
+                                    >
+                                    <span class="field-error" id="signup-username-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="signup-email">Email</label>
+                                    <input 
+                                        type="email" 
+                                        id="signup-email"
+                                        placeholder="your@email.com"
+                                        autocomplete="email"
+                                        required
+                                    >
+                                    <span class="field-error" id="signup-email-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="signup-password">Password</label>
+                                    <input 
+                                        type="password" 
+                                        id="signup-password"
+                                        placeholder="Min. 8 characters"
+                                        autocomplete="new-password"
+                                        required
+                                        minlength="8"
+                                    >
+                                    <span class="field-error" id="signup-password-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="signup-confirm-password">Confirm Password</label>
+                                    <input 
+                                        type="password" 
+                                        id="signup-confirm-password"
+                                        placeholder="Re-enter password"
+                                        autocomplete="new-password"
+                                        required
+                                    >
+                                    <span class="field-error" id="signup-confirm-error"></span>
+                                </div>
+                                
+                                <div class="form-group checkbox-group">
+                                    <label>
+                                        <input type="checkbox" id="signup-terms" required>
+                                        <span>I agree to the <a href="user-agreement.html" target="_blank">Terms of Service</a></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-outline" onclick="goBackToStart()">
+                                        <i class="fas fa-arrow-left"></i> Back
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" id="btn-signup-submit">
+                                        <span>Create Account</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
                     <!-- Payment Method Step -->
@@ -140,20 +235,82 @@
                         <p>Select how you'd like to pay</p>
                         
                         <div class="payment-methods-grid">
-                            <button class="payment-method-card" onclick="selectPayment('stripe')" data-method="stripe">
+                            <button class="payment-method-card" onclick="selectPaymentMethod('stripe')" data-method="stripe">
                                 <i class="fab fa-stripe-s"></i>
                                 <span>Credit Card</span>
                                 <small>via Stripe</small>
                             </button>
-                            <button class="payment-method-card" onclick="selectPayment('paypal')" data-method="paypal">
+                            <button class="payment-method-card" onclick="selectPaymentMethod('paypal')" data-method="paypal">
                                 <i class="fab fa-paypal"></i>
                                 <span>PayPal</span>
                                 <small>Fast & Secure</small>
                             </button>
                         </div>
                         
-                        <button class="btn btn-outline btn-block" onclick="goBackToEmail()">
+                        <button class="btn btn-outline btn-block" onclick="goBackToStart()">
                             <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </div>
+                    
+                    <!-- Stripe Card Entry Step -->
+                    <div id="step-stripe-entry" class="modal-step">
+                        <h3>Enter Card Details</h3>
+                        <p>Your payment is secured by Stripe</p>
+                        
+                        <div class="payment-summary">
+                            <div class="summary-item">
+                                <span>KiwiTweaks Premium</span>
+                                <span>$29.99</span>
+                            </div>
+                            <div class="summary-total">
+                                <span>Total</span>
+                                <span>$29.99</span>
+                            </div>
+                        </div>
+                        
+                        <div id="stripe-card-element" class="stripe-element">
+                            <!-- Stripe card element will be mounted here -->
+                        </div>
+                        <div id="stripe-card-errors" class="field-error" role="alert"></div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" onclick="goBackToPaymentMethod()">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button type="button" class="btn btn-primary" id="btn-stripe-pay" onclick="processStripeCardPayment()">
+                                <i class="fas fa-lock"></i>
+                                <span>Pay $29.99</span>
+                            </button>
+                        </div>
+                        
+                        <div class="payment-security-note">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>256-bit SSL encrypted payment</span>
+                        </div>
+                    </div>
+                    
+                    <!-- PayPal Payment Step -->
+                    <div id="step-paypal-entry" class="modal-step">
+                        <h3>Pay with PayPal</h3>
+                        <p>Complete your payment securely through PayPal</p>
+                        
+                        <div class="payment-summary">
+                            <div class="summary-item">
+                                <span>KiwiTweaks Premium</span>
+                                <span>$29.99</span>
+                            </div>
+                            <div class="summary-total">
+                                <span>Total</span>
+                                <span>$29.99</span>
+                            </div>
+                        </div>
+                        
+                        <div id="paypal-button-container" class="paypal-button-wrapper">
+                            <!-- PayPal buttons will be rendered here -->
+                        </div>
+                        
+                        <button class="btn btn-outline btn-block" onclick="goBackToPaymentMethod()">
+                            <i class="fas fa-arrow-left"></i> Back to Payment Methods
                         </button>
                     </div>
 
@@ -269,18 +426,6 @@
 
         // Re-check authentication status when modal opens
         checkUserSession();
-        
-        // If not authenticated, require login first
-        if (!PurchaseState.isAuthenticated) {
-            const shouldRedirect = confirm('You need to create an account or log in to make a purchase. Would you like to go to the login page now?');
-            if (shouldRedirect) {
-                // Save current page for redirect after login
-                sessionStorage.setItem('redirectAfterAuth', window.location.pathname);
-                sessionStorage.setItem('redirectAction', 'purchase');
-                window.location.href = 'auth.html';
-            }
-            return; // Don't open modal if not authenticated
-        }
 
         if (cartData) {
             PurchaseState.cartData = cartData;
@@ -340,17 +485,19 @@
         const btn = document.getElementById('btn-purchase-start');
         if (PurchaseState.isProcessing) return;
 
-        // Check if user is authenticated first
-        if (!requireAuthentication()) {
-            return; // User will be redirected to auth page
-        }
-
         setButtonLoading(btn, true);
 
         setTimeout(() => {
-            // User is authenticated, proceed directly to payment method selection
-            showStep('step-payment');
-            announceToScreenReader('Choose payment method');
+            // Check if user is authenticated
+            if (PurchaseState.isAuthenticated) {
+                // User is authenticated, go to payment method selection
+                showStep('step-payment');
+                announceToScreenReader('Choose payment method');
+            } else {
+                // User not authenticated, show login/signup
+                showStep('step-auth');
+                announceToScreenReader('Sign in or create an account');
+            }
             setButtonLoading(btn, false);
         }, 300);
     };
@@ -410,12 +557,142 @@
         }
     };
 
+    // Auth tab switching
+    window.switchAuthTab = function(tab) {
+        const tabs = document.querySelectorAll('.auth-tab');
+        const containers = document.querySelectorAll('.auth-form-container');
+        
+        tabs.forEach(t => t.classList.remove('active'));
+        containers.forEach(c => c.classList.remove('active'));
+        
+        const selectedTab = document.querySelector(`[data-tab="${tab}"]`);
+        const selectedContainer = document.getElementById(`auth-${tab}`);
+        
+        if (selectedTab) selectedTab.classList.add('active');
+        if (selectedContainer) selectedContainer.classList.add('active');
+    };
+
+    // Handle login in modal
+    window.handleModalLogin = async function(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const submitBtn = document.getElementById('btn-login-submit');
+        
+        setButtonLoading(submitBtn, true);
+        
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok && data.success) {
+                // Store auth data
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Update state
+                PurchaseState.isAuthenticated = true;
+                PurchaseState.userEmail = data.user.email;
+                
+                // Show success and proceed to payment
+                showStep('step-payment');
+                announceToScreenReader('Login successful. Choose payment method');
+            } else {
+                showFieldError(document.getElementById('login-password-error'), data.error || 'Login failed');
+            }
+        } catch (error) {
+            showFieldError(document.getElementById('login-password-error'), 'Connection error. Please try again.');
+        } finally {
+            setButtonLoading(submitBtn, false);
+        }
+    };
+
+    // Handle signup in modal
+    window.handleModalSignup = async function(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('signup-username').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        const confirmPassword = document.getElementById('signup-confirm-password').value;
+        const termsAccepted = document.getElementById('signup-terms').checked;
+        const submitBtn = document.getElementById('btn-signup-submit');
+        
+        // Validation
+        if (password !== confirmPassword) {
+            showFieldError(document.getElementById('signup-confirm-error'), 'Passwords do not match');
+            return;
+        }
+        
+        if (!termsAccepted) {
+            showFieldError(document.getElementById('signup-confirm-error'), 'Please accept Terms of Service');
+            return;
+        }
+        
+        setButtonLoading(submitBtn, true);
+        
+        try {
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password, username })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok && data.success) {
+                // Store auth data
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Update state
+                PurchaseState.isAuthenticated = true;
+                PurchaseState.userEmail = data.user.email;
+                
+                // Show success and proceed to payment
+                showStep('step-payment');
+                announceToScreenReader('Account created successfully. Choose payment method');
+            } else {
+                showFieldError(document.getElementById('signup-confirm-error'), data.error || 'Registration failed');
+            }
+        } catch (error) {
+            showFieldError(document.getElementById('signup-confirm-error'), 'Connection error. Please try again.');
+        } finally {
+            setButtonLoading(submitBtn, false);
+        }
+    };
+
+    // Select payment method and show entry form
+    window.selectPaymentMethod = async function(method) {
+        if (PurchaseState.isProcessing) return;
+        
+        PurchaseState.selectedPaymentMethod = method;
+        
+        if (method === 'stripe') {
+            showStep('step-stripe-entry');
+            // Initialize Stripe Elements
+            await initializeStripeElements();
+        } else if (method === 'paypal') {
+            showStep('step-paypal-entry');
+            // Initialize PayPal buttons
+            await initializePayPalButtons();
+        }
+    };
+
     window.goBackToStart = function() {
         showStep('step-initial');
     };
 
-    window.goBackToEmail = function() {
-        showStep('step-email');
+    window.goBackToPaymentMethod = function() {
+        showStep('step-payment');
     };
 
     window.closeError = function() {

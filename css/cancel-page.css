@@ -1,0 +1,220 @@
+/* ===== Cancel Page Styles ===== */
+
+.cancel-container {
+    min-height: calc(100vh - 200px);
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #1e1b29 0%, #2d1b3d 100%);
+}
+
+.cancel-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Cancel Icon */
+.cancel-icon-wrapper {
+    margin-bottom: 2rem;
+}
+
+.cancel-icon {
+    font-size: 6rem;
+    color: #ef4444;
+    animation: cancelShake 0.6s ease-out;
+}
+
+@keyframes cancelShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+/* Cancel Title */
+.cancel-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.cancel-subtitle {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cancel Info */
+.cancel-info {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.cancel-info h2 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.cancel-info p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+/* Still Interested Section */
+.still-interested {
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+.still-interested h2 {
+    font-size: 1.75rem;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+
+.still-interested > p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+
+.features-highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.4);
+    transform: translateY(-2px);
+}
+
+.feature-item i {
+    color: #10b981;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+/* Cancel Actions */
+.cancel-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+/* Free Version CTA */
+.free-version-cta {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.6s ease-out 0.7s both;
+}
+
+.free-version-cta p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+}
+
+/* Support Section */
+.support-section {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    animation: fadeInUp 0.6s ease-out 0.8s both;
+}
+
+.support-section h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.support-section p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+}
+
+.support-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.support-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 50px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.support-links a:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cancel-title {
+        font-size: 2rem;
+    }
+    
+    .cancel-subtitle {
+        font-size: 1rem;
+    }
+    
+    .cancel-actions {
+        flex-direction: column;
+    }
+    
+    .cancel-actions .btn {
+        width: 100%;
+    }
+    
+    .features-highlight {
+        grid-template-columns: 1fr;
+    }
+}

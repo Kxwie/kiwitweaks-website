@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - KiwiTweaks</title>
+    <meta name="description" content="Your KiwiTweaks Premium purchase was successful. Get your license key and start optimizing!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar-profile.css">
+    <link rel="stylesheet" href="css/navbar-vertical-center-fix.css">
+    <link rel="stylesheet" href="css/button-enhancements.css">
+    <link rel="stylesheet" href="css/success-page.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-kiwi-bird"></i>
+                        <span>Kiwi<span>Tweaks</span></span>
+                    </a>
+                    <div class="nav-links">
+                        <a href="index.html">Home</a>
+                        <a href="benchmarks.html">Benchmarks</a>
+                        <a href="index.html#download">Download</a>
+                    </div>
+                    <div class="nav-auth-actions">
+                        <a href="profile.html" class="nav-link-auth" aria-label="Profile">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <a href="https://discord.gg/kiwitweaks" target="_blank" class="nav-discord" aria-label="Join Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Success Content -->
+        <main class="success-container">
+            <div class="container">
+                <div class="success-content">
+                    <!-- Success Icon -->
+                    <div class="success-icon-wrapper">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="success-confetti"></div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <h1 class="success-title">Payment Successful!</h1>
+                    <p class="success-subtitle">Thank you for purchasing KiwiTweaks Premium</p>
+
+                    <!-- Order Details -->
+                    <div class="order-details" id="orderDetails">
+                        <div class="order-info">
+                            <div class="order-info-item">
+                                <span class="label">Order ID:</span>
+                                <span class="value" id="orderId">Loading...</span>
+                            </div>
+                            <div class="order-info-item">
+                                <span class="label">Date:</span>
+                                <span class="value" id="orderDate">Loading...</span>
+                            </div>
+                            <div class="order-info-item">
+                                <span class="label">Amount:</span>
+                                <span class="value" id="orderAmount">$29.99</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- License Key Section -->
+                    <div class="license-key-section">
+                        <h2>Your License Key</h2>
+                        <p class="license-description">Save this key - you'll need it to activate KiwiTweaks Premium</p>
+                        
+                        <div class="license-key-box" id="licenseKeyBox">
+                            <div class="license-key-loading" id="licenseLoading">
+                                <div class="spinner"></div>
+                                <p>Generating your license key...</p>
+                            </div>
+                            
+                            <div class="license-key-content" id="licenseContent" style="display: none;">
+                                <input 
+                                    type="text" 
+                                    id="licenseKey" 
+                                    class="license-key-input" 
+                                    readonly 
+                                    value="XXXX-XXXX-XXXX-XXXX"
+                                    aria-label="Your license key"
+                                >
+                                <button 
+                                    class="btn btn-outline copy-btn" 
+                                    onclick="copyLicenseKey()"
+                                    aria-label="Copy license key to clipboard"
+                                >
+                                    <i class="fas fa-copy"></i>
+                                    <span id="copyBtnText">Copy</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="license-notice">
+                            <i class="fas fa-info-circle"></i>
+                            <p>A confirmation email with your license key has been sent to <strong id="userEmail">your email</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- Next Steps -->
+                    <div class="next-steps">
+                        <h2>What's Next?</h2>
+                        <div class="steps-grid">
+                            <div class="step-card">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3>Download KiwiTweaks</h3>
+                                    <p>Get the latest version from our Discord server</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3>Install & Launch</h3>
+                                    <p>Run the installer and follow the setup wizard</p>
+                                </div>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3>Enter License Key</h3>
+                                    <p>Paste your key when prompted to unlock Premium</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="success-actions">
+                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" 
+                           class="btn btn-primary btn-lg" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            <i class="fas fa-download"></i>
+                            Download Now
+                        </a>
+                        <a href="profile.html" class="btn btn-outline btn-lg">
+                            <i class="fas fa-user"></i>
+                            View Profile
+                        </a>
+                    </div>
+
+                    <!-- Support Section -->
+                    <div class="support-section">
+                        <h3>Need Help?</h3>
+                        <p>Our support team is here to help you get started</p>
+                        <div class="support-links">
+                            <a href="https://discord.gg/kiwitweaks" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-discord"></i>
+                                Join Discord
+                            </a>
+                            <a href="index.html#faq">
+                                <i class="fas fa-question-circle"></i>
+                                View FAQ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-kiwi-bird"></i>
+                            <span>Kiwi<span>Tweaks</span></span>
+                        </div>
+                        <p>Optimizing your digital experience, one tweak at a time.</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-links-group">
+                            <h4>Product</h4>
+                            <a href="index.html#features">Features</a>
+                            <a href="benchmarks.html">Benchmarks</a>
+                        </div>
+                        <div class="footer-links-group">
+                            <h4>Legal</h4>
+                            <a href="privacy-policy.html">Privacy Policy</a>
+                            <a href="user-agreement.html">User Agreement</a>
+                            <a href="refund-policy.html">Refund Policy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 KiwiTweaks. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/success-page.js"></script>
+    <script src="js/scroll-to-top.js" defer></script>
+</body>
+</html>

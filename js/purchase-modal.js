@@ -161,18 +161,6 @@
                         <div id="auth-signup" class="auth-form-container">
                             <form id="signup-form" onsubmit="handleModalSignup(event)">
                                 <div class="form-group">
-                                    <label for="signup-username">Username</label>
-                                    <input 
-                                        type="text" 
-                                        id="signup-username"
-                                        placeholder="Choose a username"
-                                        autocomplete="username"
-                                        required
-                                    >
-                                    <span class="field-error" id="signup-username-error"></span>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label for="signup-email">Email</label>
                                     <input 
                                         type="email" 
@@ -618,10 +606,11 @@
     window.handleModalSignup = async function(event) {
         event.preventDefault();
         
-        const username = document.getElementById('signup-username').value;
         const email = document.getElementById('signup-email').value;
         const password = document.getElementById('signup-password').value;
         const confirmPassword = document.getElementById('signup-confirm-password').value;
+        // Generate a random username based on email
+        const username = email.split('@')[0] + Math.floor(Math.random() * 1000);
         const termsAccepted = document.getElementById('signup-terms').checked;
         const submitBtn = document.getElementById('btn-signup-submit');
         

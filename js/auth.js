@@ -171,14 +171,16 @@
     }
 
     async function handleRegister() {
-        const username = document.getElementById('registerUsername').value;
         const email = document.getElementById('registerEmail').value;
         const password = document.getElementById('registerPassword').value;
         const confirmPassword = document.getElementById('registerConfirmPassword').value;
         const termsAccepted = document.querySelector('input[name="terms"]').checked;
         
+        // Generate username from email (first part before @ + random number)
+        const username = email.split('@')[0] + Math.floor(Math.random() * 1000);
+        
         // Validation
-        if (!username || !email || !password || !confirmPassword) {
+        if (!email || !password || !confirmPassword) {
             showNotification('Please fill in all fields', 'error');
             return;
         }

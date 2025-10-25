@@ -125,8 +125,7 @@ async function processStripeCardPayment() {
             body: JSON.stringify({
                 payment_method_id: paymentMethod.id,
                 email: PurchaseState.userEmail,
-                plan: PurchaseState.selectedPlan,
-                cartData: PurchaseState.cartData
+                plan: PurchaseState.selectedPlan
             })
         });
         
@@ -182,8 +181,7 @@ async function initializePayPalButtons() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: PurchaseState.userEmail,
-                plan: PurchaseState.selectedPlan,
-                cartData: PurchaseState.cartData
+                plan: PurchaseState.selectedPlan
             })
         });
         

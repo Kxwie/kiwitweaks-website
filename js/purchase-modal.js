@@ -4,7 +4,6 @@
  * ✅ Modern error handling UI
  * ✅ Inline email collection
  * ✅ Network error handling with retry
- * ✅ Cart integration
  * ✅ Accessibility (ARIA, keyboard nav)
  * ✅ State management
  */
@@ -18,7 +17,6 @@
         currentStep: 'initial',
         selectedPlan: 'premium',
         userEmail: null,
-        cartData: null,
         retryCount: 0,
         maxRetries: 3,
         lastError: null,
@@ -80,7 +78,7 @@
                                 Get Free Version
                             </a>
                             <button class="btn btn-primary" id="btn-purchase-start" onclick="startPurchaseFlow()">
-                                <i class="fas fa-shopping-cart"></i>
+                                <i class="fas fa-crown"></i>
                                 <span>Purchase Premium</span>
                             </button>
                         </div>
@@ -408,16 +406,12 @@
         return true;
     }
 
-    function openModal(cartData = null) {
+    function openModal() {
         const modal = document.getElementById('purchaseModal');
         if (!modal) return;
 
         // Re-check authentication status when modal opens
         checkUserSession();
-
-        if (cartData) {
-            PurchaseState.cartData = cartData;
-        }
 
         PurchaseState.currentStep = 'initial';
         showStep('step-initial');
@@ -717,8 +711,7 @@ async function processStripePayment(retryAttempt = 0) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: PurchaseState.userEmail,
-                plan: PurchaseState.selectedPlan,
-                cartData: PurchaseState.cartData
+                plan: PurchaseState.selectedPlan
             }),
             signal: controller.signal
         });
@@ -768,8 +761,7 @@ async function processPayPalPayment(retryAttempt = 0) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: PurchaseState.userEmail,
-                plan: PurchaseState.selectedPlan,
-                cartData: PurchaseState.cartData
+                plan: PurchaseState.selectedPlan
             }),
             signal: controller.signal
         });

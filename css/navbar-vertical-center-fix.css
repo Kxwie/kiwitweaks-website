@@ -87,8 +87,7 @@
 
 /* All icon buttons - consistent sizing and centering */
 .nav-discord,
-.nav-link-auth,
-.nav-cart {
+.nav-link-auth {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -142,8 +141,7 @@
 
 /* Hover states */
 .nav-discord:hover,
-.nav-link-auth:hover,
-.nav-cart:hover {
+.nav-link-auth:hover {
     background: rgba(255, 255, 255, 0.2) !important;
     transform: translateY(-2px) scale(1.05) !important;
 }
@@ -198,9 +196,9 @@
     line-height: 1.2 !important;
 }
 
-/* Mobile menu toggle - centered */
+/* Mobile menu toggle - centered (hidden on desktop) */
 .mobile-menu-toggle {
-    display: inline-flex !important;
+    display: none !important;
     align-items: center !important;
     justify-content: center !important;
     width: 40px !important;
@@ -216,6 +214,10 @@
         padding: 0.5rem 0 !important;
     }
     
+    .mobile-menu-toggle {
+        display: inline-flex !important;
+    }
+    
     .nav-links,
     .nav-auth-actions {
         height: auto; /* Allow flex wrapping on mobile */
@@ -224,7 +226,6 @@
     .nav-links a,
     .nav-discord,
     .nav-link-auth,
-    .nav-cart,
     .nav-cta,
     .profile-trigger {
         height: 44px !important; /* Slightly larger touch targets on mobile */

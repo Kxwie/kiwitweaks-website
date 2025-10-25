@@ -29,8 +29,7 @@ input[type="reset"],
 .auth-btn,
 .modal-btn,
 .nav-cta,
-.nav-link-auth,
-.nav-cart {
+.nav-link-auth {
     border-radius: 50px !important;
 }
 

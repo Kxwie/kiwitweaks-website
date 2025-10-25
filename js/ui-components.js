@@ -11,10 +11,12 @@ function initMobileMenuToggle() {
         return;
     }
     
-    menuToggle.addEventListener('click', () => {
+    // Toggle menu
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
         menuToggle.classList.toggle('active');
         navLinks.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+        document.body.classList.toggle('mobile-menu-open');
     });
     
     // Close menu when clicking on a link
@@ -23,16 +25,27 @@ function initMobileMenuToggle() {
         link.addEventListener('click', () => {
             menuToggle.classList.remove('active');
             navLinks.classList.remove('active');
-            document.body.classList.remove('menu-open');
+            document.body.classList.remove('mobile-menu-open');
         });
     });
     
-    // Close menu when clicking outside
+    // Close menu when clicking on backdrop (outside menu)
     document.addEventListener('click', (e) => {
-        if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+        if (navLinks.classList.contains('active') && 
+            !menuToggle.contains(e.target) && 
+            !navLinks.contains(e.target)) {
             menuToggle.classList.remove('active');
             navLinks.classList.remove('active');
-            document.body.classList.remove('menu-open');
+            document.body.classList.remove('mobile-menu-open');
+        }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('mobile-menu-open');
         }
     });
     

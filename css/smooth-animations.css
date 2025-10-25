@@ -22,7 +22,6 @@
 .btn,
 .nav-cta,
 .nav-link-auth,
-.nav-cart,
 button,
 [class*="btn"] {
     transition: var(--button-transition) !important;
@@ -32,8 +31,7 @@ button,
 
 .btn:hover,
 .nav-cta:hover,
-.nav-link-auth:hover,
-.nav-cart:hover {
+.nav-link-auth:hover {
     transition: var(--hover-transition) !important;
     transform: translateY(-2px) scale(1.01);
 }

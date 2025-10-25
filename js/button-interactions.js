@@ -83,7 +83,6 @@
             [class*="btn"],
             .nav-cta,
             .nav-link-auth,
-            .nav-cart,
             input[type="submit"],
             input[type="button"]
         `);

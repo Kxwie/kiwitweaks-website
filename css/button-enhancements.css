@@ -9,7 +9,6 @@ button,
 [class*="btn"],
 .nav-cta,
 .nav-link-auth,
-.nav-cart,
 input[type="button"],
 input[type="submit"],
 input[type="reset"] {
@@ -188,22 +187,19 @@ button:focus-visible,
     position: static !important;
 }
 
-.nav-link-auth:hover,
-.nav-cart:hover {
+.nav-link-auth:hover {
     transform: translateY(-2px) scale(1.05) !important;
     background: rgba(255, 255, 255, 0.2) !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-.nav-link-auth:active,
-.nav-cart:active {
+.nav-link-auth:active {
     transform: translateY(0) scale(1.02) !important;
     background: rgba(255, 255, 255, 0.25) !important;
     transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-.nav-link-auth:focus,
-.nav-cart:focus {
+.nav-link-auth:focus {
     outline: 2px solid rgba(139, 92, 246, 0.4) !important;
     outline-offset: 2px !important;
 }

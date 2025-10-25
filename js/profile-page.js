@@ -223,10 +223,8 @@
      */
     async function loadAccountStats(user) {
         try {
-            // Calculate days active
-            const createdDate = new Date(user.createdAt || Date.now());
-            const now = new Date();
-            const daysActive = Math.floor((now - createdDate) / (1000 * 60 * 60 * 24));
+            // Use accountDays from API (already calculated)
+            const daysActive = user.accountDays || 0;
             
             // Update days active
             const statValues = document.querySelectorAll('.stat-value');
@@ -239,11 +237,73 @@
             if (statValues[1]) {
                 statValues[1].textContent = orders.length;
             }
+
+            // Display license key if user has one
+            if (user.licenseKey) {
+                displayLicenseKeyInfo(user);
+            }
+
+            // Display last login
+            if (user.lastLogin) {
+                const lastLoginDate = new Date(user.lastLogin);
+                const lastLoginStr = formatDate(lastLoginDate);
+                console.log('Last login:', lastLoginStr);
+            }
             
         } catch (error) {
             // Silently fail
         }
     }
+
+    /**
+     * Display License Key Information
+     */
+    function displayLicenseKeyInfo(user) {
+        // Find the quick stats area and add license key info
+        const quickStatsContainer = document.querySelector('.profile-quick-stats');
+        if (!quickStatsContainer) return;
+
+        // Create license key card if it doesn't exist
+        let licenseCard = document.getElementById('licenseKeyCard');
+        if (!licenseCard) {
+            licenseCard = document.createElement('div');
+            licenseCard.id = 'licenseKeyCard';
+            licenseCard.className = 'quick-stat-card';
+            licenseCard.innerHTML = `
+                <div class="quick-stat-icon" style="background: rgba(139, 92, 246, 0.1);">
+                    <i class="fas fa-key" style="color: #8b5cf6;"></i>
+                </div>
+                <div class="quick-stat-content">
+                    <h3>Your License Key</h3>
+                    <p class="quick-stat-value" style="font-size: 0.9rem; font-family: monospace; color: #a78bfa;">${user.licenseKey}</p>
+                    <button onclick="copyLicenseToClipboard('${user.licenseKey}')" class="quick-stat-meta" style="cursor: pointer; background: none; border: none; color: #8b5cf6;">
+                        <i class="fas fa-copy"></i> Copy Key
+                    </button>
+                </div>
+            `;
+            quickStatsContainer.insertBefore(licenseCard, quickStatsContainer.firstChild);
+        } else {
+            // Update existing card
+            const valueEl = licenseCard.querySelector('.quick-stat-value');
+            if (valueEl) valueEl.textContent = user.licenseKey;
+        }
+
+        // Add HWID info if available
+        if (user.hwid) {
+            console.log('HWID:', user.hwid);
+        }
+    }
+
+    /**
+     * Copy License Key to Clipboard
+     */
+    window.copyLicenseToClipboard = function(key) {
+        navigator.clipboard.writeText(key).then(() => {
+            showNotification('License key copied to clipboard!', 'success');
+        }).catch(() => {
+            showNotification('Failed to copy license key', 'error');
+        });
+    };
 
     /**
      * Load User Orders

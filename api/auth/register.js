@@ -45,13 +45,20 @@ module.exports = async (req, res) => {
     // Hash password
     const hashedPassword = await hashPassword(password);
 
-    // Create user document
+    // Create user document with all fields
+    const createdAt = new Date();
     const newUser = {
       email: email.toLowerCase(),
       password: hashedPassword,
       username: username || email.split('@')[0],
-      createdAt: new Date(),
-      purchases: []
+      createdAt: createdAt,
+      lastLogin: createdAt, // First login is creation time
+      accountDays: 0, // Will be calculated dynamically
+      hwid: null, // For KeyAuth HWID tracking
+      licenseKey: null, // Will be set when user purchases
+      isPremium: false,
+      purchases: [],
+      emailVerified: false
     };
 
     // Insert user

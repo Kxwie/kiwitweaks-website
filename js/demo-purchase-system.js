@@ -1,22 +1,22 @@
 /**
- * Demo Purchase System with REAL KeyAuth License Keys
- * Allows testing purchases without real money but generates actual verified KeyAuth keys
+ * Purchase System with REAL Orders and KeyAuth License Keys
+ * Creates actual orders in MongoDB with real user data
  */
 
 (function() {
     'use strict';
 
     /**
-     * Create Demo Purchase Button
-     * Add this to profile page or anywhere you want to test purchases
+     * Create Purchase Button
+     * Creates real orders with real data from database
      */
-    window.initDemoPurchaseButton = function() {
+    window.initPurchaseButton = function() {
         // Check if button already exists
-        if (document.getElementById('demoPurchaseBtn')) return;
+        if (document.getElementById('purchaseBtn')) return;
         
-        // Create demo purchase section
-        const demoSection = document.createElement('div');
-        demoSection.style.cssText = `
+        // Create purchase section
+        const purchaseSection = document.createElement('div');
+        purchaseSection.style.cssText = `
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -28,8 +28,8 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         `;
         
-        demoSection.innerHTML = `
-            <button id="demoPurchaseBtn" style="
+        purchaseSection.innerHTML = `
+            <button id="purchaseBtn" style="
                 background: white;
                 color: #8b5cf6;
                 border: none;
@@ -43,15 +43,15 @@
                 font-size: 0.95rem;
                 transition: all 0.3s;
             ">
-                <i class="fas fa-flask"></i>
-                Demo Purchase (FREE)
+                <i class="fas fa-shopping-cart"></i>
+                Purchase Premium (FREE)
             </button>
         `;
         
-        document.body.appendChild(demoSection);
+        document.body.appendChild(purchaseSection);
         
         // Add hover effect
-        const btn = document.getElementById('demoPurchaseBtn');
+        const btn = document.getElementById('purchaseBtn');
         btn.addEventListener('mouseenter', () => {
             btn.style.transform = 'scale(1.05)';
             btn.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
@@ -62,15 +62,15 @@
         });
         
         // Handle click
-        btn.addEventListener('click', handleDemoPurchase);
+        btn.addEventListener('click', handlePurchase);
     };
 
     /**
-     * Handle Demo Purchase
-     * Generates REAL KeyAuth license key
+     * Handle Purchase
+     * Generates REAL KeyAuth license key and creates order in MongoDB
      */
-    async function handleDemoPurchase() {
-        const btn = document.getElementById('demoPurchaseBtn');
+    async function handlePurchase() {
+        const btn = document.getElementById('purchaseBtn');
         if (!btn) return;
         
         // Check if user is logged in
@@ -86,52 +86,54 @@
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating License...';
         
         try {
-            // Generate REAL KeyAuth license key
-            const licenseKey = await generateRealKeyAuthLicense(user.email);
-            
-            if (!licenseKey) {
+            // Get token
+            const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+            if (!token) {
+                throw new Error('Not authenticated');
+            }
+
+            // Step 1: Generate REAL KeyAuth license key
+            const licenseResponse = await fetch('/api/keyauth/generate-license', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: user.email,
+                    duration: 99999999,
+                    productId: 'premium',
+                    note: 'KiwiTweaks Premium Purchase'
+                })
+            });
+
+            const licenseData = await licenseResponse.json();
+            if (!licenseData.success || !licenseData.licenseKey) {
                 throw new Error('Failed to generate license key');
             }
-            
-            // Create order with real license key
-            const order = {
-                orderId: generateOrderId(),
-                productName: "KiwiTweaks Premium",
-                productDescription: "Lifetime License (Demo Purchase)",
-                productId: "premium",
-                amount: 0.00, // Demo purchase is free
-                currency: "USD",
-                paymentMethod: "demo",
-                paymentId: "demo_" + Date.now(),
-                licenseKey: licenseKey,
-                status: "completed",
-                createdAt: new Date().toISOString(),
-                isDemo: true
-            };
-            
-            // Save order to localStorage
-            const userOrders = JSON.parse(localStorage.getItem('userOrders') || '[]');
-            userOrders.unshift(order);
-            localStorage.setItem('userOrders', JSON.stringify(userOrders));
-            
-            // Update user to premium
-            user.isPremium = true;
-            localStorage.setItem('user', JSON.stringify(user));
-            
-            // Try to save to server
-            try {
-                const token = localStorage.getItem('token') || localStorage.getItem('authToken');
-                await fetch('/api/orders/create', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(order)
-                });
-            } catch (error) {
-                // Silently fail, already saved to localStorage
+
+            const licenseKey = licenseData.licenseKey;
+
+            // Step 2: Create order in MongoDB with REAL user data
+            const orderResponse = await fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    productName: 'KiwiTweaks Premium',
+                    amount: 0.00,
+                    licenseKey: licenseKey
+                })
+            });
+
+            const orderData = await orderResponse.json();
+            if (!orderData.success) {
+                throw new Error('Failed to create order');
             }
+
+            const order = orderData.order;
             
             // Show success message
             showSuccessModal(order);
@@ -141,8 +143,13 @@
             btn.innerHTML = '<i class="fas fa-check"></i> Purchase Complete!';
             
             setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-flask"></i> Demo Purchase (FREE)';
+                btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Purchase Premium (FREE)';
             }, 3000);
+
+            // Reload page to show new order
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
             
         } catch (error) {
             console.error('Demo purchase error:', error);
@@ -150,7 +157,7 @@
             
             // Reset button
             btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-flask"></i> Demo Purchase (FREE)';
+            btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Purchase Premium (FREE)';
         }
     }
 

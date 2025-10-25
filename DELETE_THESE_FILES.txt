@@ -1,0 +1,44 @@
+DELETE THESE 3 FILES TO GET BACK TO 12 FUNCTIONS:
+
+1. api\keyauth\update-hwid.js
+   (Combined into verify-license.js)
+
+2. api\auth\resend-verification.js
+   (Email verification not needed)
+
+3. api\auth\verify-email.js
+   (Email verification not needed)
+
+AFTER DELETING, YOU'LL HAVE EXACTLY 12 FUNCTIONS:
+
+✅ api\auth\login.js
+✅ api\auth\register.js
+✅ api\auth\password-reset-request.js
+✅ api\auth\password-reset-confirm.js
+✅ api\user\profile.js
+✅ api\keyauth\generate-license.js
+✅ api\keyauth\verify-license.js (now handles HWID updates too)
+✅ api\payment\stripe-checkout.js
+✅ api\payment\stripe-webhook.js
+✅ api\payment\paypal-create.js
+✅ api\payment\paypal-capture.js
+
+Total: 11 functions (1 free slot for future)
+
+HOW TO USE VERIFY-LICENSE NOW:
+
+// Verify license:
+POST /api/keyauth/verify-license
+{
+  "licenseKey": "XXXX-XXXX-XXXX-XXXX",
+  "hwid": "ABC123"
+}
+
+// Update HWID only:
+POST /api/keyauth/verify-license
+Authorization: Bearer <token>
+{
+  "licenseKey": "XXXX-XXXX-XXXX-XXXX",
+  "hwid": "ABC123",
+  "action": "update-hwid"
+}

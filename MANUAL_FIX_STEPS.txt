@@ -1,0 +1,55 @@
+═══════════════════════════════════════════════════════════════
+   FIX BROKEN UI + REDUCE FUNCTIONS TO 11
+═══════════════════════════════════════════════════════════════
+
+DO THESE 4 THINGS IN FILE EXPLORER:
+
+───────────────────────────────────────────────────────────────
+STEP 1: FIX BROKEN UI
+───────────────────────────────────────────────────────────────
+
+Go to folder: js\
+
+1. DELETE: purchase-modal.js (the old 878-line file)
+2. RENAME: purchase-modal-STUB.js → purchase-modal.js
+
+This fixes the overlapping forms.
+
+───────────────────────────────────────────────────────────────
+STEP 2: DELETE 3 API FILES (Get to 11 functions)
+───────────────────────────────────────────────────────────────
+
+Go to folder: api\
+
+DELETE these 3 files:
+
+1. api\keyauth\update-hwid.js
+2. api\payment\paypal-capture.js
+3. api\payment\paypal-create.js
+
+───────────────────────────────────────────────────────────────
+STEP 3: VERIFY
+───────────────────────────────────────────────────────────────
+
+Count files in api\ folder:
+- Should have 11 .js files total
+
+───────────────────────────────────────────────────────────────
+STEP 4: TEST
+───────────────────────────────────────────────────────────────
+
+1. Open profile.html in browser
+2. Should see clean page (no overlapping forms)
+3. Click "Purchase Premium (FREE)" button (bottom-right)
+4. License generated → Order created
+5. Check Orders tab
+
+═══════════════════════════════════════════════════════════════
+
+THAT'S IT! After these 4 steps:
+✅ Clean UI (no overlaps)
+✅ 11 functions (under limit)
+✅ Working purchase system
+✅ Ready to deploy
+
+═══════════════════════════════════════════════════════════════

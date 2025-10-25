@@ -63,7 +63,12 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Return profile data
+    // Calculate account days (days since creation)
+    const accountDays = user.createdAt 
+      ? Math.floor((Date.now() - new Date(user.createdAt).getTime()) / (1000 * 60 * 60 * 24))
+      : 0;
+
+    // Return profile data with all fields
     return res.status(200).json({
       success: true,
       user: {
@@ -75,6 +80,10 @@ module.exports = async (req, res) => {
         isPremium: user.isPremium || false,
         emailVerified: user.emailVerified || false,
         createdAt: user.createdAt,
+        lastLogin: user.lastLogin,
+        accountDays: accountDays,
+        hwid: user.hwid || null,
+        licenseKey: user.licenseKey || null,
         purchases: user.purchases || []
       }
     });

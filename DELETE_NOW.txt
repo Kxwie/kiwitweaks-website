@@ -1,0 +1,25 @@
+DELETE THESE 3 FILES NOW TO GET TO 11 FUNCTIONS:
+
+1. api\keyauth\update-hwid.js
+   (Functionality merged into verify-license.js)
+
+2. api\payment\paypal-capture.js
+   (PayPal not needed for demo purchases)
+
+3. api\payment\paypal-create.js
+   (PayPal not needed for demo purchases)
+
+USE FILE EXPLORER TO DELETE THEM!
+
+After deleting, you'll have 11 functions:
+✅ api\auth\login.js
+✅ api\auth\register.js
+✅ api\auth\password-reset-request.js
+✅ api\auth\password-reset-confirm.js
+✅ api\user\profile.js
+✅ api\keyauth\generate-license.js
+✅ api\keyauth\verify-license.js
+✅ api\orders\create-order.js
+✅ api\orders\get-orders.js
+✅ api\payment\stripe-checkout.js
+✅ api\payment\stripe-webhook.js

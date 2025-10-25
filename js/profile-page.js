@@ -18,6 +18,11 @@
         loadUserOrders();
         initSettingsForms();
         initToggleSwitches();
+        
+        // Initialize purchase button
+        if (window.initPurchaseButton) {
+            window.initPurchaseButton();
+        }
     }
 
     /**
@@ -223,10 +228,8 @@
      */
     async function loadAccountStats(user) {
         try {
-            // Calculate days active
-            const createdDate = new Date(user.createdAt || Date.now());
-            const now = new Date();
-            const daysActive = Math.floor((now - createdDate) / (1000 * 60 * 60 * 24));
+            // Use accountDays from API (already calculated)
+            const daysActive = user.accountDays || 0;
             
             // Update days active
             const statValues = document.querySelectorAll('.stat-value');
@@ -239,11 +242,73 @@
             if (statValues[1]) {
                 statValues[1].textContent = orders.length;
             }
+
+            // Display license key if user has one
+            if (user.licenseKey) {
+                displayLicenseKeyInfo(user);
+            }
+
+            // Display last login
+            if (user.lastLogin) {
+                const lastLoginDate = new Date(user.lastLogin);
+                const lastLoginStr = formatDate(lastLoginDate);
+                console.log('Last login:', lastLoginStr);
+            }
             
         } catch (error) {
             // Silently fail
         }
     }
+
+    /**
+     * Display License Key Information
+     */
+    function displayLicenseKeyInfo(user) {
+        // Find the quick stats area and add license key info
+        const quickStatsContainer = document.querySelector('.profile-quick-stats');
+        if (!quickStatsContainer) return;
+
+        // Create license key card if it doesn't exist
+        let licenseCard = document.getElementById('licenseKeyCard');
+        if (!licenseCard) {
+            licenseCard = document.createElement('div');
+            licenseCard.id = 'licenseKeyCard';
+            licenseCard.className = 'quick-stat-card';
+            licenseCard.innerHTML = `
+                <div class="quick-stat-icon" style="background: rgba(139, 92, 246, 0.1);">
+                    <i class="fas fa-key" style="color: #8b5cf6;"></i>
+                </div>
+                <div class="quick-stat-content">
+                    <h3>Your License Key</h3>
+                    <p class="quick-stat-value" style="font-size: 0.9rem; font-family: monospace; color: #a78bfa;">${user.licenseKey}</p>
+                    <button onclick="copyLicenseToClipboard('${user.licenseKey}')" class="quick-stat-meta" style="cursor: pointer; background: none; border: none; color: #8b5cf6;">
+                        <i class="fas fa-copy"></i> Copy Key
+                    </button>
+                </div>
+            `;
+            quickStatsContainer.insertBefore(licenseCard, quickStatsContainer.firstChild);
+        } else {
+            // Update existing card
+            const valueEl = licenseCard.querySelector('.quick-stat-value');
+            if (valueEl) valueEl.textContent = user.licenseKey;
+        }
+
+        // Add HWID info if available
+        if (user.hwid) {
+            console.log('HWID:', user.hwid);
+        }
+    }
+
+    /**
+     * Copy License Key to Clipboard
+     */
+    window.copyLicenseToClipboard = function(key) {
+        navigator.clipboard.writeText(key).then(() => {
+            showNotification('License key copied to clipboard!', 'success');
+        }).catch(() => {
+            showNotification('Failed to copy license key', 'error');
+        });
+    };
 
     /**
      * Load User Orders
@@ -259,13 +324,18 @@
 
     /**
      * Get User Orders
+     * Fetches real orders from MongoDB database
      */
     async function getUserOrders() {
         try {
             const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+            if (!token) {
+                return [];
+            }
             
-            // Try to fetch from server
+            // Fetch orders from server
             const response = await fetch('/api/orders', {
+                method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -275,16 +345,14 @@
             if (response.ok) {
                 const data = await response.json();
                 return data.orders || [];
+            } else {
+                console.error('Failed to fetch orders:', response.status);
+                return [];
             }
         } catch (error) {
-            // Fallback to localStorage
-            const ordersStr = localStorage.getItem('userOrders');
-            if (ordersStr) {
-                return JSON.parse(ordersStr);
-            }
+            console.error('Error fetching orders:', error);
+            return [];
         }
-        
-        return [];
     }
 
     /**
@@ -317,7 +385,7 @@
     }
 
     /**
-     * Create Order Card with License Key
+     * Create Order Card with License Key and Real Account Data
      */
     function createOrderCard(order) {
         const card = document.createElement('div');
@@ -326,11 +394,18 @@
         const statusClass = order.status === 'completed' ? 'success' : '';
         const statusText = order.status === 'completed' ? 'Completed' : order.status;
         
+        // Format dates from MongoDB
+        const orderDate = order.orderDate || order.createdAt;
+        const accountCreated = order.accountCreatedDate ? formatDate(order.accountCreatedDate) : 'N/A';
+        const lastLogin = order.lastLoginDate ? formatDate(order.lastLoginDate) : 'N/A';
+        const lastDownload = order.lastDownloadDate ? formatDate(order.lastDownloadDate) : 'Never';
+        const accountDays = order.accountDays !== undefined ? order.accountDays : 'N/A';
+        
         card.innerHTML = `
             <div class="order-header">
                 <div>
                     <h3>Order #${order.orderId}</h3>
-                    <p class="order-date">${formatDate(order.createdAt)}</p>
+                    <p class="order-date">${formatDate(orderDate)}</p>
                 </div>
                 <span class="order-status ${statusClass}">${statusText}</span>
             </div>
@@ -339,9 +414,9 @@
                     <i class="fas fa-crown"></i>
                     <div>
                         <h4>${order.productName}</h4>
-                        <p>${order.productDescription || 'Lifetime License'}</p>
+                        <p>Lifetime License</p>
                     </div>
-                    <span class="order-price">$${order.amount.toFixed(2)}</span>
+                    <span class="order-price">${order.amount === 0 ? 'FREE' : '$' + order.amount.toFixed(2)}</span>
                 </div>
             </div>
             ${order.licenseKey ? `
@@ -362,6 +437,30 @@
                     </p>
                 </div>
             ` : ''}
+            <div class="order-account-info" style="background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 1.5rem; margin-top: 1rem;">
+                <h4 style="color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-user-circle" style="color: #8b5cf6;"></i>
+                    Account Information
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 0.25rem;">Account Created</p>
+                        <p style="color: white; font-weight: 500;">${accountCreated}</p>
+                    </div>
+                    <div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 0.25rem;">Last Login</p>
+                        <p style="color: white; font-weight: 500;">${lastLogin}</p>
+                    </div>
+                    <div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 0.25rem;">Last Download</p>
+                        <p style="color: white; font-weight: 500;">${lastDownload}</p>
+                    </div>
+                    <div>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 0.25rem;">Account Age</p>
+                        <p style="color: white; font-weight: 500;">${accountDays} days</p>
+                    </div>
+                </div>
+            </div>
             <div class="order-actions">
                 ${order.status === 'completed' ? `
                     <button class="btn btn-primary btn-sm">

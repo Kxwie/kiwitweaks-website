@@ -21,7 +21,8 @@
         cartData: null,
         retryCount: 0,
         maxRetries: 3,
-        lastError: null
+        lastError: null,
+        isAuthenticated: false
     };
 
     // Initialize when DOM is ready
@@ -227,17 +228,59 @@
     function checkUserSession() {
         try {
             const user = JSON.parse(localStorage.getItem('user') || '{}');
-            if (user.email) {
+            const token = localStorage.getItem('token');
+            
+            // Check if user has valid session with token
+            if (user.email && token) {
                 PurchaseState.userEmail = user.email;
+                PurchaseState.isAuthenticated = true;
+                console.log('[Purchase] User authenticated:', user.email);
+            } else {
+                PurchaseState.isAuthenticated = false;
+                console.log('[Purchase] User not authenticated');
             }
         } catch (error) {
             console.error('[Purchase] Session check failed:', error);
+            PurchaseState.isAuthenticated = false;
         }
+    }
+    
+    /**
+     * Check if user is authenticated and redirect to auth if not
+     */
+    function requireAuthentication() {
+        if (!PurchaseState.isAuthenticated) {
+            // Save current page for redirect after login
+            sessionStorage.setItem('redirectAfterAuth', window.location.pathname);
+            sessionStorage.setItem('redirectAction', 'purchase');
+            
+            // Show message and redirect
+            if (confirm('You need to create an account or log in to make a purchase. Would you like to go to the login page?')) {
+                window.location.href = 'auth.html';
+            }
+            return false;
+        }
+        return true;
     }
 
     function openModal(cartData = null) {
         const modal = document.getElementById('purchaseModal');
         if (!modal) return;
+
+        // Re-check authentication status when modal opens
+        checkUserSession();
+        
+        // If not authenticated, require login first
+        if (!PurchaseState.isAuthenticated) {
+            const shouldRedirect = confirm('You need to create an account or log in to make a purchase. Would you like to go to the login page now?');
+            if (shouldRedirect) {
+                // Save current page for redirect after login
+                sessionStorage.setItem('redirectAfterAuth', window.location.pathname);
+                sessionStorage.setItem('redirectAction', 'purchase');
+                window.location.href = 'auth.html';
+            }
+            return; // Don't open modal if not authenticated
+        }
 
         if (cartData) {
             PurchaseState.cartData = cartData;
@@ -297,20 +340,17 @@
         const btn = document.getElementById('btn-purchase-start');
         if (PurchaseState.isProcessing) return;
 
+        // Check if user is authenticated first
+        if (!requireAuthentication()) {
+            return; // User will be redirected to auth page
+        }
+
         setButtonLoading(btn, true);
 
         setTimeout(() => {
-            if (PurchaseState.userEmail) {
-                showStep('step-payment');
-                announceToScreenReader('Choose payment method');
-            } else {
-                showStep('step-email');
-                announceToScreenReader('Enter your email');
-                setTimeout(() => {
-                    const emailInput = document.getElementById('purchase-email');
-                    if (emailInput) emailInput.focus();
-                }, 100);
-            }
+            // User is authenticated, proceed directly to payment method selection
+            showStep('step-payment');
+            announceToScreenReader('Choose payment method');
             setButtonLoading(btn, false);
         }, 300);
     };

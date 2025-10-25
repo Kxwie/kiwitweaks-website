@@ -125,13 +125,34 @@
             if (response.ok && data.success) {
                 // Store token in localStorage
                 localStorage.setItem('authToken', data.token);
+                localStorage.setItem('token', data.token); // Also store as 'token' for purchase modal
                 localStorage.setItem('user', JSON.stringify(data.user));
                 
                 showNotification('Login successful!', 'success');
                 
-                // Redirect to home page
+                // Check if user should be redirected back to purchase flow
+                const redirectAfterAuth = sessionStorage.getItem('redirectAfterAuth');
+                const redirectAction = sessionStorage.getItem('redirectAction');
+                
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    if (redirectAction === 'purchase' && redirectAfterAuth) {
+                        // Clear redirect data
+                        sessionStorage.removeItem('redirectAfterAuth');
+                        sessionStorage.removeItem('redirectAction');
+                        
+                        // Redirect back to original page
+                        window.location.href = redirectAfterAuth;
+                        
+                        // After page loads, open purchase modal
+                        setTimeout(() => {
+                            if (window.openPurchaseModal) {
+                                window.openPurchaseModal();
+                            }
+                        }, 500);
+                    } else {
+                        // Normal redirect to home page
+                        window.location.href = 'index.html';
+                    }
                 }, 1000);
             } else {
                 showNotification(data.error || 'Login failed', 'error');
@@ -185,13 +206,34 @@
             if (response.ok && data.success) {
                 // Store token in localStorage
                 localStorage.setItem('authToken', data.token);
+                localStorage.setItem('token', data.token); // Also store as 'token' for purchase modal
                 localStorage.setItem('user', JSON.stringify(data.user));
                 
                 showNotification('Account created successfully!', 'success');
                 
-                // Redirect to home page
+                // Check if user should be redirected back to purchase flow
+                const redirectAfterAuth = sessionStorage.getItem('redirectAfterAuth');
+                const redirectAction = sessionStorage.getItem('redirectAction');
+                
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    if (redirectAction === 'purchase' && redirectAfterAuth) {
+                        // Clear redirect data
+                        sessionStorage.removeItem('redirectAfterAuth');
+                        sessionStorage.removeItem('redirectAction');
+                        
+                        // Redirect back to original page
+                        window.location.href = redirectAfterAuth;
+                        
+                        // After page loads, open purchase modal
+                        setTimeout(() => {
+                            if (window.openPurchaseModal) {
+                                window.openPurchaseModal();
+                            }
+                        }, 500);
+                    } else {
+                        // Normal redirect to home page
+                        window.location.href = 'index.html';
+                    }
                 }, 1000);
             } else {
                 showNotification(data.error || 'Registration failed', 'error');

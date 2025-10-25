@@ -165,9 +165,7 @@
         <section id="download" class="section bg-dark">
             <div class="container">
                 <div class="section-header" data-scroll="fade-up">
-                    <span class="section-subtitle text-gradient">Ready to Optimize?</span>
                     <h2 class="section-title">Get Started <span class="highlight">Today</span></h2>
-                    <p class="section-description">Choose the version that's right for you</p>
                 </div>
                 
                 <div class="download-grid">
@@ -229,7 +227,6 @@
                     <!-- Premium Version Card -->
                     <div class="download-version-card premium" data-scroll="fade-up" data-scroll-delay="0.4s">
                         <div class="version-badge premium">PREMIUM</div>
-                        <div class="popular-tag">Most Popular</div>
                         <div class="version-header">
                             <h3>KiwiTweaks Premium</h3>
                             <p class="version-subtitle">Maximum performance unleashed</p>
@@ -832,6 +829,19 @@
             const yearSpan = document.getElementById('current-year');
             if (yearSpan) {
                 yearSpan.textContent = new Date().getFullYear();
+            }
+            
+            // Check if user should open purchase modal after authentication
+            const redirectAction = sessionStorage.getItem('redirectAction');
+            if (redirectAction === 'purchase') {
+                sessionStorage.removeItem('redirectAction');
+                
+                // Wait for purchase modal to be initialized, then open it
+                setTimeout(function() {
+                    if (window.openPurchaseModal) {
+                        window.openPurchaseModal();
+                    }
+                }, 1000);
             }
         });
     </script>

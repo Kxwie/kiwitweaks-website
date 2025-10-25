@@ -9,10 +9,14 @@
 
     // Initialize when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
-        // Only load purchase modal on index page, not on auth page
-        if (window.location.pathname.includes('auth.html')) {
-            return; // Don't load modal on auth page
+        // Only load purchase modal on index page, not on auth or legal pages
+        const excludedPages = ['auth.html', 'privacy-policy.html', 'user-agreement.html', 'refund-policy.html'];
+        const currentPath = window.location.pathname;
+        
+        if (excludedPages.some(page => currentPath.includes(page))) {
+            return; // Don't load modal on excluded pages
         }
+        
         createPurchaseModal();
         initPurchaseModal();
     });

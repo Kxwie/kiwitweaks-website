@@ -46,19 +46,22 @@
 
 .auth-form-container label {
     display: block;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.875rem;
-    font-weight: 500;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
 }
 
 .auth-form-container label a {
     color: #8b5cf6;
     text-decoration: none;
+    font-weight: 500;
 }
 
 .auth-form-container label a:hover {
     text-decoration: underline;
+    color: #9333ea;
 }
 
 /* Payment Summary */
@@ -149,6 +152,55 @@
     margin-bottom: 1.5rem;
 }
 
+/* Auth Form Input Styling */
+.auth-form-container input[type="email"],
+.auth-form-container input[type="password"],
+.auth-form-container input[type="text"] {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.auth-form-container input[type="email"]:focus,
+.auth-form-container input[type="password"]:focus,
+.auth-form-container input[type="text"]:focus {
+    border-color: #8b5cf6;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+.auth-form-container input[type="email"]::placeholder,
+.auth-form-container input[type="password"]::placeholder,
+.auth-form-container input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.auth-form-container input[type="email"]:hover:not(:focus),
+.auth-form-container input[type="password"]:hover:not(:focus),
+.auth-form-container input[type="text"]:hover:not(:focus) {
+    border-color: rgba(139, 92, 246, 0.5);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Invalid input state */
+.auth-form-container input[type="email"]:invalid:not(:placeholder-shown),
+.auth-form-container input[type="password"]:invalid:not(:placeholder-shown) {
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* Input with error */
+.auth-form-container .form-group.has-error input {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
 /* Payment Entry Headers */
 #step-stripe-entry h3,
 #step-paypal-entry h3 {
@@ -167,7 +219,8 @@
 
 /* Form Group Improvements for Auth */
 .auth-form-container .form-group {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .auth-form-container .checkbox-group {
@@ -178,12 +231,60 @@
 .auth-form-container .checkbox-group label {
     display: flex;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 0.75rem;
     font-size: 0.875rem;
+    font-weight: 400;
+    cursor: pointer;
 }
 
 .auth-form-container .checkbox-group input[type="checkbox"] {
-    margin-top: 0.2rem;
+    margin-top: 0.25rem;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #8b5cf6;
+    border-radius: 4px;
+}
+
+.auth-form-container .checkbox-group input[type="checkbox"]:focus {
+    outline: 2px solid #8b5cf6;
+    outline-offset: 2px;
+}
+
+/* Custom Checkbox Styling */
+.auth-form-container .checkbox-group input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.auth-form-container .checkbox-group input[type="checkbox"]:hover {
+    border-color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.auth-form-container .checkbox-group input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    border-color: #8b5cf6;
+}
+
+.auth-form-container .checkbox-group input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 /* Responsive Adjustments */

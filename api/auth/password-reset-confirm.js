@@ -4,57 +4,74 @@
  */
 
 const crypto = require('crypto');
-const { getDb } = require('../../utils/database');
-const { hashPassword } = require('../../lib/auth');
-const logger = require('../../utils/logger');
-const { asyncHandler, ValidationError, AuthenticationError } = require('../../middleware/errorHandler');
-const { validate } = require('../../middleware/validate');
-const { authLimiter } = require('../../middleware/rateLimiter');
-const { passwordResetConfirmSchema } = require('../../schemas/auth.schema');
+const clientPromise = require('../../lib/mongodb');
+const bcrypt = require('bcryptjs');
 
-module.exports = authLimiter(validate(passwordResetConfirmSchema)(asyncHandler(async (req, res) => {
-  const { token, password } = req.validatedBody;
-
-  // Hash the token to match database
-  const resetTokenHash = crypto.createHash('sha256').update(token).digest('hex');
-
-  const db = await getDb();
-  const usersCollection = db.collection('users');
-
-  // Find user with valid reset token
-  const user = await usersCollection.findOne({
-    resetToken: resetTokenHash,
-    resetTokenExpiry: { $gt: new Date() } // Token not expired
-  });
-
-  if (!user) {
-    logger.logSecurity('password_reset_invalid_token', 'medium', { token: token.substring(0, 10) });
-    throw new AuthenticationError('Invalid or expired reset token');
+module.exports = async (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Hash new password
-  const hashedPassword = await hashPassword(password);
+  try {
+    const { token, password } = req.body;
 
-  // Update password and clear reset token
-  await usersCollection.updateOne(
-    { _id: user._id },
-    {
-      $set: {
-        password: hashedPassword,
-        passwordChangedAt: new Date()
-      },
-      $unset: {
-        resetToken: '',
-        resetTokenExpiry: '',
-        resetRequestedAt: ''
-      }
+    if (!token || !password) {
+      return res.status(400).json({ error: 'Token and password are required' });
     }
-  );
 
-  logger.logAuth('password_reset_completed', user._id, user.email);
+    // Validate password strength
+    if (password.length < 8) {
+      return res.status(400).json({ error: 'Password must be at least 8 characters' });
+    }
 
-  res.status(200).json({
-    success: true,
-    message: 'Password has been reset successfully. You can now login with your new password.'
-  });
-})));
+    // Hash the token to match database
+    const resetTokenHash = crypto.createHash('sha256').update(token).digest('hex');
+
+    // Connect to database
+    const client = await clientPromise;
+    const db = client.db('kiwitweaks');
+    const usersCollection = db.collection('users');
+
+    // Find user with valid reset token
+    const user = await usersCollection.findOne({
+      resetToken: resetTokenHash,
+      resetTokenExpiry: { $gt: new Date() } // Token not expired
+    });
+
+    if (!user) {
+      return res.status(400).json({ 
+        error: 'Invalid or expired reset token. Please request a new password reset.' 
+      });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update password and clear reset token
+    await usersCollection.updateOne(
+      { _id: user._id },
+      {
+        $set: {
+          password: hashedPassword,
+          passwordChangedAt: new Date()
+        },
+        $unset: {
+          resetToken: '',
+          resetTokenExpiry: '',
+          resetRequestedAt: ''
+        }
+      }
+    );
+
+    console.log('Password reset completed for:', user.email);
+
+    res.status(200).json({
+      success: true,
+      message: 'Password has been reset successfully. You can now login with your new password.'
+    });
+
+  } catch (error) {
+    console.error('Password reset confirm error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};

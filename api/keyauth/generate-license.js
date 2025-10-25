@@ -69,6 +69,23 @@ module.exports = async (req, res) => {
             });
         }
 
+        // Save license key to user's MongoDB document
+        const clientPromise = require('../../lib/mongodb');
+        const client = await clientPromise;
+        const db = client.db('kiwitweaks');
+        const usersCollection = db.collection('users');
+
+        await usersCollection.updateOne(
+            { email: username.toLowerCase() },
+            { 
+                $set: { 
+                    licenseKey: licenseKey,
+                    isPremium: true,
+                    licenseGeneratedAt: new Date()
+                }
+            }
+        );
+
         // Return the license key
         return res.status(200).json({
             success: true,

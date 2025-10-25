@@ -36,6 +36,20 @@
                     <a href="benchmarks.html">Benchmarks</a>
                     <a href="index.html#download">Download</a>
                     <a href="index.html#testimonials">Reviews</a>
+                    <!-- Auth actions for mobile menu -->
+                    <div class="nav-auth-actions">
+                        <a href="profile.html" class="nav-link-auth active">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                        <a href="https://discord.gg/kiwitweaks" target="_blank" class="nav-discord" aria-label="Join Discord">
+                            <i class="fab fa-discord"></i>
+                            <span>Discord</span>
+                        </a>
+                        <a href="#" class="nav-cta" data-purchase-modal>
+                            <span>Purchase</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="nav-auth-actions">
                     <a href="profile.html" class="nav-link-auth active" aria-label="Profile">
@@ -445,6 +459,12 @@
     </section>
 
     <!-- Scripts -->
+    <script src="js/keyauth-purchase-integration.js"></script>
+    <script src="js/demo-purchase-system.js"></script>
+    <script src="js/ui-components.js"></script>
+    <script src="js/profile-nav-guard.js"></script>
     <script src="js/profile-page.js"></script>
+    <script src="js/purchase-modal.js" defer></script>
+    <script src="js/scroll-to-top.js" defer></script>
 </body>
 </html>

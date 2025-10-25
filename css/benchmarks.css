@@ -508,11 +508,13 @@
 }
 
 .setup-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 2.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(139, 92, 246, 0.2);
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -530,13 +532,16 @@
 
 .setup-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(139, 92, 246, 0.4);
 }
 
 .setup-card h4 {
     margin: 0 0 1.5rem;
-    color: var(--primary);
+    color: #a78bfa;
     font-size: 1.25rem;
+    font-weight: 600;
 }
 
 .setup-card ul {
@@ -547,18 +552,22 @@
 
 .setup-card li {
     margin-bottom: 0.75rem;
-    color: var(--gray);
+    color: rgba(255, 255, 255, 0.8);
     display: flex;
     align-items: flex-start;
 }
 
 .setup-card li:before {
     content: '•';
-    color: var(--primary);
+    color: #8b5cf6;
     font-weight: bold;
     display: inline-block;
     width: 1.5em;
     margin-left: -1.5em;
+}
+
+.setup-card li strong {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* CTA Box */

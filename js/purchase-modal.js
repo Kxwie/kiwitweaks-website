@@ -1,11 +1,28 @@
 /**
- * Purchase Modal Functionality
+ * Enhanced Purchase Modal System v2.0
+ * ✅ Loading states & disabled buttons
+ * ✅ Modern error handling UI
+ * ✅ Inline email collection
+ * ✅ Network error handling with retry
+ * ✅ Cart integration
+ * ✅ Accessibility (ARIA, keyboard nav)
+ * ✅ State management
  */
 
 (function() {
     'use strict';
 
-    let selectedPlan = 'premium';
+    // Global state management
+    const PurchaseState = {
+        isProcessing: false,
+        currentStep: 'initial',
+        selectedPlan: 'premium',
+        userEmail: null,
+        cartData: null,
+        retryCount: 0,
+        maxRetries: 3,
+        lastError: null
+    };
 
     // Initialize when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
@@ -22,58 +39,142 @@
     });
 
     function createPurchaseModal() {
-        // Create modal element
         const modal = document.createElement('div');
         modal.id = 'purchaseModal';
         modal.className = 'purchase-modal-overlay';
         modal.setAttribute('aria-hidden', 'true');
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-labelledby', 'modal-title');
         
-        // Build modal content using DOM methods (not innerHTML to avoid parsing issues)
         modal.innerHTML = `
             <div class="purchase-modal">
-                <button class="modal-close" id="closeModal" aria-label="Close modal">
+                <button class="modal-close" id="closeModal" aria-label="Close purchase modal">
                     <i class="fas fa-times"></i>
                 </button>
+                
+                <!-- Screen Reader Announcements -->
+                <div aria-live="polite" aria-atomic="true" class="sr-only" id="modal-status"></div>
                 
                 <div class="purchase-modal-content">
                     <div class="purchase-modal-header">
                         <i class="fas fa-kiwi-bird"></i>
-                        <h2>Get KiwiTweaks Premium</h2>
+                        <h2 id="modal-title">Get KiwiTweaks Premium</h2>
                         <p>Unlock the full potential of your gaming PC</p>
                     </div>
 
-                    <div class="pricing-comparison">
-                        <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" 
-                           class="btn btn-outline" 
-                           target="_blank" 
-                           rel="noopener noreferrer"
-                           style="margin-right: 1rem;">
-                            <i class="fas fa-download"></i>
-                            Get Free Version
-                        </a>
-                        <button class="btn btn-primary" onclick="handlePurchase('premium')">
-                            <i class="fas fa-shopping-cart"></i>
-                            Purchase Premium - $29.99
-                        </button>
-                    </div>
+                    <!-- Initial Step -->
+                    <div id="step-initial" class="modal-step active">
+                        <div class="product-price-box">
+                            <span class="price-label">One-time payment</span>
+                            <span class="price-amount">$29.99</span>
+                        </div>
+                        
+                        <div class="pricing-comparison">
+                            <a href="https://discord.com/channels/1326296916719566982/1335208265679900754" 
+                               class="btn btn-outline" 
+                               target="_blank" 
+                               rel="noopener noreferrer">
+                                <i class="fas fa-download"></i>
+                                Get Free Version
+                            </a>
+                            <button class="btn btn-primary" id="btn-purchase-start" onclick="startPurchaseFlow()">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Purchase Premium</span>
+                            </button>
+                        </div>
 
-                    <div class="payment-info">
-                        <h4><i class="fas fa-credit-card"></i> Secure Payment via Payhip</h4>
-                        <div class="payment-methods">
-                            <i class="fab fa-cc-visa"></i>
-                            <i class="fab fa-cc-mastercard"></i>
-                            <i class="fab fa-cc-paypal"></i>
-                            <i class="fab fa-bitcoin"></i>
+                        <div class="payment-info">
+                            <h4><i class="fas fa-lock"></i> Secure Payment</h4>
+                            <div class="payment-methods">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fab fa-cc-paypal"></i>
+                            </div>
+                        </div>
+
+                        <div class="guarantee-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>30-Day Money Back Guarantee</h4>
+                                <p>Try risk-free with our full refund policy</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="guarantee-badge">
-                        <i class="fas fa-shield-alt"></i>
-                        <div>
-                            <h4>30-Day Money Back Guarantee</h4>
-                            <p>Try KiwiTweaks risk-free. Get a full refund as long as you're within our refund requirements!</p>
+                    <!-- Email Collection Step -->
+                    <div id="step-email" class="modal-step">
+                        <h3>Enter Your Email</h3>
+                        <p>We'll send your license key to this address</p>
+                        
+                        <form id="email-form" onsubmit="submitEmail(event)">
+                            <div class="form-group">
+                                <input 
+                                    type="email" 
+                                    id="purchase-email"
+                                    placeholder="your@email.com"
+                                    autocomplete="email"
+                                    required
+                                    aria-label="Email address"
+                                    aria-describedby="email-error"
+                                >
+                                <span class="field-error" id="email-error" role="alert"></span>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="goBackToStart()">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="btn-email-submit">
+                                    <span>Continue</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Payment Method Step -->
+                    <div id="step-payment" class="modal-step">
+                        <h3>Choose Payment Method</h3>
+                        <p>Select how you'd like to pay</p>
+                        
+                        <div class="payment-methods-grid">
+                            <button class="payment-method-card" onclick="selectPayment('stripe')" data-method="stripe">
+                                <i class="fab fa-stripe-s"></i>
+                                <span>Credit Card</span>
+                                <small>via Stripe</small>
+                            </button>
+                            <button class="payment-method-card" onclick="selectPayment('paypal')" data-method="paypal">
+                                <i class="fab fa-paypal"></i>
+                                <span>PayPal</span>
+                                <small>Fast & Secure</small>
+                            </button>
+                        </div>
+                        
+                        <button class="btn btn-outline btn-block" onclick="goBackToEmail()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </div>
+
+                    <!-- Processing Step -->
+                    <div id="step-processing" class="modal-step">
+                        <div class="processing-state">
+                            <div class="spinner-large"></div>
+                            <h3 id="processing-title">Processing...</h3>
+                            <p id="processing-message">Please wait</p>
+                        </div>
+                    </div>
+
+                    <!-- Error Display -->
+                    <div id="error-display" class="error-container" style="display: none;" role="alert">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h3 id="error-title">Error</h3>
+                        <p id="error-message">Something went wrong</p>
+                        <div class="error-actions">
+                            <button class="btn btn-outline" onclick="closeError()">Close</button>
+                            <button class="btn btn-primary" id="btn-retry" onclick="retryPayment()">
+                                <i class="fas fa-redo"></i> Retry
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -88,11 +189,9 @@
     function initPurchaseModal() {
         const modal = document.getElementById('purchaseModal');
         const closeBtn = document.getElementById('closeModal');
-        const pricingCards = document.querySelectorAll('.pricing-card');
 
         // Open modal triggers
         document.addEventListener('click', function(e) {
-            // Check if clicked element or its parent is a purchase trigger
             const trigger = e.target.closest('[data-purchase-modal]');
             if (trigger) {
                 e.preventDefault();
@@ -105,194 +204,297 @@
             closeBtn.addEventListener('click', closeModal);
         }
 
-        // Close on overlay click
+        // Close on overlay click (unless processing)
         if (modal) {
             modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
+                if (e.target === modal && !PurchaseState.isProcessing) {
                     closeModal();
                 }
             });
         }
 
-        // Close on Escape key
+        // Close on Escape key (unless processing)
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
+            if (e.key === 'Escape' && modal.classList.contains('active') && !PurchaseState.isProcessing) {
                 closeModal();
             }
         });
 
-        // Pricing card selection
-        pricingCards.forEach(card => {
-            card.addEventListener('click', function() {
-                pricingCards.forEach(c => c.classList.remove('selected'));
-                this.classList.add('selected');
-                selectedPlan = this.getAttribute('data-plan');
-            });
-        });
+        // Check for existing user session
+        checkUserSession();
     }
 
-    function openModal() {
-        const modal = document.getElementById('purchaseModal');
-        if (modal) {
-            // Simply add active class - CSS handles all display properties with !important
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    function checkUserSession() {
+        try {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            if (user.email) {
+                PurchaseState.userEmail = user.email;
+            }
+        } catch (error) {
+            console.error('[Purchase] Session check failed:', error);
         }
+    }
+
+    function openModal(cartData = null) {
+        const modal = document.getElementById('purchaseModal');
+        if (!modal) return;
+
+        if (cartData) {
+            PurchaseState.cartData = cartData;
+        }
+
+        PurchaseState.currentStep = 'initial';
+        showStep('step-initial');
+        hideError();
+
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // Focus management
+        setTimeout(() => {
+            const firstButton = modal.querySelector('button:not([disabled])');
+            if (firstButton) firstButton.focus();
+        }, 300);
+
+        announceToScreenReader('Purchase modal opened');
     }
 
     function closeModal() {
+        if (PurchaseState.isProcessing) {
+            if (!confirm('Payment in progress. Are you sure you want to cancel?')) {
+                return;
+            }
+        }
+
         const modal = document.getElementById('purchaseModal');
-        if (modal) {
-            // Simply remove active class - CSS handles all display properties with !important
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
+        if (!modal) return;
+
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+
+        setTimeout(() => {
+            PurchaseState.isProcessing = false;
+            PurchaseState.currentStep = 'initial';
+            showStep('step-initial');
+        }, 300);
+    }
+
+    function showStep(stepId) {
+        document.querySelectorAll('.modal-step').forEach(step => {
+            step.classList.remove('active');
+        });
+
+        const targetStep = document.getElementById(stepId);
+        if (targetStep) {
+            targetStep.classList.add('active');
         }
     }
+
+    // Navigation functions
+    window.startPurchaseFlow = function() {
+        const btn = document.getElementById('btn-purchase-start');
+        if (PurchaseState.isProcessing) return;
+
+        setButtonLoading(btn, true);
+
+        setTimeout(() => {
+            if (PurchaseState.userEmail) {
+                showStep('step-payment');
+                announceToScreenReader('Choose payment method');
+            } else {
+                showStep('step-email');
+                announceToScreenReader('Enter your email');
+                setTimeout(() => {
+                    const emailInput = document.getElementById('purchase-email');
+                    if (emailInput) emailInput.focus();
+                }, 100);
+            }
+            setButtonLoading(btn, false);
+        }, 300);
+    };
+
+    window.submitEmail = function(event) {
+        event.preventDefault();
+
+        const emailInput = document.getElementById('purchase-email');
+        const submitBtn = document.getElementById('btn-email-submit');
+        const errorDisplay = document.getElementById('email-error');
+
+        if (!emailInput || !submitBtn) return;
+
+        const email = emailInput.value.trim();
+
+        if (!validateEmail(email)) {
+            showFieldError(errorDisplay, 'Please enter a valid email');
+            emailInput.setAttribute('aria-invalid', 'true');
+            return;
+        }
+
+        hideFieldError(errorDisplay);
+        emailInput.setAttribute('aria-invalid', 'false');
+        setButtonLoading(submitBtn, true);
+
+        setTimeout(() => {
+            PurchaseState.userEmail = email;
+            showStep('step-payment');
+            announceToScreenReader('Email confirmed. Choose payment method');
+            setButtonLoading(submitBtn, false);
+        }, 300);
+    };
+
+    window.selectPayment = async function(method) {
+        if (PurchaseState.isProcessing) return;
+
+        PurchaseState.isProcessing = true;
+        showStep('step-processing');
+
+        const title = document.getElementById('processing-title');
+        const message = document.getElementById('processing-message');
+
+        if (title) title.textContent = method === 'stripe' ? 'Redirecting to Stripe...' : 'Loading PayPal...';
+        if (message) message.textContent = 'Please wait...';
+
+        announceToScreenReader('Processing payment');
+
+        try {
+            if (method === 'stripe') {
+                await processStripePayment();
+            } else {
+                await processPayPalPayment();
+            }
+        } catch (error) {
+            PurchaseState.isProcessing = false;
+            handlePaymentError(error);
+        }
+    };
+
+    window.goBackToStart = function() {
+        showStep('step-initial');
+    };
+
+    window.goBackToEmail = function() {
+        showStep('step-email');
+    };
+
+    window.closeError = function() {
+        hideError();
+        showStep('step-payment');
+    };
+
+    window.retryPayment = function() {
+        hideError();
+        PurchaseState.retryCount++;
+        showStep('step-payment');
+    };
 
     // Expose functions globally
     window.openPurchaseModal = openModal;
     window.closePurchaseModal = closeModal;
-    window.handlePurchase = handlePurchase;
 })();
 
 /**
- * Handle purchase with Stripe or PayPal
+ * Process Stripe payment with retry and error handling
  */
-async function handlePurchase(plan) {
-    // Check if user is logged in
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const email = user.email;
-    
-    if (!email) {
-        // Prompt for email or redirect to login
-        const userEmail = prompt('Please enter your email address:');
-        if (!userEmail) return;
-        
-        // Validate email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(userEmail)) {
-            alert('Please enter a valid email address');
-            return;
-        }
-    }
-    
-    // Show payment method selection
-    const paymentMethod = await showPaymentMethodSelection();
-    
-    if (paymentMethod === 'stripe') {
-        await processStripePayment(email || userEmail, plan);
-    } else if (paymentMethod === 'paypal') {
-        await processPayPalPayment(email || userEmail, plan);
-    }
-}
-
-/**
- * Show payment method selection dialog
- */
-function showPaymentMethodSelection() {
-    return new Promise((resolve) => {
-        const dialog = document.createElement('div');
-        dialog.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, rgba(30, 30, 45, 0.98) 0%, rgba(20, 20, 35, 0.99) 100%);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            z-index: 10000;
-            text-align: center;
-        `;
-        
-        dialog.innerHTML = `
-            <h3 style="color: #ffffff; margin-bottom: 1.5rem;">Select Payment Method</h3>
-            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                <button id="stripeBtn" class="btn btn-primary" style="flex: 1;">
-                    <i class="fab fa-cc-stripe"></i> Stripe
-                </button>
-                <button id="paypalBtn" class="btn btn-primary" style="flex: 1;">
-                    <i class="fab fa-paypal"></i> PayPal
-                </button>
-            </div>
-            <button id="cancelBtn" class="btn btn-outline">Cancel</button>
-        `;
-        
-        document.body.appendChild(dialog);
-        
-        dialog.querySelector('#stripeBtn').onclick = () => {
-            document.body.removeChild(dialog);
-            resolve('stripe');
-        };
-        
-        dialog.querySelector('#paypalBtn').onclick = () => {
-            document.body.removeChild(dialog);
-            resolve('paypal');
-        };
-        
-        dialog.querySelector('#cancelBtn').onclick = () => {
-            document.body.removeChild(dialog);
-            resolve(null);
-        };
-    });
-}
-
-/**
- * Process Stripe payment
- */
-async function processStripePayment(email, plan) {
+async function processStripePayment(retryAttempt = 0) {
     try {
+        if (!navigator.onLine) {
+            throw new Error('OFFLINE');
+        }
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
+
         const response = await fetch('/api/payment/stripe-checkout', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, plan })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: PurchaseState.userEmail,
+                plan: PurchaseState.selectedPlan,
+                cartData: PurchaseState.cartData
+            }),
+            signal: controller.signal
         });
-        
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            if (response.status === 429) throw new Error('RATE_LIMITED');
+            throw new Error(`HTTP_${response.status}`);
+        }
+
         const data = await response.json();
-        
+
         if (data.success && data.url) {
-            // Redirect to Stripe checkout
             window.location.href = data.url;
         } else {
-            alert('Failed to create checkout session. Please try again.');
+            throw new Error('INVALID_RESPONSE');
         }
     } catch (error) {
-        console.error('Stripe payment error:', error);
-        alert('Payment error. Please try again.');
+        if (error.name === 'AbortError') {
+            throw new Error('TIMEOUT');
+        }
+
+        if (retryAttempt < PurchaseState.maxRetries && shouldRetry(error)) {
+            await new Promise(resolve => setTimeout(resolve, 1000 * (retryAttempt + 1)));
+            return processStripePayment(retryAttempt + 1);
+        }
+
+        throw error;
     }
 }
 
 /**
- * Process PayPal payment
+ * Process PayPal payment with retry and error handling
  */
-async function processPayPalPayment(email, plan) {
+async function processPayPalPayment(retryAttempt = 0) {
     try {
+        if (!navigator.onLine) {
+            throw new Error('OFFLINE');
+        }
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000);
+
         const response = await fetch('/api/payment/paypal-create', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, plan })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: PurchaseState.userEmail,
+                plan: PurchaseState.selectedPlan,
+                cartData: PurchaseState.cartData
+            }),
+            signal: controller.signal
         });
-        
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            throw new Error(`HTTP_${response.status}`);
+        }
+
         const data = await response.json();
-        
+
         if (data.success && data.orderId) {
-            // Load PayPal SDK if not already loaded
             if (!window.paypal) {
                 await loadPayPalSDK();
             }
-            
-            // Render PayPal button
-            showPayPalCheckout(data.orderId, email);
+            showPayPalCheckout(data.orderId);
         } else {
-            alert('Failed to create PayPal order. Please try again.');
+            throw new Error('INVALID_RESPONSE');
         }
     } catch (error) {
-        console.error('PayPal payment error:', error);
-        alert('Payment error. Please try again.');
+        if (error.name === 'AbortError') {
+            throw new Error('TIMEOUT');
+        }
+
+        if (retryAttempt < PurchaseState.maxRetries && shouldRetry(error)) {
+            await new Promise(resolve => setTimeout(resolve, 1000 * (retryAttempt + 1)));
+            return processPayPalPayment(retryAttempt + 1);
+        }
+
+        throw error;
     }
 }
 
@@ -301,10 +503,17 @@ async function processPayPalPayment(email, plan) {
  */
 function loadPayPalSDK() {
     return new Promise((resolve, reject) => {
+        if (window.paypal) {
+            resolve();
+            return;
+        }
+
         const script = document.createElement('script');
-        script.src = `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID || 'AfHir0qS1C-PrKUV2D1VcqAZ-JDTIA4KRpd40cdJkTojucgv40k-sfpnrpxJfoKKE9b5uszwJOk5qVfR'}&currency=USD`;
+        const clientId = document.body.getAttribute('data-paypal-client-id') || 
+                        'AfHir0qS1C-PrKUV2D1VcqAZ-JDTIA4KRpd40cdJkTojucgv40k-sfpnrpxJfoKKE9b5uszwJOk5qVfR';
+        script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
         script.onload = resolve;
-        script.onerror = reject;
+        script.onerror = () => reject(new Error('Failed to load PayPal SDK'));
         document.head.appendChild(script);
     });
 }
@@ -312,47 +521,59 @@ function loadPayPalSDK() {
 /**
  * Show PayPal checkout
  */
-function showPayPalCheckout(orderId, email) {
-    const container = document.createElement('div');
-    container.id = 'paypal-button-container';
-    container.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        padding: 2rem;
-        border-radius: 16px;
-        z-index: 10000;
-        min-width: 400px;
+function showPayPalCheckout(orderId) {
+    const processingStep = document.getElementById('step-processing');
+    if (!processingStep) return;
+
+    processingStep.innerHTML = `
+        <div class="paypal-checkout-container">
+            <h3>Complete Payment with PayPal</h3>
+            <div id="paypal-buttons-container"></div>
+            <button class="btn btn-outline btn-sm" onclick="cancelPayPalPayment()">Cancel</button>
+        </div>
     `;
-    
-    document.body.appendChild(container);
-    
-    paypal.Buttons({
+
+    window.paypal.Buttons({
         createOrder: () => orderId,
         onApprove: async (data) => {
-            const response = await fetch('/api/payment/paypal-capture', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ orderId: data.orderID })
-            });
-            
-            const result = await response.json();
-            
-            if (result.success) {
-                alert('Payment successful! Thank you for your purchase.');
-                document.body.removeChild(container);
-                window.location.href = '/success';
+            showStep('step-processing');
+            const title = document.getElementById('processing-title');
+            const message = document.getElementById('processing-message');
+            if (title) title.textContent = 'Confirming payment...';
+            if (message) message.textContent = 'Please wait';
+
+            try {
+                const response = await fetch('/api/payment/paypal-capture', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId: data.orderID })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    window.location.href = `/success?order_id=${result.orderId || data.orderID}`;
+                } else {
+                    throw new Error('Payment confirmation failed');
+                }
+            } catch (error) {
+                PurchaseState.isProcessing = false;
+                handlePaymentError(error);
             }
         },
         onCancel: () => {
-            document.body.removeChild(container);
+            PurchaseState.isProcessing = false;
+            showStep('step-payment');
+            announceToScreenReader('Payment cancelled');
         },
         onError: (err) => {
-            console.error('PayPal error:', err);
-            alert('Payment failed. Please try again.');
-            document.body.removeChild(container);
+            PurchaseState.isProcessing = false;
+            handlePaymentError(new Error('PayPal error: ' + err));
         }
-    }).render('#paypal-button-container');
+    }).render('#paypal-buttons-container');
 }
+
+window.cancelPayPalPayment = function() {
+    PurchaseState.isProcessing = false;
+    showStep('step-payment');
+};

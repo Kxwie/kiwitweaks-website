@@ -346,13 +346,21 @@ class ShoppingCart {
             return;
         }
 
-        // Close cart and open purchase modal
+        // Get cart summary
+        const cartData = this.getCartSummary();
+
+        // Close cart
         this.closeCart();
         
-        // Trigger purchase modal with cart items
-        const purchaseModal = document.querySelector('[data-purchase-modal]');
-        if (purchaseModal) {
-            purchaseModal.click();
+        // Open purchase modal with cart data
+        if (window.openPurchaseModal) {
+            window.openPurchaseModal(cartData);
+        } else {
+            // Fallback to old method
+            const purchaseModal = document.querySelector('[data-purchase-modal]');
+            if (purchaseModal) {
+                purchaseModal.click();
+            }
         }
     }
 

@@ -1,0 +1,458 @@
+/* ===== Enhanced Purchase Modal Styles v2.0 ===== */
+/* Adds support for loading states, error handling, email forms, and accessibility */
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Modal Steps */
+.modal-step {
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Product Price Box */
+.product-price-box {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+}
+
+.price-label {
+    display: block;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.price-amount {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Email Collection Form */
+.email-collection-form,
+.payment-method-selection {
+    padding: 1rem 0;
+}
+
+.email-collection-form h3,
+.payment-method-selection h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.email-collection-form p,
+.payment-method-selection p {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input[type="email"],
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+.form-group input[aria-invalid="true"] {
+    border-color: #ef4444;
+}
+
+.field-error {
+    display: none;
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 0.5rem;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.form-actions .btn {
+    flex: 1;
+}
+
+/* Payment Methods Grid */
+.payment-methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-method-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(139, 92, 246, 0.2);
+    border-radius: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 120px;
+}
+
+.payment-method-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-2px);
+}
+
+.payment-method-card:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+}
+
+.payment-method-card i {
+    font-size: 2.5rem;
+    color: #8b5cf6;
+}
+
+.payment-method-card i.fa-paypal {
+    color: #0070ba;
+}
+
+.payment-method-card span {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.payment-method-card small {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.payment-method-card.selected {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: #8b5cf6;
+}
+
+/* Processing State */
+.processing-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.spinner-large {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(139, 92, 246, 0.2);
+    border-top-color: #8b5cf6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.processing-state h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.processing-state p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Error Container */
+.error-container {
+    padding: 2rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: 16px;
+    text-align: center;
+    animation: errorShake 0.4s ease-out;
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.error-container i {
+    font-size: 3rem;
+    color: #ef4444;
+    margin-bottom: 1rem;
+}
+
+.error-container h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+}
+
+.error-container p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Button Loading State */
+.btn.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-right: 0.5rem;
+}
+
+/* PayPal Checkout Container */
+.paypal-checkout-container {
+    padding: 2rem;
+    text-align: center;
+}
+
+.paypal-checkout-container h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+#paypal-buttons-container {
+    margin-bottom: 1rem;
+}
+
+/* Purchase Notification */
+.purchase-notification {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 1.5rem;
+    background: rgba(30, 30, 45, 0.98);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 12px;
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.purchase-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.purchase-notification.error {
+    border-color: rgba(239, 68, 68, 0.5);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.purchase-notification.success {
+    border-color: rgba(16, 185, 129, 0.5);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+/* Security Badges */
+.security-badges {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.badge-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+}
+
+.badge-item i {
+    color: #10b981;
+    font-size: 1rem;
+}
+
+/* Button Block */
+.btn-block {
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .price-amount {
+        font-size: 2.5rem;
+    }
+
+    .payment-methods-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    .error-actions {
+        flex-direction: column;
+    }
+
+    .error-actions .btn {
+        width: 100%;
+    }
+
+    .security-badges {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .purchase-notification {
+        right: 1rem;
+        left: 1rem;
+        bottom: 1rem;
+    }
+}
+
+/* Focus Visible Styles (Accessibility) */
+.btn:focus-visible,
+.payment-method-card:focus-visible,
+input:focus-visible {
+    outline: 3px solid #8b5cf6;
+    outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .modal-step,
+    .btn-spinner,
+    .spinner-large,
+    .error-container,
+    .purchase-notification {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .product-price-box,
+    .payment-method-card,
+    .error-container {
+        border-width: 3px;
+    }
+
+    input:focus,
+    .btn:focus {
+        outline: 3px solid;
+        outline-offset: 3px;
+    }
+}

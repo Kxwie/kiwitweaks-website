@@ -1,0 +1,232 @@
+/* ===== Navbar Vertical Centering Fix ===== */
+
+/* Ensure navbar container properly centers all items */
+.navbar {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    position: relative;
+    z-index: 1001;
+    padding: 0.75rem 0 !important;
+    width: 100%;
+    gap: 3rem;
+    min-height: 60px; /* Ensure consistent height */
+}
+
+/* Logo - properly centered */
+.logo {
+    justify-self: start;
+    flex-shrink: 0;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem;
+    height: 40px; /* Fixed height for consistency */
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Navigation links - perfectly centered */
+.nav-links {
+    display: flex !important;
+    gap: 2rem;
+    align-items: center !important;
+    justify-self: center;
+    justify-content: center;
+    white-space: nowrap;
+    height: 40px; /* Match other elements */
+}
+
+/* Navigation link items - vertically centered */
+.nav-links a {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 40px !important; /* Match icon button height */
+    padding: 0 0.5rem !important; /* Horizontal padding only */
+    margin: 0 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    line-height: 1 !important; /* Prevent line-height from affecting vertical alignment */
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-links a.active {
+    color: white !important;
+    font-weight: 600;
+}
+
+/* Underline for active state - positioned consistently */
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 8px; /* Fixed distance from bottom */
+    left: 0.5rem;
+    right: 0.5rem;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Auth actions container - properly aligned */
+.nav-auth-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem;
+    justify-self: end;
+    height: 40px; /* Match other elements */
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* All icon buttons - consistent sizing and centering */
+.nav-discord,
+.nav-link-auth,
+.nav-cart {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important; /* Remove padding, use fixed size instead */
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    font-size: 1.1rem !important;
+    margin: 0 !important;
+    border: none !important;
+    flex-shrink: 0;
+    line-height: 1 !important;
+}
+
+/* Purchase button - properly aligned with icon buttons */
+.nav-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 40px !important; /* Match icon button height */
+    padding: 0 1.5rem !important; /* Horizontal padding only */
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%) !important;
+    color: white !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    line-height: 1 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: none !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+    white-space: nowrap;
+    position: relative !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.nav-cta span {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1 !important;
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover states */
+.nav-discord:hover,
+.nav-link-auth:hover,
+.nav-cart:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px) scale(1.05) !important;
+}
+
+.nav-cta:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4) !important;
+}
+
+/* Profile dropdown trigger - match height */
+.profile-trigger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 40px !important;
+    gap: 0.75rem;
+    padding: 0 1rem !important;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    line-height: 1 !important;
+}
+
+.profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gradient);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: white;
+    line-height: 1 !important;
+    flex-shrink: 0;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1.2;
+}
+
+.profile-name,
+.profile-email {
+    line-height: 1.2 !important;
+}
+
+/* Mobile menu toggle - centered */
+.mobile-menu-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+
+/* Responsive - maintain centering on mobile */
+@media (max-width: 768px) {
+    .navbar {
+        min-height: auto;
+        padding: 0.5rem 0 !important;
+    }
+    
+    .nav-links,
+    .nav-auth-actions {
+        height: auto; /* Allow flex wrapping on mobile */
+    }
+    
+    .nav-links a,
+    .nav-discord,
+    .nav-link-auth,
+    .nav-cart,
+    .nav-cta,
+    .profile-trigger {
+        height: 44px !important; /* Slightly larger touch targets on mobile */
+    }
+}
